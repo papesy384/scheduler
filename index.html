@@ -185,6 +185,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            position: relative;
         }
 
         .time-slot:hover {
@@ -206,6 +207,38 @@
         .time-slot.optimized {
             background: #3498db;
             color: white;
+        }
+
+        .time-slot.passed {
+            background: #95a5a6;
+            color: white;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .time-slot.current {
+            background: #f39c12;
+            color: white;
+            animation: pulse 2s infinite;
+            border: 3px solid #e67e22;
+        }
+
+        .time-slot.patient-info {
+            font-size: 0.7rem;
+            margin-top: 5px;
+            opacity: 0.9;
+            font-weight: bold;
+        }
+
+        .time-slot-status {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.6rem;
+            font-weight: bold;
+            padding: 2px 4px;
+            border-radius: 3px;
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .patient-list {
@@ -960,7 +993,7 @@
             startRealTimeUpdates();
         });
 
-        // Initialize schedule grid
+        // Initialize schedule grid with real-time status
         function initializeSchedule() {
             const grid = document.getElementById('scheduleGrid');
             const timeSlots = [
@@ -971,10 +1004,88 @@
             grid.innerHTML = '';
             timeSlots.forEach(slot => {
                 const slotElement = document.createElement('div');
-                slotElement.className = 'time-slot available';
+                slotElement.className = 'time-slot';
                 slotElement.textContent = slot;
                 slotElement.onclick = () => selectTimeSlot(slot, slotElement);
                 grid.appendChild(slotElement);
+            });
+            
+            // Update schedule grid with current status
+            updateScheduleGrid();
+        }
+
+        // Update schedule grid with real-time status
+        function updateScheduleGrid() {
+            const grid = document.getElementById('scheduleGrid');
+            const slots = grid.querySelectorAll('.time-slot');
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            
+            slots.forEach(slot => {
+                const timeText = slot.textContent.split('\n')[0]; // Get just the time part
+                const [hour, minute] = timeText.split(':').map(Number);
+                
+                // Convert to 24-hour format for comparison
+                const slotHour = hour === 12 ? 12 : hour;
+                const slotTime = slotHour * 60 + minute;
+                const currentTime = currentHour * 60 + currentMinute;
+                
+                // Reset classes
+                slot.className = 'time-slot';
+                slot.innerHTML = timeText;
+                
+                // Find if there's an appointment for this time slot today
+                const today = new Date();
+                const appointmentForSlot = appointments.find(apt => {
+                    const aptDate = new Date(apt.scheduledDate);
+                    return aptDate.toDateString() === today.toDateString() && apt.time === timeText;
+                });
+                
+                if (appointmentForSlot) {
+                    // Slot is booked
+                    slot.classList.add('booked');
+                    slot.innerHTML = `
+                        <div class="time-slot-status">BOOKED</div>
+                        ${timeText}
+                        <div class="time-slot.patient-info">${appointmentForSlot.name}</div>
+                    `;
+                    
+                    // Check if it's currently happening
+                    if (slotTime === currentTime || (slotTime < currentTime && slotTime + 30 > currentTime)) {
+                        slot.classList.remove('booked');
+                        slot.classList.add('current');
+                        slot.innerHTML = `
+                            <div class="time-slot-status">NOW</div>
+                            ${timeText}
+                            <div class="time-slot.patient-info">${appointmentForSlot.name}</div>
+                        `;
+                    }
+                } else if (slotTime < currentTime) {
+                    // Time has passed
+                    slot.classList.add('passed');
+                    slot.innerHTML = `
+                        <div class="time-slot-status">PASSED</div>
+                        ${timeText}
+                    `;
+                } else if (slotTime === currentTime) {
+                    // Current time slot
+                    slot.classList.add('current');
+                    slot.innerHTML = `
+                        <div class="time-slot-status">NOW</div>
+                        ${timeText}
+                    `;
+                } else {
+                    // Available slot
+                    slot.classList.add('available');
+                    slot.innerHTML = `
+                        <div class="time-slot-status">FREE</div>
+                        ${timeText}
+                    `;
+                }
+                
+                // Add click handler
+                slot.onclick = () => selectTimeSlot(timeText, slot);
             });
         }
 
@@ -1501,6 +1612,9 @@ FEEDBACK SUMMARY:
             
             // Update analytics dashboard
             updateAnalyticsDashboard();
+            
+            // Update schedule grid
+            updateScheduleGrid();
         }
 
         // Update analytics dashboard with real-time data
@@ -1580,6 +1694,11 @@ FEEDBACK SUMMARY:
         }
 
         function startRealTimeUpdates() {
+            // Update schedule grid every minute for real-time status
+            setInterval(() => {
+                updateScheduleGrid();
+            }, 60000); // Every minute
+            
             // Simulate real-time updates every 30 seconds
             setInterval(() => {
                 updateDashboard();
