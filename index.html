@@ -46,6 +46,61 @@
             font-size: 1.1rem;
         }
 
+        /* Navigation Menu Styles */
+        .navigation-menu {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(135deg, #2980b9, #3498db);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .nav-btn.active:hover {
+            background: linear-gradient(135deg, #229954, #27ae60);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+
+        /* Section Visibility */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
         .dashboard {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -728,16 +783,26 @@
         <div class="header">
             <h1>🏥 Dr. Sarah Johnson's Schedule Management System</h1>
             <p>Professional scheduling • Operational efficiency • Staff management</p>
-            <div style="background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; border-radius: 10px; padding: 15px; margin-top: 15px;">
-                <h3 style="color: #3498db; margin: 0 0 10px 0;">🔧 Clinic Operations Dashboard</h3>
-                <p style="margin: 0; color: #2c3e50;">Monitor patient flow • Optimize scheduling • Track performance metrics • Manage staff workload</p>
-            </div>
         </div>
 
-        <!-- Professional Clinic Operations Dashboard -->
-        <div class="dashboard">
-            <div class="card">
-                <h2>📊 Clinic Performance Metrics</h2>
+        <!-- Navigation Menu -->
+        <nav class="navigation-menu">
+            <div class="nav-container">
+                <button class="nav-btn active" onclick="showSection('dashboard')">🏠 Dashboard</button>
+                <button class="nav-btn" onclick="showSection('scheduling')">📅 Scheduling</button>
+                <button class="nav-btn" onclick="showSection('patients')">👥 Patients</button>
+                <button class="nav-btn" onclick="showSection('feedback')">💬 Feedback</button>
+                <button class="nav-btn" onclick="showSection('analytics')">📈 Analytics</button>
+                <button class="nav-btn" onclick="showSection('performance')">📊 Performance</button>
+            </div>
+        </nav>
+
+        <!-- Dashboard Section (Default View) -->
+        <div id="dashboard-section" class="section active">
+            <!-- Professional Clinic Operations Dashboard -->
+            <div class="dashboard">
+                <div class="card">
+                    <h2>📊 Clinic Performance Metrics</h2>
                 <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px;">
                     <div style="font-size: 3rem; font-weight: bold; margin-bottom: 10px;" id="avgWaitDays">4.2</div>
                     <div style="font-size: 1.2rem; margin-bottom: 5px;">Average Wait Days</div>
@@ -776,10 +841,14 @@
             </div>
         </div>
 
-        <!-- Scheduling Interface -->
-        <div class="scheduling-interface">
-            <div class="card">
-                <h2>📅 Schedule New Appointment</h2>
+            </div>
+        </div>
+
+        <!-- Scheduling Section -->
+        <div id="scheduling-section" class="section">
+            <div class="scheduling-interface">
+                <div class="card">
+                    <h2>📅 Schedule New Appointment</h2>
                 <form id="appointmentForm">
                     <div class="form-group">
                         <label for="patientName">Patient Name</label>
@@ -832,11 +901,15 @@
             </div>
         </div>
 
-        <!-- Professional Patient Management -->
-        <div class="dashboard">
-            <div class="card">
-                <div class="queue-header">
-                    <h2>👥 Patient Management System</h2>
+            </div>
+        </div>
+
+        <!-- Patients Section -->
+        <div id="patients-section" class="section">
+            <div class="dashboard">
+                <div class="card">
+                    <div class="queue-header">
+                        <h2>👥 Patient Management System</h2>
                     <div style="background: rgba(52, 152, 219, 0.1); padding: 10px; border-radius: 8px; border-left: 4px solid #3498db;">
                         <div style="font-size: 0.9rem; color: #2c3e50;">
                             <strong>Professional Operations:</strong> Monitor patient flow, manage appointments, and track clinical efficiency
@@ -925,10 +998,94 @@
             </div>
         </div>
 
-        <!-- Professional Performance Tracking -->
-        <div class="dashboard">
-            <div class="card">
-                <h2>📈 Operational Excellence Metrics</h2>
+            </div>
+        </div>
+
+        <!-- Analytics Section -->
+        <div id="analytics-section" class="section">
+            <div class="dashboard">
+                <div class="card">
+                    <h2>📈 Professional Analytics Dashboard</h2>
+                    
+                    <!-- Key Performance Indicators -->
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <h4>📅 Daily Capacity</h4>
+                            <div class="analytics-value" id="todayAppointments">1</div>
+                            <div class="analytics-label">Appointments Scheduled</div>
+                        </div>
+                        <div class="analytics-card">
+                            <h4>⏱️ Wait Time Performance</h4>
+                            <div class="analytics-value" id="avgWaitDaysAnalytics">4.2</div>
+                            <div class="analytics-label">Average Wait Days</div>
+                        </div>
+                        <div class="analytics-card">
+                            <h4>🎯 Resource Utilization</h4>
+                            <div class="analytics-value" id="utilizationAnalytics">78%</div>
+                            <div class="analytics-label">Schedule Efficiency</div>
+                        </div>
+                        <div class="analytics-card">
+                            <h4>⚡ Capacity Planning</h4>
+                            <div class="analytics-value" id="nextAvailable">1</div>
+                            <div class="analytics-label">Next Open Slot (Days)</div>
+                        </div>
+                    </div>
+
+                    <!-- Wait Days Distribution Chart -->
+                    <div class="wait-time-chart">
+                        <h4>📅 Patient Wait Days Distribution</h4>
+                        <div class="wait-time-bar">
+                            <div class="wait-time-fill" style="width: 15%;"></div>
+                            <div class="wait-time-label">≤3 Days</div>
+                            <div class="wait-time-value">15%</div>
+                        </div>
+                        <div class="wait-time-bar">
+                            <div class="wait-time-fill" style="width: 35%;"></div>
+                            <div class="wait-time-label">4-7 Days</div>
+                            <div class="wait-time-value">35%</div>
+                        </div>
+                        <div class="wait-time-bar">
+                            <div class="wait-time-fill" style="width: 30%;"></div>
+                            <div class="wait-time-label">8-14 Days</div>
+                            <div class="wait-time-value">30%</div>
+                        </div>
+                        <div class="wait-time-bar">
+                            <div class="wait-time-fill" style="width: 20%;"></div>
+                            <div class="wait-time-label">>14 Days</div>
+                            <div class="wait-time-value">20%</div>
+                        </div>
+                    </div>
+
+                    <!-- Schedule Insights -->
+                    <div class="schedule-insights">
+                        <h4>💡 Schedule Optimization Insights</h4>
+                        <div class="insight-item" id="insight1">✅ Target achieved: 15% of patients seen within 3 days</div>
+                        <div class="insight-item" id="insight2">⚠️ 20% of patients wait >14 days - needs attention</div>
+                        <div class="insight-item" id="insight3">📈 Peak utilization at 9:00 AM (95%) - consider adding slots</div>
+                        <div class="insight-item" id="insight4">🕐 Low utilization at 4:00 PM (70%) - opportunity for optimization</div>
+                    </div>
+
+                    <!-- Patient Load Summary -->
+                    <div style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #3498db;">
+                        <h4 style="margin: 0 0 10px 0; color: #2c3e50;">📋 Patient Load Summary</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.9rem;">
+                            <div><strong>Active Patients:</strong> <span id="activePatients">6</span></div>
+                            <div><strong>Completed Today:</strong> <span id="completedToday">1</span></div>
+                            <div><strong>Scheduled:</strong> <span id="scheduledCount">3</span></div>
+                            <div><strong>Waiting:</strong> <span id="waitingCount">2</span></div>
+                            <div><strong>Urgent Cases:</strong> <span id="urgentCount">1</span></div>
+                            <div><strong>Avg Wait Days:</strong> <span id="avgWaitDaysSummary">4</span> days</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Section -->
+        <div id="performance-section" class="section">
+            <div class="dashboard">
+                <div class="card">
+                    <h2>📈 Operational Excellence Metrics</h2>
                 <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
                     <h3 style="margin: 0 0 10px 0; font-size: 1.5rem;">🎯 Operational Performance Achievement</h3>
                     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; text-align: center;">
@@ -1086,10 +1243,14 @@
             </div>
         </div>
 
-        <!-- Professional Feedback System -->
-        <div class="feedback-section">
-            <div class="feedback-form">
-                <h2>💬 Professional Feedback & Quality Assurance</h2>
+            </div>
+        </div>
+
+        <!-- Feedback Section -->
+        <div id="feedback-section" class="section">
+            <div class="feedback-section">
+                <div class="feedback-form">
+                    <h2>💬 Professional Feedback & Quality Assurance</h2>
                 <form id="feedbackForm">
                     <div class="form-group">
                         <label for="feedbackType">Feedback Type</label>
@@ -1127,9 +1288,34 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
 
     <script>
+        // Navigation function
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionId + '-section');
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Activate clicked button
+            event.target.classList.add('active');
+        }
+
         // Prevent Firebase initialization
         window.firebase = undefined;
         console.log('Firebase blocked from initialization');
