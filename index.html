@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Sarah Johnson's Scheduling System</title>
+    <title>Dr. Sarah Johnson's Patient Portal - Transparent Scheduling</title>
     <style>
         * {
             margin: 0;
@@ -726,45 +726,53 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>🏥 Dr. Sarah Johnson's Scheduling System</h1>
-            <p>Reducing patient wait days • Optimizing daily schedule • Improving patient experience</p>
+            <h1>🏥 Dr. Sarah Johnson's Patient Portal</h1>
+            <p>Transparent scheduling • Clear wait times • Patient-first care</p>
+            <div style="background: rgba(46, 204, 113, 0.1); border: 2px solid #27ae60; border-radius: 10px; padding: 15px; margin-top: 15px;">
+                <h3 style="color: #27ae60; margin: 0 0 10px 0;">📋 Your Appointment Status</h3>
+                <p style="margin: 0; color: #2c3e50;">See exactly when you'll see Dr. Sarah • Track your wait time • Know what to expect</p>
+            </div>
         </div>
 
-        <!-- Key Metrics Dashboard -->
+        <!-- Patient-Centric Dashboard -->
         <div class="dashboard">
             <div class="card">
-                <h2>📊 Current Performance Metrics</h2>
-                <div class="metrics">
-                    <div class="metric">
-                        <div class="metric-value" id="avgWaitDays">12</div>
-                        <div class="metric-label">Avg Wait Days</div>
+                <h2>⏰ Your Wait Time Information</h2>
+                <div style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 3rem; font-weight: bold; margin-bottom: 10px;" id="patientWaitDays">4</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 5px;">Days Until Your Appointment</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9;">Based on current schedule and priority</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; border-left: 4px solid #27ae60;">
+                        <div style="font-weight: bold; color: #27ae60;">✅ Target Met</div>
+                        <div style="font-size: 0.9rem; color: #7f8c8d;">Your wait time is within our 7-day target</div>
                     </div>
-                    <div class="metric">
-                        <div class="metric-value" id="providerUtilization">78</div>
-                        <div class="metric-label">Dr. Sarah's Utilization (%)</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value" id="patientSatisfaction">4.2</div>
-                        <div class="metric-label">Patient Satisfaction</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value" id="appointmentsToday">47</div>
-                        <div class="metric-label">Appointments Today</div>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; border-left: 4px solid #3498db;">
+                        <div style="font-weight: bold; color: #3498db;">📅 Next Available</div>
+                        <div style="font-size: 0.9rem; color: #7f8c8d;">Dr. Sarah's next open slot</div>
                     </div>
                 </div>
             </div>
 
             <div class="card">
-                <h2>📅 Patient Wait Days Monitor</h2>
-                <div class="wait-days-display">
-                    <div class="wait-days-value" id="currentWaitDays">12</div>
-                    <div class="wait-days-label">Average Days Until Dr. Sarah's Visit</div>
-                    <div class="wait-days-trend" id="waitDaysTrend">
-                        <span class="wait-days-improvement">↓ 2 days improvement this week</span>
+                <h2>👩‍⚕️ Dr. Sarah's Current Status</h2>
+                <div style="background: linear-gradient(135deg, #27ae60, #229954); color: white; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🟢 AVAILABLE</div>
+                    <div style="font-size: 1.1rem;">Dr. Sarah is currently seeing patients</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9; margin-top: 5px;">Last updated: <span id="lastUpdated">Just now</span></div>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                    <h4 style="margin: 0 0 10px 0; color: #2c3e50;">📊 Today's Schedule Overview</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.9rem;">
+                        <div><strong>Patients Today:</strong> <span id="patientsToday">1</span></div>
+                        <div><strong>Completed:</strong> <span id="completedTodayPatient">0</span></div>
+                        <div><strong>In Progress:</strong> <span id="inProgressToday">1</span></div>
+                        <div><strong>Waiting:</strong> <span id="waitingToday">0</span></div>
                     </div>
                 </div>
-                <div class="status-indicator status-available"></div>
-                <span>Target: &lt; 7 days | Current: 12 days</span>
             </div>
         </div>
 
@@ -824,17 +832,15 @@
             </div>
         </div>
 
-        <!-- Patient Queue Management -->
+        <!-- Transparent Patient Queue -->
         <div class="dashboard">
             <div class="card">
                 <div class="queue-header">
                     <h2>👥 Current Patient Queue</h2>
-                    <div class="queue-filters">
-                        <button class="filter-btn active" onclick="filterPatients('all')">All</button>
-                        <button class="filter-btn" onclick="filterPatients('today')">Today</button>
-                        <button class="filter-btn" onclick="filterPatients('urgent')">Urgent</button>
-                        <button class="filter-btn" onclick="filterPatients('waiting')">Waiting</button>
-                        <button class="filter-btn" onclick="filterPatients('scheduled')">Scheduled</button>
+                    <div style="background: rgba(52, 152, 219, 0.1); padding: 10px; border-radius: 8px; border-left: 4px solid #3498db;">
+                        <div style="font-size: 0.9rem; color: #2c3e50;">
+                            <strong>Transparency Promise:</strong> See exactly where you are in line and when you'll be seen
+                        </div>
                     </div>
                 </div>
                 <div class="patient-list" id="patientList">
@@ -1585,36 +1591,43 @@ FEEDBACK SUMMARY:
         }
 
         function updateDashboard() {
-            // Update metrics based on current data
-            const totalAppointments = appointments.length;
-            const completedAppointments = appointments.filter(apt => apt.status === 'completed').length;
-            const waitingAppointments = appointments.filter(apt => apt.status === 'waiting').length;
-            const scheduledAppointments = appointments.filter(apt => apt.status === 'scheduled').length;
-            const urgentAppointments = appointments.filter(apt => apt.priority === 'urgent').length;
-            
-            // Calculate average wait days
-            const avgWaitDays = calculateAverageWaitDays();
-            document.getElementById('avgWaitDays').textContent = avgWaitDays;
-            document.getElementById('currentWaitDays').textContent = avgWaitDays;
-            
-            // Update appointments today
-            document.getElementById('appointmentsToday').textContent = totalAppointments;
-            
-            // Update wait days trend
-            const trendElement = document.getElementById('waitDaysTrend');
-            if (avgWaitDays <= 7) {
-                trendElement.innerHTML = `<span class="wait-days-improvement">✓ Target achieved: ≤7 days</span>`;
-            } else if (avgWaitDays <= 10) {
-                trendElement.innerHTML = `<span class="wait-days-warning">⚠ Close to target: ${avgWaitDays} days</span>`;
-            } else {
-                trendElement.innerHTML = `<span style="color: #e74c3c; font-weight: bold;">⚠ Needs attention: ${avgWaitDays} days</span>`;
-            }
+            // Update patient-centric dashboard
+            updatePatientCentricDashboard();
             
             // Update analytics dashboard
             updateAnalyticsDashboard();
             
             // Update schedule grid
             updateScheduleGrid();
+        }
+
+        // Update patient-centric dashboard
+        function updatePatientCentricDashboard() {
+            const avgWaitDays = calculateAverageWaitDays();
+            const today = new Date();
+            
+            // Update patient wait days display
+            document.getElementById('patientWaitDays').textContent = avgWaitDays;
+            
+            // Update Dr. Sarah's status
+            const inProgressToday = appointments.filter(apt => {
+                const aptDate = new Date(apt.scheduledDate);
+                return aptDate.toDateString() === today.toDateString() && apt.status === 'in-progress';
+            }).length;
+            
+            const statusElement = document.getElementById('lastUpdated');
+            statusElement.textContent = new Date().toLocaleTimeString();
+            
+            // Update today's schedule overview
+            const todayAppointments = appointments.filter(apt => {
+                const aptDate = new Date(apt.scheduledDate);
+                return aptDate.toDateString() === today.toDateString();
+            });
+            
+            document.getElementById('patientsToday').textContent = todayAppointments.length;
+            document.getElementById('completedTodayPatient').textContent = todayAppointments.filter(apt => apt.status === 'completed').length;
+            document.getElementById('inProgressToday').textContent = todayAppointments.filter(apt => apt.status === 'in-progress').length;
+            document.getElementById('waitingToday').textContent = todayAppointments.filter(apt => apt.status === 'waiting').length;
         }
 
         // Update analytics dashboard with real-time data
