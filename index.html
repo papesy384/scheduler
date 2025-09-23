@@ -224,6 +224,28 @@
             align-items: center;
         }
 
+        .patient-wait-days {
+            background: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .patient-wait-days.low {
+            background: #27ae60;
+        }
+
+        .patient-wait-days.medium {
+            background: #f39c12;
+        }
+
+        .patient-wait-days.high {
+            background: #e74c3c;
+        }
+
         .patient-item.high-priority {
             border-left-color: #e74c3c;
             background: #fdf2f2;
@@ -291,6 +313,45 @@
             margin-bottom: 10px;
         }
 
+        .wait-days-display {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .wait-days-value {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .wait-days-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .wait-days-trend {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .wait-days-improvement {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        .wait-days-warning {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
         .analytics-chart {
             background: white;
             border-radius: 10px;
@@ -338,6 +399,10 @@
                 <h2>📊 Current Performance Metrics</h2>
                 <div class="metrics">
                     <div class="metric">
+                        <div class="metric-value" id="avgWaitDays">12</div>
+                        <div class="metric-label">Avg Wait Days</div>
+                    </div>
+                    <div class="metric">
                         <div class="metric-value" id="avgWaitTime">24</div>
                         <div class="metric-label">Avg Wait Time (min)</div>
                     </div>
@@ -357,13 +422,16 @@
             </div>
 
             <div class="card">
-                <h2>⏱️ Real-time Wait Time Monitor</h2>
-                <div class="wait-time-display">
-                    <div class="wait-time-value" id="currentWaitTime">18</div>
-                    <div>Current Estimated Wait Time (minutes)</div>
+                <h2>📅 Patient Wait Days Monitor</h2>
+                <div class="wait-days-display">
+                    <div class="wait-days-value" id="currentWaitDays">12</div>
+                    <div class="wait-days-label">Average Days Until Provider Visit</div>
+                    <div class="wait-days-trend" id="waitDaysTrend">
+                        <span class="wait-days-improvement">↓ 2 days improvement this week</span>
+                    </div>
                 </div>
                 <div class="status-indicator status-available"></div>
-                <span>System Status: Optimized</span>
+                <span>Target: &lt; 7 days | Current: 12 days</span>
             </div>
         </div>
 
@@ -410,9 +478,9 @@
             <div class="card">
                 <h2>🔧 Optimization Controls</h2>
                 <div class="optimization-controls">
-                    <button class="btn" onclick="optimizeSchedule()">🚀 Optimize Schedule</button>
-                    <button class="btn btn-warning" onclick="balanceWorkload()">⚖️ Balance Workload</button>
-                    <button class="btn btn-success" onclick="reduceWaitTimes()">⏱️ Reduce Wait Times</button>
+                    <button class="btn" onclick="reduceWaitDays()">📅 Reduce Wait Days</button>
+                    <button class="btn btn-warning" onclick="optimizeSchedule()">🚀 Optimize Schedule</button>
+                    <button class="btn btn-success" onclick="balanceWorkload()">⚖️ Balance Workload</button>
                     <button class="btn" onclick="generateReport()">📈 Generate Report</button>
                 </div>
                 
@@ -530,12 +598,53 @@
 
         // Load sample data
         function loadSampleData() {
-            // Sample appointments
+            // Sample appointments with wait days calculation
+            const today = new Date();
             appointments = [
-                { id: 1, name: 'John Doe', type: 'consultation', priority: 'high', time: '9:00', provider: 'Dr. Smith', status: 'scheduled' },
-                { id: 2, name: 'Jane Smith', type: 'followup', priority: 'medium', time: '10:30', provider: 'Dr. Johnson', status: 'waiting' },
-                { id: 3, name: 'Bob Wilson', type: 'treatment', priority: 'low', time: '2:00', provider: 'Dr. Williams', status: 'completed' },
-                { id: 4, name: 'Alice Brown', type: 'urgent', priority: 'urgent', time: '11:00', provider: 'Dr. Brown', status: 'in-progress' }
+                { 
+                    id: 1, 
+                    name: 'John Doe', 
+                    type: 'consultation', 
+                    priority: 'high', 
+                    time: '9:00', 
+                    provider: 'Dr. Smith', 
+                    status: 'scheduled',
+                    scheduledDate: new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000), // 5 days from now
+                    requestDate: today
+                },
+                { 
+                    id: 2, 
+                    name: 'Jane Smith', 
+                    type: 'followup', 
+                    priority: 'medium', 
+                    time: '10:30', 
+                    provider: 'Dr. Johnson', 
+                    status: 'waiting',
+                    scheduledDate: new Date(today.getTime() + 8 * 24 * 60 * 60 * 1000), // 8 days from now
+                    requestDate: new Date(today.getTime() - 2 * 24 * 60 * 60 * 1000) // 2 days ago
+                },
+                { 
+                    id: 3, 
+                    name: 'Bob Wilson', 
+                    type: 'treatment', 
+                    priority: 'low', 
+                    time: '2:00', 
+                    provider: 'Dr. Williams', 
+                    status: 'completed',
+                    scheduledDate: today,
+                    requestDate: new Date(today.getTime() - 15 * 24 * 60 * 60 * 1000) // 15 days ago
+                },
+                { 
+                    id: 4, 
+                    name: 'Alice Brown', 
+                    type: 'urgent', 
+                    priority: 'urgent', 
+                    time: '11:00', 
+                    provider: 'Dr. Brown', 
+                    status: 'in-progress',
+                    scheduledDate: new Date(today.getTime() + 1 * 24 * 60 * 60 * 1000), // 1 day from now
+                    requestDate: new Date(today.getTime() - 1 * 24 * 60 * 60 * 1000) // 1 day ago
+                }
             ];
 
             // Sample feedback
@@ -549,12 +658,35 @@
             updateRecentFeedback();
         }
 
+        // Calculate wait days for an appointment
+        function calculateWaitDays(appointment) {
+            const today = new Date();
+            const scheduledDate = new Date(appointment.scheduledDate);
+            const requestDate = new Date(appointment.requestDate);
+            
+            if (appointment.status === 'completed') {
+                return Math.ceil((scheduledDate - requestDate) / (1000 * 60 * 60 * 24));
+            } else {
+                return Math.ceil((scheduledDate - today) / (1000 * 60 * 60 * 24));
+            }
+        }
+
+        // Get wait days category for styling
+        function getWaitDaysCategory(waitDays) {
+            if (waitDays <= 3) return 'low';
+            if (waitDays <= 7) return 'medium';
+            return 'high';
+        }
+
         // Update patient list display
         function updatePatientList() {
             const list = document.getElementById('patientList');
             list.innerHTML = '';
 
             appointments.forEach(appointment => {
+                const waitDays = calculateWaitDays(appointment);
+                const waitCategory = getWaitDaysCategory(waitDays);
+                
                 const item = document.createElement('div');
                 item.className = `patient-item ${appointment.priority}-priority`;
                 item.innerHTML = `
@@ -562,9 +694,10 @@
                         <strong>${appointment.name}</strong><br>
                         <small>${appointment.type} • ${appointment.time} • ${appointment.provider}</small>
                     </div>
-                    <div>
+                    <div style="display: flex; align-items: center;">
                         <span class="status-indicator status-${appointment.status === 'waiting' ? 'booked' : 'available'}"></span>
                         ${appointment.status}
+                        <span class="patient-wait-days ${waitCategory}">${waitDays} days</span>
                     </div>
                 `;
                 list.appendChild(item);
@@ -600,7 +733,9 @@
                 date: document.getElementById('preferredDate').value,
                 notes: document.getElementById('notes').value,
                 status: 'scheduled',
-                provider: providers[Math.floor(Math.random() * providers.length)]
+                provider: providers[Math.floor(Math.random() * providers.length)],
+                requestDate: new Date(),
+                scheduledDate: new Date(document.getElementById('preferredDate').value)
             };
 
             appointments.push(formData);
@@ -635,6 +770,55 @@
             // Show success message
             alert('Feedback submitted successfully! Thank you for your input.');
         });
+
+        // Calculate average wait days
+        function calculateAverageWaitDays() {
+            const activeAppointments = appointments.filter(apt => apt.status !== 'completed');
+            if (activeAppointments.length === 0) return 0;
+            
+            const totalWaitDays = activeAppointments.reduce((sum, apt) => {
+                return sum + calculateWaitDays(apt);
+            }, 0);
+            
+            return Math.round(totalWaitDays / activeAppointments.length);
+        }
+
+        // Main optimization function - Reduce Wait Days
+        function reduceWaitDays() {
+            // Reduce average wait days by optimizing schedules
+            const currentWaitDays = document.getElementById('avgWaitDays');
+            const currentWaitDaysDisplay = document.getElementById('currentWaitDays');
+            const trendElement = document.getElementById('waitDaysTrend');
+            
+            let currentDays = parseInt(currentWaitDays.textContent);
+            let displayDays = parseInt(currentWaitDaysDisplay.textContent);
+            
+            // Reduce by 2-3 days through optimization
+            const reduction = Math.floor(Math.random() * 2) + 2;
+            const newDays = Math.max(3, currentDays - reduction);
+            const newDisplayDays = Math.max(3, displayDays - reduction);
+            
+            currentWaitDays.textContent = newDays;
+            currentWaitDaysDisplay.textContent = newDisplayDays;
+            
+            // Update trend
+            trendElement.innerHTML = `<span class="wait-days-improvement">↓ ${reduction} days improvement through optimization</span>`;
+            
+            // Update patient schedules to reflect reduced wait times
+            appointments.forEach(appointment => {
+                if (appointment.status === 'scheduled' || appointment.status === 'waiting') {
+                    const currentWait = calculateWaitDays(appointment);
+                    if (currentWait > 7) {
+                        // Reduce wait time by moving appointment closer
+                        const reductionDays = Math.min(reduction, currentWait - 3);
+                        appointment.scheduledDate = new Date(appointment.scheduledDate.getTime() - reductionDays * 24 * 60 * 60 * 1000);
+                    }
+                }
+            });
+            
+            updatePatientList();
+            alert(`Wait days reduced by ${reduction} days! Average wait time now ${newDays} days.`);
+        }
 
         // Optimization functions
         function optimizeSchedule() {
@@ -739,6 +923,11 @@ FEEDBACK SUMMARY:
             const completedAppointments = appointments.filter(apt => apt.status === 'completed').length;
             const waitingAppointments = appointments.filter(apt => apt.status === 'waiting').length;
             
+            // Calculate average wait days
+            const avgWaitDays = calculateAverageWaitDays();
+            document.getElementById('avgWaitDays').textContent = avgWaitDays;
+            document.getElementById('currentWaitDays').textContent = avgWaitDays;
+            
             // Calculate average wait time based on waiting patients
             const avgWaitTime = waitingAppointments > 0 ? Math.floor(Math.random() * 30) + 10 : 5;
             document.getElementById('avgWaitTime').textContent = avgWaitTime;
@@ -748,6 +937,16 @@ FEEDBACK SUMMARY:
             
             // Update appointments today
             document.getElementById('appointmentsToday').textContent = totalAppointments;
+            
+            // Update wait days trend
+            const trendElement = document.getElementById('waitDaysTrend');
+            if (avgWaitDays <= 7) {
+                trendElement.innerHTML = `<span class="wait-days-improvement">✓ Target achieved: ≤7 days</span>`;
+            } else if (avgWaitDays <= 10) {
+                trendElement.innerHTML = `<span class="wait-days-warning">⚠ Close to target: ${avgWaitDays} days</span>`;
+            } else {
+                trendElement.innerHTML = `<span style="color: #e74c3c; font-weight: bold;">⚠ Needs attention: ${avgWaitDays} days</span>`;
+            }
         }
 
         function startRealTimeUpdates() {
