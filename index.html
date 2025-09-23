@@ -214,24 +214,85 @@
         }
 
         .patient-item {
-            background: #f8f9fa;
+            background: #ffffff;
             border-left: 4px solid #3498db;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .patient-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .patient-item.high-priority {
+            border-left-color: #e74c3c;
+            background: linear-gradient(135deg, #fdf2f2, #ffffff);
+        }
+
+        .patient-item.medium-priority {
+            border-left-color: #f39c12;
+            background: linear-gradient(135deg, #fef9e7, #ffffff);
+        }
+
+        .patient-item.urgent-priority {
+            border-left-color: #8e44ad;
+            background: linear-gradient(135deg, #f4ecf7, #ffffff);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 2px 8px rgba(142, 68, 173, 0.3); }
+            50% { box-shadow: 0 4px 20px rgba(142, 68, 173, 0.5); }
+            100% { box-shadow: 0 2px 8px rgba(142, 68, 173, 0.3); }
+        }
+
+        .patient-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .patient-info {
+            flex: 1;
+        }
+
+        .patient-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .patient-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .patient-status-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
         }
 
         .patient-wait-days {
             background: #e74c3c;
             color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
             font-weight: bold;
-            margin-left: 10px;
+            text-align: center;
+            min-width: 60px;
         }
 
         .patient-wait-days.low {
@@ -244,6 +305,112 @@
 
         .patient-wait-days.high {
             background: #e74c3c;
+        }
+
+        .patient-status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-scheduled {
+            background: #3498db;
+            color: white;
+        }
+
+        .status-waiting {
+            background: #e67e22;
+            color: white;
+        }
+
+        .status-in-progress {
+            background: #9b59b6;
+            color: white;
+        }
+
+        .status-completed {
+            background: #27ae60;
+            color: white;
+        }
+
+        .patient-actions {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .patient-action-btn {
+            background: #ecf0f1;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .patient-action-btn:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .queue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .queue-filters {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background: #ecf0f1;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .filter-btn:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .date-status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .date-status-badge.today {
+            background: #e74c3c;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        .date-status-badge.past {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .date-status-badge.future {
+            background: #27ae60;
+            color: white;
         }
 
         .patient-item.high-priority {
@@ -403,10 +570,6 @@
                         <div class="metric-label">Avg Wait Days</div>
                     </div>
                     <div class="metric">
-                        <div class="metric-value" id="avgWaitTime">24</div>
-                        <div class="metric-label">Avg Wait Time (min)</div>
-                    </div>
-                    <div class="metric">
                         <div class="metric-value" id="providerUtilization">78</div>
                         <div class="metric-label">Dr. Sarah's Utilization (%)</div>
                     </div>
@@ -494,7 +657,16 @@
         <!-- Patient Queue Management -->
         <div class="dashboard">
             <div class="card">
-                <h2>👥 Current Patient Queue</h2>
+                <div class="queue-header">
+                    <h2>👥 Current Patient Queue</h2>
+                    <div class="queue-filters">
+                        <button class="filter-btn active" onclick="filterPatients('all')">All</button>
+                        <button class="filter-btn" onclick="filterPatients('today')">Today</button>
+                        <button class="filter-btn" onclick="filterPatients('urgent')">Urgent</button>
+                        <button class="filter-btn" onclick="filterPatients('waiting')">Waiting</button>
+                        <button class="filter-btn" onclick="filterPatients('scheduled')">Scheduled</button>
+                    </div>
+                </div>
                 <div class="patient-list" id="patientList">
                     <!-- Patient items will be populated by JavaScript -->
                 </div>
@@ -614,9 +786,10 @@
                     priority: 'high', 
                     time: '9:00', 
                     provider: doctor, 
-                    status: 'scheduled',
-                    scheduledDate: new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000), // 5 days from now
-                    requestDate: today
+                    status: 'completed',
+                    scheduledDate: new Date(today.getTime() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
+                    requestDate: new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
+                    notes: 'Initial consultation for chest pain'
                 },
                 { 
                     id: 2, 
@@ -625,9 +798,10 @@
                     priority: 'medium', 
                     time: '10:30', 
                     provider: doctor, 
-                    status: 'waiting',
-                    scheduledDate: new Date(today.getTime() + 8 * 24 * 60 * 60 * 1000), // 8 days from now
-                    requestDate: new Date(today.getTime() - 2 * 24 * 60 * 60 * 1000) // 2 days ago
+                    status: 'in-progress',
+                    scheduledDate: today, // Today
+                    requestDate: new Date(today.getTime() - 5 * 24 * 60 * 60 * 1000), // 5 days ago
+                    notes: 'Follow-up for diabetes management'
                 },
                 { 
                     id: 3, 
@@ -636,9 +810,10 @@
                     priority: 'low', 
                     time: '2:00', 
                     provider: doctor, 
-                    status: 'completed',
-                    scheduledDate: today,
-                    requestDate: new Date(today.getTime() - 15 * 24 * 60 * 60 * 1000) // 15 days ago
+                    status: 'scheduled',
+                    scheduledDate: new Date(today.getTime() + 1 * 24 * 60 * 60 * 1000), // Tomorrow
+                    requestDate: new Date(today.getTime() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
+                    notes: 'Routine chemotherapy session'
                 },
                 { 
                     id: 4, 
@@ -647,9 +822,10 @@
                     priority: 'urgent', 
                     time: '11:00', 
                     provider: doctor, 
-                    status: 'in-progress',
-                    scheduledDate: new Date(today.getTime() + 1 * 24 * 60 * 60 * 1000), // 1 day from now
-                    requestDate: new Date(today.getTime() - 1 * 24 * 60 * 60 * 1000) // 1 day ago
+                    status: 'waiting',
+                    scheduledDate: new Date(today.getTime() + 2 * 24 * 60 * 60 * 1000), // Day after tomorrow
+                    requestDate: new Date(today.getTime() - 1 * 24 * 60 * 60 * 1000), // 1 day ago
+                    notes: 'URGENT: Severe symptoms requiring immediate attention'
                 },
                 { 
                     id: 5, 
@@ -659,8 +835,9 @@
                     time: '3:30', 
                     provider: doctor, 
                     status: 'scheduled',
-                    scheduledDate: new Date(today.getTime() + 6 * 24 * 60 * 60 * 1000), // 6 days from now
-                    requestDate: new Date(today.getTime() - 1 * 24 * 60 * 60 * 1000) // 1 day ago
+                    scheduledDate: new Date(today.getTime() + 3 * 24 * 60 * 60 * 1000), // 3 days from now
+                    requestDate: new Date(today.getTime() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
+                    notes: 'Routine check-up and blood work review'
                 },
                 { 
                     id: 6, 
@@ -670,8 +847,21 @@
                     time: '4:00', 
                     provider: doctor, 
                     status: 'waiting',
-                    scheduledDate: new Date(today.getTime() + 4 * 24 * 60 * 60 * 1000), // 4 days from now
-                    requestDate: new Date(today.getTime() - 3 * 24 * 60 * 60 * 1000) // 3 days ago
+                    scheduledDate: new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000), // 5 days from now
+                    requestDate: new Date(today.getTime() - 4 * 24 * 60 * 60 * 1000), // 4 days ago
+                    notes: 'High priority follow-up for test results'
+                },
+                { 
+                    id: 7, 
+                    name: 'Sarah Johnson', 
+                    type: 'consultation', 
+                    priority: 'high', 
+                    time: '1:00', 
+                    provider: doctor, 
+                    status: 'scheduled',
+                    scheduledDate: new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
+                    requestDate: new Date(today.getTime() - 6 * 24 * 60 * 60 * 1000), // 6 days ago
+                    notes: 'Follow-up for recent test results'
                 }
             ];
 
@@ -706,30 +896,175 @@
             return 'high';
         }
 
-        // Update patient list display
+        // Global filter state
+        let currentFilter = 'all';
+
+        // Update patient list display with enhanced information
         function updatePatientList() {
             const list = document.getElementById('patientList');
             list.innerHTML = '';
 
-            appointments.forEach(appointment => {
+            // Filter appointments based on current filter
+            let filteredAppointments = appointments;
+            if (currentFilter !== 'all') {
+                filteredAppointments = appointments.filter(appointment => {
+                    if (currentFilter === 'today') {
+                        const today = new Date();
+                        const appointmentDate = new Date(appointment.scheduledDate);
+                        today.setHours(0, 0, 0, 0);
+                        appointmentDate.setHours(0, 0, 0, 0);
+                        return appointmentDate.getTime() === today.getTime();
+                    }
+                    if (currentFilter === 'urgent') return appointment.priority === 'urgent';
+                    if (currentFilter === 'waiting') return appointment.status === 'waiting';
+                    if (currentFilter === 'scheduled') return appointment.status === 'scheduled';
+                    return true;
+                });
+            }
+
+            // Sort by appointment date (chronological order)
+            filteredAppointments.sort((a, b) => {
+                const dateA = new Date(a.scheduledDate);
+                const dateB = new Date(b.scheduledDate);
+                return dateA - dateB; // Chronological order (earliest first)
+            });
+
+            filteredAppointments.forEach(appointment => {
                 const waitDays = calculateWaitDays(appointment);
                 const waitCategory = getWaitDaysCategory(waitDays);
+                const scheduledDate = new Date(appointment.scheduledDate);
+                const requestDate = new Date(appointment.requestDate);
                 
                 const item = document.createElement('div');
                 item.className = `patient-item ${appointment.priority}-priority`;
+                // Determine if appointment is today, past, or future
+                const today = new Date();
+                const appointmentDate = new Date(scheduledDate);
+                appointmentDate.setHours(0, 0, 0, 0);
+                today.setHours(0, 0, 0, 0);
+                
+                let dateStatus = '';
+                let dateClass = '';
+                if (appointmentDate.getTime() === today.getTime()) {
+                    dateStatus = 'TODAY';
+                    dateClass = 'today';
+                } else if (appointmentDate < today) {
+                    dateStatus = 'PAST';
+                    dateClass = 'past';
+                } else {
+                    dateStatus = 'FUTURE';
+                    dateClass = 'future';
+                }
+
                 item.innerHTML = `
-                    <div>
-                        <strong>${appointment.name}</strong><br>
-                        <small>${appointment.type} • ${appointment.time}</small>
+                    <div class="patient-header">
+                        <div class="patient-info">
+                            <div class="patient-name">${appointment.name}</div>
+                            <div class="patient-details">
+                                <div><strong>Appointment Date:</strong> ${scheduledDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                                <div><strong>Time:</strong> ${appointment.time}</div>
+                                <div><strong>Type:</strong> ${appointment.type}</div>
+                                <div><strong>Priority:</strong> ${appointment.priority}</div>
+                            </div>
+                        </div>
+                        <div class="patient-status-section">
+                            <span class="patient-status-badge status-${appointment.status}">${appointment.status}</span>
+                            <span class="patient-wait-days ${waitCategory}">${waitDays} days</span>
+                            <span class="date-status-badge ${dateClass}">${dateStatus}</span>
+                        </div>
                     </div>
-                    <div style="display: flex; align-items: center;">
-                        <span class="status-indicator status-${appointment.status === 'waiting' ? 'booked' : 'available'}"></span>
-                        ${appointment.status}
-                        <span class="patient-wait-days ${waitCategory}">${waitDays} days</span>
+                    <div class="patient-actions">
+                        <button class="patient-action-btn" onclick="updatePatientStatus(${appointment.id}, 'in-progress')">Start</button>
+                        <button class="patient-action-btn" onclick="updatePatientStatus(${appointment.id}, 'completed')">Complete</button>
+                        <button class="patient-action-btn" onclick="reschedulePatient(${appointment.id})">Reschedule</button>
+                        <button class="patient-action-btn" onclick="viewPatientDetails(${appointment.id})">Details</button>
                     </div>
                 `;
                 list.appendChild(item);
             });
+        }
+
+        // Filter patients function
+        function filterPatients(filter) {
+            currentFilter = filter;
+            
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            updatePatientList();
+        }
+
+        // Update patient status
+        function updatePatientStatus(patientId, newStatus) {
+            const appointment = appointments.find(apt => apt.id === patientId);
+            if (appointment) {
+                appointment.status = newStatus;
+                updatePatientList();
+                updateDashboard();
+                alert(`Patient ${appointment.name} status updated to ${newStatus}`);
+            }
+        }
+
+        // Reschedule patient
+        function reschedulePatient(patientId) {
+            const appointment = appointments.find(apt => apt.id === patientId);
+            if (appointment) {
+                const newDate = prompt(`Reschedule ${appointment.name} to (YYYY-MM-DD):`, 
+                    new Date(appointment.scheduledDate).toISOString().split('T')[0]);
+                if (newDate) {
+                    appointment.scheduledDate = new Date(newDate);
+                    updatePatientList();
+                    updateDashboard();
+                    alert(`${appointment.name} rescheduled to ${newDate}`);
+                }
+            }
+        }
+
+        // View patient details
+        function viewPatientDetails(patientId) {
+            const appointment = appointments.find(apt => apt.id === patientId);
+            if (appointment) {
+                const waitDays = calculateWaitDays(appointment);
+                const scheduledDate = new Date(appointment.scheduledDate);
+                const requestDate = new Date(appointment.requestDate);
+                
+                // Determine date status
+                const today = new Date();
+                const appointmentDate = new Date(scheduledDate);
+                today.setHours(0, 0, 0, 0);
+                appointmentDate.setHours(0, 0, 0, 0);
+                
+                let dateStatus = '';
+                if (appointmentDate.getTime() === today.getTime()) {
+                    dateStatus = 'TODAY';
+                } else if (appointmentDate < today) {
+                    dateStatus = 'PAST APPOINTMENT';
+                } else {
+                    dateStatus = 'FUTURE APPOINTMENT';
+                }
+                
+                const details = `
+Patient Details:
+Name: ${appointment.name}
+Type: ${appointment.type}
+Priority: ${appointment.priority}
+Status: ${appointment.status}
+
+APPOINTMENT SCHEDULE:
+Date: ${scheduledDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+Time: ${appointment.time}
+Status: ${dateStatus}
+Wait Days: ${waitDays}
+
+REQUEST INFO:
+Requested: ${requestDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+Notes: ${appointment.notes || 'None'}
+                `;
+                alert(details);
+            }
         }
 
         // Update recent feedback display
@@ -850,14 +1185,9 @@
 
         // Optimization functions
         function optimizeSchedule() {
-            // Simulate optimization algorithm
-            const waitTime = document.getElementById('avgWaitTime');
+            // Simulate optimization algorithm focused on wait days
             const utilization = document.getElementById('providerUtilization');
             const satisfaction = document.getElementById('patientSatisfaction');
-            
-            // Reduce wait time by 30%
-            let currentWait = parseInt(waitTime.textContent);
-            waitTime.textContent = Math.max(5, Math.floor(currentWait * 0.7));
             
             // Increase utilization by 10%
             let currentUtil = parseInt(utilization.textContent);
@@ -876,7 +1206,7 @@
                 }
             });
             
-            alert('Schedule optimized! Wait times reduced, utilization improved.');
+            alert('Schedule optimized! Utilization improved, focus on reducing wait days.');
         }
 
         function balanceWorkload() {
@@ -903,7 +1233,6 @@ Generated: ${new Date().toLocaleString()}
 
 KEY METRICS:
 - Average Wait Days: ${document.getElementById('avgWaitDays').textContent} days
-- Average Wait Time: ${document.getElementById('avgWaitTime').textContent} minutes
 - Dr. Sarah's Utilization: ${document.getElementById('providerUtilization').textContent}%
 - Patient Satisfaction: ${document.getElementById('patientSatisfaction').textContent}/5
 - Total Appointments Today: ${document.getElementById('appointmentsToday').textContent}
@@ -951,9 +1280,7 @@ FEEDBACK SUMMARY:
             document.getElementById('avgWaitDays').textContent = avgWaitDays;
             document.getElementById('currentWaitDays').textContent = avgWaitDays;
             
-            // Calculate average wait time based on waiting patients
-            const avgWaitTime = waitingAppointments > 0 ? Math.floor(Math.random() * 30) + 10 : 5;
-            document.getElementById('avgWaitTime').textContent = avgWaitTime;
+            // Wait time calculation removed - now using wait days only
             
             // Current wait time removed - now using wait days instead
             
