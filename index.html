@@ -492,6 +492,10 @@
     </div>
 
     <script>
+        // Prevent Firebase initialization
+        window.firebase = undefined;
+        console.log('Firebase blocked from initialization');
+        
         // Global state management
         let appointments = [];
         let feedback = [];
@@ -793,18 +797,15 @@ FEEDBACK SUMMARY:
             }
         });
 
-        // Add service worker for offline capability (optional)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(function(registration) {
-                        console.log('ServiceWorker registration successful');
-                    })
-                    .catch(function(err) {
-                        console.log('ServiceWorker registration failed');
-                    });
-            });
+        // Debug: Check for Firebase initialization
+        console.log('Checking for Firebase...');
+        if (typeof firebase !== 'undefined') {
+            console.log('Firebase is loaded:', firebase);
+        } else {
+            console.log('Firebase is not loaded');
         }
+        
+        // Service worker removed to prevent Firebase initialization errors
     </script>
 </body>
 </html>
