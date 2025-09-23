@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Sarah Johnson's Patient Portal - Transparent Scheduling</title>
+    <title>Dr. Sarah Johnson's Clinic Management System - Professional Dashboard</title>
     <style>
         * {
             margin: 0;
@@ -726,51 +726,51 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>🏥 Dr. Sarah Johnson's Patient Portal</h1>
-            <p>Transparent scheduling • Clear wait times • Patient-first care</p>
-            <div style="background: rgba(46, 204, 113, 0.1); border: 2px solid #27ae60; border-radius: 10px; padding: 15px; margin-top: 15px;">
-                <h3 style="color: #27ae60; margin: 0 0 10px 0;">📋 Your Appointment Status</h3>
-                <p style="margin: 0; color: #2c3e50;">See exactly when you'll see Dr. Sarah • Track your wait time • Know what to expect</p>
+            <h1>🏥 Dr. Sarah Johnson's Clinic Management System</h1>
+            <p>Professional scheduling • Operational efficiency • Staff management</p>
+            <div style="background: rgba(52, 152, 219, 0.1); border: 2px solid #3498db; border-radius: 10px; padding: 15px; margin-top: 15px;">
+                <h3 style="color: #3498db; margin: 0 0 10px 0;">🔧 Clinic Operations Dashboard</h3>
+                <p style="margin: 0; color: #2c3e50;">Monitor patient flow • Optimize scheduling • Track performance metrics • Manage staff workload</p>
             </div>
         </div>
 
-        <!-- Patient-Centric Dashboard -->
+        <!-- Professional Clinic Operations Dashboard -->
         <div class="dashboard">
             <div class="card">
-                <h2>⏰ Your Wait Time Information</h2>
-                <div style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 3rem; font-weight: bold; margin-bottom: 10px;" id="patientWaitDays">4</div>
-                    <div style="font-size: 1.2rem; margin-bottom: 5px;">Days Until Your Appointment</div>
-                    <div style="font-size: 0.9rem; opacity: 0.9;">Based on current schedule and priority</div>
+                <h2>📊 Clinic Performance Metrics</h2>
+                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 3rem; font-weight: bold; margin-bottom: 10px;" id="avgWaitDays">4.2</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 5px;">Average Wait Days</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9;">Target: ≤7 days | Current Performance</div>
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; border-left: 4px solid #27ae60;">
-                        <div style="font-weight: bold; color: #27ae60;">✅ Target Met</div>
-                        <div style="font-size: 0.9rem; color: #7f8c8d;">Your wait time is within our 7-day target</div>
+                        <div style="font-weight: bold; color: #27ae60;">✅ Target Achieved</div>
+                        <div style="font-size: 0.9rem; color: #7f8c8d;">67% reduction from baseline (12.8 days)</div>
                     </div>
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; border-left: 4px solid #3498db;">
-                        <div style="font-weight: bold; color: #3498db;">📅 Next Available</div>
-                        <div style="font-size: 0.9rem; color: #7f8c8d;">Dr. Sarah's next open slot</div>
+                        <div style="font-weight: bold; color: #3498db;">📈 Efficiency Rate</div>
+                        <div style="font-size: 0.9rem; color: #7f8c8d;">78% schedule utilization</div>
                     </div>
                 </div>
             </div>
 
             <div class="card">
-                <h2>👩‍⚕️ Dr. Sarah's Current Status</h2>
+                <h2>👩‍⚕️ Dr. Sarah's Professional Status</h2>
                 <div style="background: linear-gradient(135deg, #27ae60, #229954); color: white; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 2rem; margin-bottom: 10px;">🟢 AVAILABLE</div>
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🟢 ACTIVE</div>
                     <div style="font-size: 1.1rem;">Dr. Sarah is currently seeing patients</div>
-                    <div style="font-size: 0.9rem; opacity: 0.9; margin-top: 5px;">Last updated: <span id="lastUpdated">Just now</span></div>
+                    <div style="font-size: 0.9rem; opacity: 0.9; margin-top: 5px;">Status updated: <span id="lastUpdated">Just now</span></div>
                 </div>
                 
                 <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
-                    <h4 style="margin: 0 0 10px 0; color: #2c3e50;">📊 Today's Schedule Overview</h4>
+                    <h4 style="margin: 0 0 10px 0; color: #2c3e50;">📋 Daily Operations Summary</h4>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.9rem;">
-                        <div><strong>Patients Today:</strong> <span id="patientsToday">1</span></div>
+                        <div><strong>Total Appointments:</strong> <span id="patientsToday">1</span></div>
                         <div><strong>Completed:</strong> <span id="completedTodayPatient">0</span></div>
                         <div><strong>In Progress:</strong> <span id="inProgressToday">1</span></div>
-                        <div><strong>Waiting:</strong> <span id="waitingToday">0</span></div>
+                        <div><strong>Pending:</strong> <span id="waitingToday">0</span></div>
                     </div>
                 </div>
             </div>
@@ -832,14 +832,14 @@
             </div>
         </div>
 
-        <!-- Transparent Patient Queue -->
+        <!-- Professional Patient Management -->
         <div class="dashboard">
             <div class="card">
                 <div class="queue-header">
-                    <h2>👥 Current Patient Queue</h2>
+                    <h2>👥 Patient Management System</h2>
                     <div style="background: rgba(52, 152, 219, 0.1); padding: 10px; border-radius: 8px; border-left: 4px solid #3498db;">
                         <div style="font-size: 0.9rem; color: #2c3e50;">
-                            <strong>Transparency Promise:</strong> See exactly where you are in line and when you'll be seen
+                            <strong>Professional Operations:</strong> Monitor patient flow, manage appointments, and track clinical efficiency
                         </div>
                     </div>
                 </div>
@@ -849,29 +849,29 @@
             </div>
 
             <div class="card">
-                <h2>📈 Dr. Sarah Johnson's Schedule Analytics</h2>
+                <h2>📈 Professional Analytics Dashboard</h2>
                 
                 <!-- Key Performance Indicators -->
                 <div class="analytics-grid">
                     <div class="analytics-card">
-                        <h4>📅 Today's Schedule</h4>
+                        <h4>📅 Daily Capacity</h4>
                         <div class="analytics-value" id="todayAppointments">1</div>
-                        <div class="analytics-label">Appointments Today</div>
+                        <div class="analytics-label">Appointments Scheduled</div>
                     </div>
                     <div class="analytics-card">
-                        <h4>⏱️ Avg Wait Days</h4>
-                        <div class="analytics-value" id="avgWaitDaysAnalytics">4</div>
-                        <div class="analytics-label">Days Until Visit</div>
+                        <h4>⏱️ Wait Time Performance</h4>
+                        <div class="analytics-value" id="avgWaitDaysAnalytics">4.2</div>
+                        <div class="analytics-label">Average Wait Days</div>
                     </div>
                     <div class="analytics-card">
-                        <h4>🎯 Utilization</h4>
+                        <h4>🎯 Resource Utilization</h4>
                         <div class="analytics-value" id="utilizationAnalytics">78%</div>
                         <div class="analytics-label">Schedule Efficiency</div>
                     </div>
                     <div class="analytics-card">
-                        <h4>⚡ Next Available</h4>
+                        <h4>⚡ Capacity Planning</h4>
                         <div class="analytics-value" id="nextAvailable">1</div>
-                        <div class="analytics-label">Days</div>
+                        <div class="analytics-label">Next Open Slot (Days)</div>
                     </div>
                 </div>
 
@@ -937,24 +937,24 @@
             </div>
         </div>
 
-        <!-- Clinic Progress Tracking -->
+        <!-- Professional Performance Tracking -->
         <div class="dashboard">
             <div class="card">
-                <h2>📈 Clinic Optimization Progress</h2>
-                <div style="background: linear-gradient(135deg, #27ae60, #229954); color: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-                    <h3 style="margin: 0 0 10px 0; font-size: 1.5rem;">🎯 Wait Time Reduction Achievement</h3>
+                <h2>📈 Operational Excellence Metrics</h2>
+                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+                    <h3 style="margin: 0 0 10px 0; font-size: 1.5rem;">🎯 Operational Performance Achievement</h3>
                     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; text-align: center;">
                         <div>
                             <div style="font-size: 2.5rem; font-weight: bold;">67%</div>
-                            <div style="font-size: 0.9rem; opacity: 0.9;">Reduction in Avg Wait Time</div>
+                            <div style="font-size: 0.9rem; opacity: 0.9;">Wait Time Reduction</div>
                         </div>
                         <div>
                             <div style="font-size: 2.5rem; font-weight: bold;">4.2</div>
-                            <div style="font-size: 0.9rem; opacity: 0.9;">Days (Current Avg)</div>
+                            <div style="font-size: 0.9rem; opacity: 0.9;">Current Avg (Days)</div>
                         </div>
                         <div>
                             <div style="font-size: 2.5rem; font-weight: bold;">12.8</div>
-                            <div style="font-size: 0.9rem; opacity: 0.9;">Days (Previous Avg)</div>
+                            <div style="font-size: 0.9rem; opacity: 0.9;">Baseline Avg (Days)</div>
                         </div>
                     </div>
                 </div>
@@ -985,31 +985,31 @@
                     </div>
                 </div>
 
-                <!-- Key Achievements -->
+                <!-- Professional Achievements -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                     <div style="background: #e8f5e8; padding: 15px; border-radius: 10px; border-left: 4px solid #27ae60;">
-                        <h4 style="margin: 0 0 10px 0; color: #27ae60;">✅ Achievements</h4>
+                        <h4 style="margin: 0 0 10px 0; color: #27ae60;">✅ Operational Achievements</h4>
                         <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #2c3e50;">
-                            <li>Reduced avg wait time by 67%</li>
-                            <li>95% of patients seen within 7 days</li>
-                            <li>Zero urgent cases waiting >24 hours</li>
-                            <li>Patient satisfaction increased to 4.8/5</li>
+                            <li>67% reduction in average wait time</li>
+                            <li>95% of appointments scheduled within 7 days</li>
+                            <li>100% urgent case coverage within 24 hours</li>
+                            <li>4.8/5 patient satisfaction rating</li>
                         </ul>
                     </div>
                     <div style="background: #fff3cd; padding: 15px; border-radius: 10px; border-left: 4px solid #ffc107;">
-                        <h4 style="margin: 0 0 10px 0; color: #856404;">🎯 Next Goals</h4>
+                        <h4 style="margin: 0 0 10px 0; color: #856404;">🎯 Strategic Objectives</h4>
                         <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #2c3e50;">
-                            <li>Reduce avg wait time to 3 days</li>
-                            <li>Implement same-day urgent slots</li>
-                            <li>Increase patient capacity by 20%</li>
-                            <li>Achieve 5.0/5 patient satisfaction</li>
+                            <li>Target: 3-day average wait time</li>
+                            <li>Implement same-day urgent appointment slots</li>
+                            <li>Increase clinic capacity by 20%</li>
+                            <li>Achieve 5.0/5 patient satisfaction rating</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div class="card">
-                <h2>📊 Optimization Metrics Dashboard</h2>
+                <h2>📊 Professional Performance Analytics</h2>
                 
                 <!-- Weekly Progress Chart -->
                 <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
@@ -1046,36 +1046,36 @@
                     </div>
                 </div>
 
-                <!-- Optimization Actions Taken -->
+                <!-- Professional Implementation Actions -->
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                    <h4 style="margin: 0 0 15px 0; color: #2c3e50;">🔧 Optimization Actions Implemented</h4>
+                    <h4 style="margin: 0 0 15px 0; color: #2c3e50;">🔧 Professional Implementation Actions</h4>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                         <div>
-                            <h5 style="color: #27ae60; margin: 0 0 10px 0;">✅ Completed Actions</h5>
+                            <h5 style="color: #27ae60; margin: 0 0 10px 0;">✅ Completed Implementations</h5>
                             <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #2c3e50;">
-                                <li>Implemented priority-based scheduling</li>
-                                <li>Added real-time wait time tracking</li>
-                                <li>Optimized appointment time slots</li>
-                                <li>Created patient transparency portal</li>
+                                <li>Priority-based scheduling system</li>
+                                <li>Real-time wait time monitoring</li>
+                                <li>Appointment slot optimization</li>
+                                <li>Professional management dashboard</li>
                                 <li>Automated schedule optimization</li>
                             </ul>
                         </div>
                         <div>
-                            <h5 style="color: #3498db; margin: 0 0 10px 0;">🔄 Ongoing Actions</h5>
+                            <h5 style="color: #3498db; margin: 0 0 10px 0;">🔄 Active Operations</h5>
                             <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #2c3e50;">
                                 <li>Continuous schedule monitoring</li>
-                                <li>Real-time patient status updates</li>
-                                <li>Dynamic appointment rescheduling</li>
-                                <li>Patient feedback integration</li>
-                                <li>Performance analytics tracking</li>
+                                <li>Real-time patient status tracking</li>
+                                <li>Dynamic appointment management</li>
+                                <li>Performance analytics integration</li>
+                                <li>Operational efficiency tracking</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Impact Summary -->
-                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 15px;">
-                    <h4 style="margin: 0 0 15px 0;">🎉 Overall Impact</h4>
+                <!-- Professional Impact Summary -->
+                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 20px; border-radius: 15px;">
+                    <h4 style="margin: 0 0 15px 0;">📊 Professional Performance Impact</h4>
                     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; text-align: center;">
                         <div>
                             <div style="font-size: 1.8rem; font-weight: bold;">67%</div>
@@ -1098,10 +1098,10 @@
             </div>
         </div>
 
-        <!-- Feedback System -->
+        <!-- Professional Feedback System -->
         <div class="feedback-section">
             <div class="feedback-form">
-                <h2>💬 Patient Feedback</h2>
+                <h2>💬 Professional Feedback & Quality Assurance</h2>
                 <form id="feedbackForm">
                     <div class="form-group">
                         <label for="feedbackType">Feedback Type</label>
