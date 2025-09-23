@@ -533,6 +533,143 @@
             margin-bottom: 10px;
             border-radius: 10px;
             transition: width 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .analytics-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .analytics-card h4 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+
+        .analytics-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+
+        .analytics-label {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+
+        .schedule-insights {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #28a745;
+        }
+
+        .schedule-insights h4 {
+            margin: 0 0 10px 0;
+            color: #28a745;
+            font-size: 0.9rem;
+        }
+
+        .insight-item {
+            background: white;
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border-left: 3px solid #28a745;
+        }
+
+        .wait-time-chart {
+            background: linear-gradient(135deg, #ff7675, #fd79a8);
+            color: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .wait-time-chart h4 {
+            margin: 0 0 15px 0;
+            font-size: 1rem;
+        }
+
+        .wait-time-bar {
+            background: rgba(255, 255, 255, 0.3);
+            height: 25px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wait-time-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            transition: width 0.8s ease;
+            position: relative;
+        }
+
+        .wait-time-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        .wait-time-label {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .wait-time-value {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
         @media (max-width: 768px) {
@@ -674,8 +811,34 @@
 
             <div class="card">
                 <h2>📈 Dr. Sarah Johnson's Schedule Analytics</h2>
+                
+                <!-- Key Performance Indicators -->
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h4>📅 Today's Schedule</h4>
+                        <div class="analytics-value" id="todayAppointments">1</div>
+                        <div class="analytics-label">Appointments Today</div>
+                    </div>
+                    <div class="analytics-card">
+                        <h4>⏱️ Avg Wait Days</h4>
+                        <div class="analytics-value" id="avgWaitDaysAnalytics">4</div>
+                        <div class="analytics-label">Days Until Visit</div>
+                    </div>
+                    <div class="analytics-card">
+                        <h4>🎯 Utilization</h4>
+                        <div class="analytics-value" id="utilizationAnalytics">78%</div>
+                        <div class="analytics-label">Schedule Efficiency</div>
+                    </div>
+                    <div class="analytics-card">
+                        <h4>⚡ Next Available</h4>
+                        <div class="analytics-value" id="nextAvailable">1</div>
+                        <div class="analytics-label">Days</div>
+                    </div>
+                </div>
+
+                <!-- Daily Utilization Chart -->
                 <div class="analytics-chart">
-                    <h4>Daily Utilization by Hour</h4>
+                    <h4>📊 Daily Utilization by Hour</h4>
                     <div class="chart-bar" style="width: 85%;">8:00 AM - 85%</div>
                     <div class="chart-bar" style="width: 95%;">9:00 AM - 95%</div>
                     <div class="chart-bar" style="width: 78%;">10:00 AM - 78%</div>
@@ -685,11 +848,52 @@
                     <div class="chart-bar" style="width: 82%;">3:00 PM - 82%</div>
                     <div class="chart-bar" style="width: 70%;">4:00 PM - 70%</div>
                 </div>
-                <div style="margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 8px;">
-                    <strong>Dr. Sarah's Patient Load:</strong> ${appointments.filter(apt => apt.status !== 'completed').length} patients<br>
-                    <strong>Completed Today:</strong> ${appointments.filter(apt => apt.status === 'completed').length} patients<br>
-                    <strong>Average Wait Days:</strong> ${calculateAverageWaitDays()} days<br>
-                    <strong>Next Available:</strong> ${Math.min(...appointments.filter(apt => apt.status === 'scheduled').map(apt => calculateWaitDays(apt)))} days
+
+                <!-- Wait Days Distribution Chart -->
+                <div class="wait-time-chart">
+                    <h4>📅 Patient Wait Days Distribution</h4>
+                    <div class="wait-time-bar">
+                        <div class="wait-time-fill" style="width: 15%;"></div>
+                        <div class="wait-time-label">≤3 Days</div>
+                        <div class="wait-time-value">15%</div>
+                    </div>
+                    <div class="wait-time-bar">
+                        <div class="wait-time-fill" style="width: 35%;"></div>
+                        <div class="wait-time-label">4-7 Days</div>
+                        <div class="wait-time-value">35%</div>
+                    </div>
+                    <div class="wait-time-bar">
+                        <div class="wait-time-fill" style="width: 30%;"></div>
+                        <div class="wait-time-label">8-14 Days</div>
+                        <div class="wait-time-value">30%</div>
+                    </div>
+                    <div class="wait-time-bar">
+                        <div class="wait-time-fill" style="width: 20%;"></div>
+                        <div class="wait-time-label">>14 Days</div>
+                        <div class="wait-time-value">20%</div>
+                    </div>
+                </div>
+
+                <!-- Schedule Insights -->
+                <div class="schedule-insights">
+                    <h4>💡 Schedule Optimization Insights</h4>
+                    <div class="insight-item" id="insight1">✅ Target achieved: 15% of patients seen within 3 days</div>
+                    <div class="insight-item" id="insight2">⚠️ 20% of patients wait >14 days - needs attention</div>
+                    <div class="insight-item" id="insight3">📈 Peak utilization at 9:00 AM (95%) - consider adding slots</div>
+                    <div class="insight-item" id="insight4">🕐 Low utilization at 4:00 PM (70%) - opportunity for optimization</div>
+                </div>
+
+                <!-- Patient Load Summary -->
+                <div style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #3498db;">
+                    <h4 style="margin: 0 0 10px 0; color: #2c3e50;">📋 Patient Load Summary</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.9rem;">
+                        <div><strong>Active Patients:</strong> <span id="activePatients">6</span></div>
+                        <div><strong>Completed Today:</strong> <span id="completedToday">1</span></div>
+                        <div><strong>Scheduled:</strong> <span id="scheduledCount">3</span></div>
+                        <div><strong>Waiting:</strong> <span id="waitingCount">2</span></div>
+                        <div><strong>Urgent Cases:</strong> <span id="urgentCount">1</span></div>
+                        <div><strong>Avg Wait Days:</strong> <span id="avgWaitDaysSummary">4</span> days</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1274,15 +1478,13 @@ FEEDBACK SUMMARY:
             const totalAppointments = appointments.length;
             const completedAppointments = appointments.filter(apt => apt.status === 'completed').length;
             const waitingAppointments = appointments.filter(apt => apt.status === 'waiting').length;
+            const scheduledAppointments = appointments.filter(apt => apt.status === 'scheduled').length;
+            const urgentAppointments = appointments.filter(apt => apt.priority === 'urgent').length;
             
             // Calculate average wait days
             const avgWaitDays = calculateAverageWaitDays();
             document.getElementById('avgWaitDays').textContent = avgWaitDays;
             document.getElementById('currentWaitDays').textContent = avgWaitDays;
-            
-            // Wait time calculation removed - now using wait days only
-            
-            // Current wait time removed - now using wait days instead
             
             // Update appointments today
             document.getElementById('appointmentsToday').textContent = totalAppointments;
@@ -1296,6 +1498,85 @@ FEEDBACK SUMMARY:
             } else {
                 trendElement.innerHTML = `<span style="color: #e74c3c; font-weight: bold;">⚠ Needs attention: ${avgWaitDays} days</span>`;
             }
+            
+            // Update analytics dashboard
+            updateAnalyticsDashboard();
+        }
+
+        // Update analytics dashboard with real-time data
+        function updateAnalyticsDashboard() {
+            const today = new Date();
+            const todayAppointments = appointments.filter(apt => {
+                const aptDate = new Date(apt.scheduledDate);
+                return aptDate.toDateString() === today.toDateString();
+            }).length;
+            
+            const avgWaitDays = calculateAverageWaitDays();
+            const activePatients = appointments.filter(apt => apt.status !== 'completed').length;
+            const completedToday = appointments.filter(apt => apt.status === 'completed').length;
+            const scheduledCount = appointments.filter(apt => apt.status === 'scheduled').length;
+            const waitingCount = appointments.filter(apt => apt.status === 'waiting').length;
+            const urgentCount = appointments.filter(apt => apt.priority === 'urgent').length;
+            
+            // Calculate next available slot
+            const futureAppointments = appointments.filter(apt => {
+                const aptDate = new Date(apt.scheduledDate);
+                return aptDate > today && apt.status === 'scheduled';
+            });
+            const nextAvailable = futureAppointments.length > 0 ? 
+                Math.min(...futureAppointments.map(apt => calculateWaitDays(apt))) : 0;
+            
+            // Update analytics cards
+            document.getElementById('todayAppointments').textContent = todayAppointments;
+            document.getElementById('avgWaitDaysAnalytics').textContent = avgWaitDays;
+            document.getElementById('utilizationAnalytics').textContent = '78%'; // Static for now
+            document.getElementById('nextAvailable').textContent = nextAvailable;
+            
+            // Update patient load summary
+            document.getElementById('activePatients').textContent = activePatients;
+            document.getElementById('completedToday').textContent = completedToday;
+            document.getElementById('scheduledCount').textContent = scheduledCount;
+            document.getElementById('waitingCount').textContent = waitingCount;
+            document.getElementById('urgentCount').textContent = urgentCount;
+            document.getElementById('avgWaitDaysSummary').textContent = avgWaitDays;
+            
+            // Update insights based on current data
+            updateScheduleInsights();
+        }
+
+        // Update schedule insights based on current data
+        function updateScheduleInsights() {
+            const avgWaitDays = calculateAverageWaitDays();
+            const urgentCount = appointments.filter(apt => apt.priority === 'urgent').length;
+            const todayAppointments = appointments.filter(apt => {
+                const aptDate = new Date(apt.scheduledDate);
+                return aptDate.toDateString() === new Date().toDateString();
+            }).length;
+            
+            // Update insights dynamically
+            const insight1 = document.getElementById('insight1');
+            const insight2 = document.getElementById('insight2');
+            const insight3 = document.getElementById('insight3');
+            const insight4 = document.getElementById('insight4');
+            
+            if (avgWaitDays <= 7) {
+                insight1.innerHTML = `✅ Target achieved: Average wait time is ${avgWaitDays} days (≤7 days)`;
+                insight1.style.borderLeftColor = '#28a745';
+            } else {
+                insight1.innerHTML = `⚠️ Target missed: Average wait time is ${avgWaitDays} days (target: ≤7 days)`;
+                insight1.style.borderLeftColor = '#ffc107';
+            }
+            
+            if (urgentCount > 0) {
+                insight2.innerHTML = `🚨 ${urgentCount} urgent case(s) requiring immediate attention`;
+                insight2.style.borderLeftColor = '#dc3545';
+            } else {
+                insight2.innerHTML = `✅ No urgent cases pending - good schedule management`;
+                insight2.style.borderLeftColor = '#28a745';
+            }
+            
+            insight3.innerHTML = `📈 Peak utilization at 9:00 AM (95%) - consider adding morning slots`;
+            insight4.innerHTML = `🕐 Low utilization at 4:00 PM (70%) - opportunity for afternoon optimization`;
         }
 
         function startRealTimeUpdates() {
