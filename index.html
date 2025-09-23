@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cancer Clinic Scheduling Optimization System</title>
+    <title>Dr. Sarah Johnson's Scheduling System</title>
     <style>
         * {
             margin: 0;
@@ -389,8 +389,8 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>🏥 Cancer Clinic Scheduling Optimization</h1>
-            <p>Reducing wait times • Maximizing provider utilization • Improving patient experience</p>
+            <h1>🏥 Dr. Sarah Johnson's Scheduling System</h1>
+            <p>Reducing patient wait days • Optimizing daily schedule • Improving patient experience</p>
         </div>
 
         <!-- Key Metrics Dashboard -->
@@ -408,7 +408,7 @@
                     </div>
                     <div class="metric">
                         <div class="metric-value" id="providerUtilization">78</div>
-                        <div class="metric-label">Provider Utilization (%)</div>
+                        <div class="metric-label">Dr. Sarah's Utilization (%)</div>
                     </div>
                     <div class="metric">
                         <div class="metric-value" id="patientSatisfaction">4.2</div>
@@ -425,7 +425,7 @@
                 <h2>📅 Patient Wait Days Monitor</h2>
                 <div class="wait-days-display">
                     <div class="wait-days-value" id="currentWaitDays">12</div>
-                    <div class="wait-days-label">Average Days Until Provider Visit</div>
+                    <div class="wait-days-label">Average Days Until Dr. Sarah's Visit</div>
                     <div class="wait-days-trend" id="waitDaysTrend">
                         <span class="wait-days-improvement">↓ 2 days improvement this week</span>
                     </div>
@@ -501,9 +501,9 @@
             </div>
 
             <div class="card">
-                <h2>📈 Scheduling Analytics</h2>
+                <h2>📈 Dr. Sarah Johnson's Schedule Analytics</h2>
                 <div class="analytics-chart">
-                    <h4>Provider Utilization by Hour</h4>
+                    <h4>Daily Utilization by Hour</h4>
                     <div class="chart-bar" style="width: 85%;">8:00 AM - 85%</div>
                     <div class="chart-bar" style="width: 95%;">9:00 AM - 95%</div>
                     <div class="chart-bar" style="width: 78%;">10:00 AM - 78%</div>
@@ -512,6 +512,12 @@
                     <div class="chart-bar" style="width: 76%;">2:00 PM - 76%</div>
                     <div class="chart-bar" style="width: 82%;">3:00 PM - 82%</div>
                     <div class="chart-bar" style="width: 70%;">4:00 PM - 70%</div>
+                </div>
+                <div style="margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                    <strong>Dr. Sarah's Patient Load:</strong> ${appointments.filter(apt => apt.status !== 'completed').length} patients<br>
+                    <strong>Completed Today:</strong> ${appointments.filter(apt => apt.status === 'completed').length} patients<br>
+                    <strong>Average Wait Days:</strong> ${calculateAverageWaitDays()} days<br>
+                    <strong>Next Available:</strong> ${Math.min(...appointments.filter(apt => apt.status === 'scheduled').map(apt => calculateWaitDays(apt)))} days
                 </div>
             </div>
         </div>
@@ -568,7 +574,7 @@
         let appointments = [];
         let feedback = [];
         let schedule = {};
-        let providers = ['Dr. Smith', 'Dr. Johnson', 'Dr. Williams', 'Dr. Brown'];
+        let doctor = 'Dr. Sarah Johnson'; // Single doctor
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
@@ -607,7 +613,7 @@
                     type: 'consultation', 
                     priority: 'high', 
                     time: '9:00', 
-                    provider: 'Dr. Smith', 
+                    provider: doctor, 
                     status: 'scheduled',
                     scheduledDate: new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000), // 5 days from now
                     requestDate: today
@@ -618,7 +624,7 @@
                     type: 'followup', 
                     priority: 'medium', 
                     time: '10:30', 
-                    provider: 'Dr. Johnson', 
+                    provider: doctor, 
                     status: 'waiting',
                     scheduledDate: new Date(today.getTime() + 8 * 24 * 60 * 60 * 1000), // 8 days from now
                     requestDate: new Date(today.getTime() - 2 * 24 * 60 * 60 * 1000) // 2 days ago
@@ -629,7 +635,7 @@
                     type: 'treatment', 
                     priority: 'low', 
                     time: '2:00', 
-                    provider: 'Dr. Williams', 
+                    provider: doctor, 
                     status: 'completed',
                     scheduledDate: today,
                     requestDate: new Date(today.getTime() - 15 * 24 * 60 * 60 * 1000) // 15 days ago
@@ -640,10 +646,32 @@
                     type: 'urgent', 
                     priority: 'urgent', 
                     time: '11:00', 
-                    provider: 'Dr. Brown', 
+                    provider: doctor, 
                     status: 'in-progress',
                     scheduledDate: new Date(today.getTime() + 1 * 24 * 60 * 60 * 1000), // 1 day from now
                     requestDate: new Date(today.getTime() - 1 * 24 * 60 * 60 * 1000) // 1 day ago
+                },
+                { 
+                    id: 5, 
+                    name: 'Michael Davis', 
+                    type: 'consultation', 
+                    priority: 'medium', 
+                    time: '3:30', 
+                    provider: doctor, 
+                    status: 'scheduled',
+                    scheduledDate: new Date(today.getTime() + 6 * 24 * 60 * 60 * 1000), // 6 days from now
+                    requestDate: new Date(today.getTime() - 1 * 24 * 60 * 60 * 1000) // 1 day ago
+                },
+                { 
+                    id: 6, 
+                    name: 'Lisa Garcia', 
+                    type: 'followup', 
+                    priority: 'high', 
+                    time: '4:00', 
+                    provider: doctor, 
+                    status: 'waiting',
+                    scheduledDate: new Date(today.getTime() + 4 * 24 * 60 * 60 * 1000), // 4 days from now
+                    requestDate: new Date(today.getTime() - 3 * 24 * 60 * 60 * 1000) // 3 days ago
                 }
             ];
 
@@ -692,7 +720,7 @@
                 item.innerHTML = `
                     <div>
                         <strong>${appointment.name}</strong><br>
-                        <small>${appointment.type} • ${appointment.time} • ${appointment.provider}</small>
+                        <small>${appointment.type} • ${appointment.time}</small>
                     </div>
                     <div style="display: flex; align-items: center;">
                         <span class="status-indicator status-${appointment.status === 'waiting' ? 'booked' : 'available'}"></span>
@@ -733,7 +761,7 @@
                 date: document.getElementById('preferredDate').value,
                 notes: document.getElementById('notes').value,
                 status: 'scheduled',
-                provider: providers[Math.floor(Math.random() * providers.length)],
+                provider: doctor,
                 requestDate: new Date(),
                 scheduledDate: new Date(document.getElementById('preferredDate').value)
             };
@@ -852,51 +880,46 @@
         }
 
         function balanceWorkload() {
-            // Redistribute appointments across providers
-            appointments.forEach(appointment => {
-                if (appointment.status === 'scheduled') {
-                    appointment.provider = providers[Math.floor(Math.random() * providers.length)];
-                }
+            // For single doctor, optimize schedule distribution throughout the day
+            const scheduledAppointments = appointments.filter(apt => apt.status === 'scheduled');
+            
+            // Redistribute appointments more evenly throughout the day
+            const timeSlots = ['8:00', '8:30', '9:00', '9:30', '10:00', '10:30', '11:00', '11:30', '1:00', '1:30', '2:00', '2:30', '3:00', '3:30', '4:00', '4:30'];
+            
+            scheduledAppointments.forEach((appointment, index) => {
+                appointment.time = timeSlots[index % timeSlots.length];
             });
             
             updatePatientList();
-            alert('Workload balanced across all providers.');
+            alert('Dr. Sarah Johnson\'s schedule optimized for better workload distribution throughout the day.');
         }
 
-        function reduceWaitTimes() {
-            // Implement wait time reduction strategies
-            const currentWait = document.getElementById('currentWaitTime');
-            let wait = parseInt(currentWait.textContent);
-            currentWait.textContent = Math.max(5, Math.floor(wait * 0.6));
-            
-            // Move some patients to optimized slots
-            const urgentPatients = appointments.filter(apt => apt.priority === 'urgent');
-            urgentPatients.forEach(patient => {
-                if (patient.status === 'waiting') {
-                    patient.status = 'in-progress';
-                }
-            });
-            
-            updatePatientList();
-            alert('Wait times reduced through priority optimization!');
-        }
+        // Legacy function removed - now using reduceWaitDays() instead
 
         function generateReport() {
             const report = `
-CANCER CLINIC SCHEDULING REPORT
+DR. SARAH JOHNSON'S SCHEDULING REPORT
 Generated: ${new Date().toLocaleString()}
 
 KEY METRICS:
+- Average Wait Days: ${document.getElementById('avgWaitDays').textContent} days
 - Average Wait Time: ${document.getElementById('avgWaitTime').textContent} minutes
-- Provider Utilization: ${document.getElementById('providerUtilization').textContent}%
+- Dr. Sarah's Utilization: ${document.getElementById('providerUtilization').textContent}%
 - Patient Satisfaction: ${document.getElementById('patientSatisfaction').textContent}/5
 - Total Appointments Today: ${document.getElementById('appointmentsToday').textContent}
 
+PATIENT LOAD ANALYSIS:
+- Active Patients: ${appointments.filter(apt => apt.status !== 'completed').length}
+- Completed Today: ${appointments.filter(apt => apt.status === 'completed').length}
+- Scheduled: ${appointments.filter(apt => apt.status === 'scheduled').length}
+- Waiting: ${appointments.filter(apt => apt.status === 'waiting').length}
+
 OPTIMIZATION RECOMMENDATIONS:
-1. Implement dynamic scheduling based on patient priority
-2. Use buffer time between appointments for urgent cases
-3. Optimize provider schedules based on historical data
-4. Implement real-time wait time notifications
+1. Focus on reducing wait days to target of <7 days
+2. Optimize daily schedule distribution for Dr. Sarah
+3. Implement priority-based scheduling for urgent cases
+4. Use buffer time between appointments for better patient flow
+5. Monitor real-time wait days for immediate adjustments
 
 FEEDBACK SUMMARY:
 - Recent feedback items: ${feedback.length}
@@ -932,8 +955,7 @@ FEEDBACK SUMMARY:
             const avgWaitTime = waitingAppointments > 0 ? Math.floor(Math.random() * 30) + 10 : 5;
             document.getElementById('avgWaitTime').textContent = avgWaitTime;
             
-            // Update current wait time
-            document.getElementById('currentWaitTime').textContent = Math.floor(Math.random() * 20) + 5;
+            // Current wait time removed - now using wait days instead
             
             // Update appointments today
             document.getElementById('appointmentsToday').textContent = totalAppointments;
