@@ -562,7 +562,7 @@
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
-            color: #ffffff;
+            color: #000000;
         }
 
         .form-group input,
@@ -570,26 +570,26 @@
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 2px solid #dc143c;
+            border: 2px solid #000000;
             border-radius: 8px;
             font-size: 1rem;
             transition: border-color 0.3s ease;
-            background: #1a1a1a;
-            color: #ffffff;
+            background: #ffffff;
+            color: #000000;
         }
 
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #ff1744;
-            box-shadow: 0 0 10px rgba(220, 20, 60, 0.3);
+            border-color: #333333;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
         .btn {
-            background: linear-gradient(135deg, #dc143c, #b71c1c);
+            background: linear-gradient(135deg, #000000, #1a1a1a);
             color: white;
-            border: none;
+            border: 2px solid #000000;
             padding: 12px 25px;
             border-radius: 8px;
             font-size: 1rem;
@@ -600,7 +600,7 @@
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(220, 20, 60, 0.6);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .btn-success {
@@ -3485,8 +3485,8 @@
                 
                 scheduledTime.setHours(hours, parseInt(time[1]), 0, 0);
                 
-                // Create specific wait times to achieve 4-day average (good performance)
-                const waitDays = [3, 4, 5, 4, 3]; // Total: 19 days for 5 patients = 3.8 avg
+                // Create specific wait times to achieve exactly 4-day average
+                const waitDays = [3, 4, 5, 4, 4]; // Total: 20 days for 5 patients = 4.0 avg
                 const requestDate = new Date(scheduledTime.getTime() - waitDays[index] * 24 * 60 * 60 * 1000);
                 
                 appointments.push({
@@ -3548,7 +3548,7 @@
             // 3. WAITING LIST (2 patients - 4-day average target) - Good performance wait times
             const waitingPatients = [
                 { name: 'Follow-up Patient', priority: 'high', daysWaiting: 4 },
-                { name: 'New Patient', priority: 'medium', daysWaiting: 5 }
+                { name: 'New Patient', priority: 'medium', daysWaiting: 4 }
             ];
             
             waitingPatients.forEach((patient, index) => {
@@ -3619,7 +3619,7 @@
                 if (appointment.patientName === 'Follow-up Patient') {
                     intendedWaitDays = 4;
                 } else if (appointment.patientName === 'New Patient') {
-                    intendedWaitDays = 5;
+                    intendedWaitDays = 4;
                 }
                 
                 console.log(`   Wait Days (waiting): ${intendedWaitDays} (intended), ${daysSinceRequest} (actual)`);
@@ -3979,11 +3979,11 @@ Notes: ${appointment.notes || 'None'}
                 progressBar.style.background = 'linear-gradient(90deg, #000000, #333333)';
                 progressBar.style.width = `${progressPercent}%`;
                 
-                // Status cards - green
-                statusCard1.style.borderLeftColor = '#27ae60';
-                statusCard2.style.borderLeftColor = '#27ae60';
-                statusText1.style.color = '#27ae60';
-                statusText2.style.color = '#27ae60';
+                // Status cards - black
+                statusCard1.style.borderLeftColor = '#000000';
+                statusCard2.style.borderLeftColor = '#000000';
+                statusText1.style.color = '#000000';
+                statusText2.style.color = '#000000';
                 
                 // Status texts
                 statusText1.textContent = '✅ Target Achieved';
@@ -3992,23 +3992,23 @@ Notes: ${appointment.notes || 'None'}
                 statusSubtext2.textContent = `${avgWaitDays.toFixed(1)} days average`;
                 
                 // Dr. Sarah's status - OPTIMIZED
-                doctorStatusCard.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                doctorStatusCard.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
                 doctorStatusIndicator.className = 'status-indicator success';
                 doctorStatusText.textContent = 'OPTIMIZED';
                 doctorStatusMessage.textContent = `Excellent performance - ${avgWaitDays.toFixed(1)} days average wait`;
-                doctorStatusProgress.style.background = 'linear-gradient(90deg, #27ae60, #2ecc71)';
+                doctorStatusProgress.style.background = 'linear-gradient(90deg, #000000, #333333)';
                 doctorStatusProgress.style.width = `${progressPercent}%`;
                 
                 // Performance Status - SUCCESS
-                performanceStatusCard.style.background = 'linear-gradient(135deg, #d4edda, #c3e6cb)';
-                performanceStatusCard.style.borderLeft = '5px solid #28a745';
-                performanceStatusTitle.style.color = '#155724';
+                performanceStatusCard.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
+                performanceStatusCard.style.borderLeft = '5px solid #000000';
+                performanceStatusTitle.style.color = '#000000';
                 performanceStatusTitle.textContent = '✅ Performance Success';
-                performanceStatusSubtitle1.style.color = '#155724';
+                performanceStatusSubtitle1.style.color = '#000000';
                 performanceStatusSubtitle1.textContent = '🎉 Excellent Achievements';
-                performanceStatusSubtitle2.style.color = '#155724';
+                performanceStatusSubtitle2.style.color = '#000000';
                 performanceStatusSubtitle2.textContent = '🎯 Continue Excellence';
-                performanceStatusList1.style.color = '#155724';
+                performanceStatusList1.style.color = '#000000';
                 performanceStatusList1.innerHTML = `
                     <li>Wait time ${((targetWaitDays - avgWaitDays) / targetWaitDays * 100).toFixed(0)}% below target (${avgWaitDays.toFixed(1)} days)</li>
                     <li>Dr. Sarah operating efficiently</li>
@@ -4025,15 +4025,15 @@ Notes: ${appointment.notes || 'None'}
                 
             } else {
                 // UNDERPERFORMANCE (>7 days)
-                performanceCard.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
-                progressBar.style.background = 'linear-gradient(90deg, #e74c3c, #c0392b)';
+                performanceCard.style.background = 'linear-gradient(135deg, #f8f9fa, #e9ecef)';
+                progressBar.style.background = 'linear-gradient(90deg, #6c757d, #495057)';
                 progressBar.style.width = '100%';
                 
-                // Status cards - red
-                statusCard1.style.borderLeftColor = '#e74c3c';
-                statusCard2.style.borderLeftColor = '#e74c3c';
-                statusText1.style.color = '#e74c3c';
-                statusText2.style.color = '#e74c3c';
+                // Status cards - gray
+                statusCard1.style.borderLeftColor = '#6c757d';
+                statusCard2.style.borderLeftColor = '#6c757d';
+                statusText1.style.color = '#6c757d';
+                statusText2.style.color = '#6c757d';
                 
                 // Status texts
                 statusText1.textContent = '❌ Target Missed';
@@ -4042,23 +4042,23 @@ Notes: ${appointment.notes || 'None'}
                 statusSubtext2.textContent = `${avgWaitDays.toFixed(1)} days average`;
                 
                 // Dr. Sarah's status - OVERWHELMED
-                doctorStatusCard.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+                doctorStatusCard.style.background = 'linear-gradient(135deg, #f8f9fa, #e9ecef)';
                 doctorStatusIndicator.className = 'status-indicator danger';
                 doctorStatusText.textContent = 'OVERWHELMED';
                 doctorStatusMessage.textContent = `Behind schedule - ${avgWaitDays.toFixed(1)} days average wait`;
-                doctorStatusProgress.style.background = 'linear-gradient(90deg, #e74c3c, #c0392b)';
+                doctorStatusProgress.style.background = 'linear-gradient(90deg, #6c757d, #495057)';
                 doctorStatusProgress.style.width = '100%';
                 
                 // Performance Status - ALERT
-                performanceStatusCard.style.background = 'linear-gradient(135deg, #fff3cd, #ffeaa7)';
-                performanceStatusCard.style.borderLeft = '5px solid #f39c12';
-                performanceStatusTitle.style.color = '#856404';
+                performanceStatusCard.style.background = 'linear-gradient(135deg, #f8f9fa, #e9ecef)';
+                performanceStatusCard.style.borderLeft = '5px solid #6c757d';
+                performanceStatusTitle.style.color = '#6c757d';
                 performanceStatusTitle.textContent = '⚠️ Performance Alert';
-                performanceStatusSubtitle1.style.color = '#856404';
+                performanceStatusSubtitle1.style.color = '#6c757d';
                 performanceStatusSubtitle1.textContent = '🚨 Critical Issues';
-                performanceStatusSubtitle2.style.color = '#856404';
+                performanceStatusSubtitle2.style.color = '#6c757d';
                 performanceStatusSubtitle2.textContent = '📋 Immediate Actions';
-                performanceStatusList1.style.color = '#856404';
+                performanceStatusList1.style.color = '#6c757d';
                 performanceStatusList1.innerHTML = `
                     <li>Wait time ${((avgWaitDays - targetWaitDays) / targetWaitDays * 100).toFixed(0)}% over target (${avgWaitDays.toFixed(1)} days)</li>
                     <li>Dr. Sarah overwhelmed with workload</li>
