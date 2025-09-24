@@ -1909,6 +1909,64 @@
         let feedback = [];
         let schedule = {};
         let doctor = 'Dr. Sarah Johnson'; // Single doctor
+        
+        // Intelligent Scheduling Data Model
+        const SchedulingDataModel = {
+            // Resource definitions
+            resources: {
+                providers: [
+                    { id: 'dr_sarah', name: 'Dr. Sarah Johnson', specialties: ['general', 'urgent'], availability: 'full-time', workingHours: { start: '08:00', end: '17:00' } },
+                    { id: 'dr_mike', name: 'Dr. Mike Davis', specialties: ['general'], availability: 'part-time', workingHours: { start: '09:00', end: '15:00' } },
+                    { id: 'nurse_lisa', name: 'Nurse Lisa Brown', specialties: ['routine'], availability: 'full-time', workingHours: { start: '08:00', end: '17:00' } }
+                ],
+                rooms: [
+                    { id: 'room_1', name: 'Exam Room 1', equipment: ['exam_table', 'computer'], capacity: 1, specialty: 'general' },
+                    { id: 'room_2', name: 'Exam Room 2', equipment: ['exam_table', 'computer'], capacity: 1, specialty: 'general' },
+                    { id: 'room_3', name: 'Urgent Care Room', equipment: ['exam_table', 'computer', 'emergency_kit'], capacity: 1, specialty: 'urgent' }
+                ],
+                equipment: [
+                    { id: 'xray_machine', name: 'X-Ray Machine', location: 'room_1', maintenance_schedule: [] },
+                    { id: 'lab_station', name: 'Lab Station', location: 'room_2', maintenance_schedule: [] }
+                ]
+            },
+            
+            // Time constraints and preferences
+            constraints: {
+                workingHours: {
+                    start: '08:00',
+                    end: '17:00',
+                    lunch: { start: '12:00', end: '13:00' },
+                    weekends: false
+                },
+                appointmentTypes: {
+                    'routine': { duration: 30, resources: ['room_1', 'room_2'], providers: ['dr_sarah', 'dr_mike', 'nurse_lisa'], priority: 3 },
+                    'urgent': { duration: 45, resources: ['room_3'], providers: ['dr_sarah'], priority: 1 },
+                    'follow_up': { duration: 20, resources: ['room_1', 'room_2'], providers: ['dr_sarah', 'dr_mike'], priority: 2 },
+                    'consultation': { duration: 60, resources: ['room_1'], providers: ['dr_sarah'], priority: 2 },
+                    'procedure': { duration: 90, resources: ['room_1', 'xray_machine'], providers: ['dr_sarah'], priority: 2 }
+                },
+                bufferTimes: {
+                    between_appointments: 15, // minutes
+                    setup_time: 10,
+                    cleanup_time: 10
+                }
+            },
+            
+            // Patient preferences and constraints
+            patientPreferences: {
+                timePreferences: ['morning', 'afternoon', 'evening'],
+                providerPreferences: ['any', 'specific'],
+                urgencyLevels: ['routine', 'urgent', 'emergency']
+            },
+            
+            // Historical data for optimization
+            historicalData: {
+                peakHours: ['09:00-11:00', '14:00-16:00'],
+                averageWaitTimes: { routine: 3, urgent: 1, emergency: 0 },
+                noShowRates: { routine: 0.15, urgent: 0.05, emergency: 0.02 },
+                completionRates: { routine: 0.95, urgent: 0.98, emergency: 0.99 }
+            }
+        };
         let currentQueueFilter = 'all';
         
         // Global update system - tracks all components that need updating
@@ -1957,10 +2015,10 @@
                 const todayInProgress = todayAppointments.filter(apt => apt.status === 'in-progress').length;
                 const todayWaiting = waitingAppointments; // All waiting patients
                 
-                // Calculate performance metrics - EXCELLENT PERFORMANCE Scenario
+                // Calculate performance metrics - GOOD PERFORMANCE Scenario
                 const targetWaitDays = 7.0;
-                const baselineWaitDays = 10.0; // Baseline was 10 days (before optimization)
-                const currentWaitDays = avgWaitDays; // Current value showing excellent performance
+                const baselineWaitDays = 8.0; // Baseline was 8 days (before optimization)
+                const currentWaitDays = avgWaitDays; // Current value showing good performance (4 days)
                 
                 // Wait time change: (old - new) / old * 100 (positive = improvement)
                 const waitTimeChange = baselineWaitDays > 0 ? ((baselineWaitDays - currentWaitDays) / baselineWaitDays) * 100 : 0;
@@ -3424,8 +3482,8 @@
                 
                 scheduledTime.setHours(hours, parseInt(time[1]), 0, 0);
                 
-                // Create specific wait times to achieve EXCELLENT PERFORMANCE scenario
-                const waitDays = [3, 4, 5, 4, 3]; // Low wait days showing excellent performance
+                // Create specific wait times to achieve 4-day average (good performance)
+                const waitDays = [3, 4, 5, 4, 3]; // Total: 19 days for 5 patients = 3.8 avg
                 const requestDate = new Date(scheduledTime.getTime() - waitDays[index] * 24 * 60 * 60 * 1000);
                 
                 appointments.push({
@@ -3442,8 +3500,8 @@
                 });
             });
             
-            // 2. UPCOMING APPOINTMENTS (15 patients over next 2 weeks) - EXCELLENT PERFORMANCE scenario
-            const upcomingWaitDays = [3, 4, 5, 4, 3, 6, 4, 3, 4, 5, 4, 3, 4, 6, 4]; // Low wait days
+            // 2. UPCOMING APPOINTMENTS (15 patients over next 2 weeks) - 4-day average target
+            const upcomingWaitDays = [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]; // All 4 days = 60 total
             for (let i = 6; i <= 20; i++) {
                 const daysFromNow = Math.floor(Math.random() * 14) + 1;
                 const requestDaysAgo = upcomingWaitDays[i - 6]; // Use specific wait days
@@ -3484,10 +3542,10 @@
                 });
             }
             
-            // 3. WAITING LIST (2 patients - EXCELLENT PERFORMANCE Scenario) - Minimal wait times
+            // 3. WAITING LIST (2 patients - 4-day average target) - Good performance wait times
             const waitingPatients = [
-                { name: 'Follow-up Patient', priority: 'high', daysWaiting: 2 },
-                { name: 'New Patient', priority: 'medium', daysWaiting: 3 }
+                { name: 'Follow-up Patient', priority: 'high', daysWaiting: 4 },
+                { name: 'New Patient', priority: 'medium', daysWaiting: 5 }
             ];
             
             waitingPatients.forEach((patient, index) => {
@@ -3508,7 +3566,7 @@
                 });
             });
             
-            console.log(`✅ EXCELLENT PERFORMANCE SCENARIO LOADED: ${appointments.length} appointments:`);
+            console.log(`✅ GOOD PERFORMANCE SCENARIO LOADED: ${appointments.length} appointments:`);
             console.log(`   - Today: ${appointments.filter(apt => {
                 const aptDate = new Date(apt.scheduledDate);
                 return aptDate.toDateString() === today.toDateString();
@@ -3516,7 +3574,7 @@
             console.log(`   - Scheduled: ${appointments.filter(apt => apt.status === 'scheduled').length} patients`);
             console.log(`   - Waiting: ${appointments.filter(apt => apt.status === 'waiting').length} patients`);
             console.log(`   - Urgent: ${appointments.filter(apt => apt.priority === 'urgent').length} patients`);
-            console.log(`🎉 SUCCESS: Clinic is achieving excellent performance targets!`);
+            console.log(`🎯 TARGET: Achieving 4-day average wait time (GOOD PERFORMANCE - Below 7-day target!)`);
             
             // Test the calculateAverageWaitDays function
             const testAvgWaitDays = calculateAverageWaitDays();
@@ -3552,13 +3610,13 @@
                 // Calculate the intended wait days based on the request date and current time
                 const daysSinceRequest = Math.max(0, Math.ceil((today - requestDate) / (1000 * 60 * 60 * 24)));
                 
-                // For EXCELLENT PERFORMANCE scenario, use the intended wait days based on patient name
+                // For 4-day average target (good performance), use the intended wait days based on patient name
                 let intendedWaitDays = daysSinceRequest; // Default to actual days
                 
                 if (appointment.patientName === 'Follow-up Patient') {
-                    intendedWaitDays = 2;
+                    intendedWaitDays = 4;
                 } else if (appointment.patientName === 'New Patient') {
-                    intendedWaitDays = 3;
+                    intendedWaitDays = 5;
                 }
                 
                 console.log(`   Wait Days (waiting): ${intendedWaitDays} (intended), ${daysSinceRequest} (actual)`);
@@ -4050,6 +4108,613 @@ Notes: ${appointment.notes || 'None'}
             }
         }
 
+        // ========================================
+        // INTELLIGENT SCHEDULING SYSTEM
+        // ========================================
+        
+        // Advanced Scheduling Engine
+        class IntelligentScheduler {
+            constructor() {
+                this.dataModel = SchedulingDataModel;
+                this.optimizationEngine = new SchedulingOptimizer();
+                this.constraintSolver = new ConstraintSolver();
+            }
+            
+            // Main scheduling method
+            scheduleAppointment(patientData, preferences = {}) {
+                console.log('🧠 Intelligent Scheduling Started:', patientData);
+                
+                // 1. Analyze requirements
+                const requirements = this.analyzeRequirements(patientData);
+                
+                // 2. Find optimal time slots
+                const availableSlots = this.findOptimalSlots(requirements, preferences);
+                
+                // 3. Apply constraints and optimization
+                const optimizedSlots = this.optimizationEngine.optimize(availableSlots, requirements);
+                
+                // 4. Select best slot
+                const bestSlot = this.selectBestSlot(optimizedSlots, patientData);
+                
+                console.log('🎯 Best slot selected:', bestSlot);
+                return bestSlot;
+            }
+            
+            // Analyze patient requirements
+            analyzeRequirements(patientData) {
+                const urgency = this.determineUrgency(patientData);
+                const duration = this.getAppointmentDuration(patientData);
+                const requiredResources = this.getRequiredResources(patientData);
+                const preferredProviders = this.getPreferredProviders(patientData);
+                
+                return {
+                    urgency,
+                    duration,
+                    requiredResources,
+                    preferredProviders,
+                    estimatedWaitTime: this.calculateEstimatedWaitTime(urgency),
+                    constraints: this.getPatientConstraints(patientData)
+                };
+            }
+            
+            // Determine urgency level based on symptoms and priority
+            determineUrgency(patientData) {
+                const symptoms = patientData.symptoms || [];
+                const priority = patientData.priority || 'medium';
+                
+                // Emergency indicators
+                const emergencyKeywords = ['chest pain', 'difficulty breathing', 'severe bleeding', 'unconscious'];
+                if (emergencyKeywords.some(keyword => symptoms.some(s => s.toLowerCase().includes(keyword)))) {
+                    return 'emergency';
+                }
+                
+                // Urgent indicators
+                const urgentKeywords = ['fever', 'pain', 'infection', 'urgent'];
+                if (urgentKeywords.some(keyword => symptoms.some(s => s.toLowerCase().includes(keyword))) || priority === 'urgent') {
+                    return 'urgent';
+                }
+                
+                return 'routine';
+            }
+            
+            // Get appointment duration based on type and complexity
+            getAppointmentDuration(patientData) {
+                const type = patientData.type || 'routine';
+                const complexity = patientData.complexity || 'standard';
+                
+                let baseDuration = this.dataModel.constraints.appointmentTypes[type]?.duration || 30;
+                
+                // Adjust for complexity
+                if (complexity === 'complex') baseDuration *= 1.5;
+                if (complexity === 'simple') baseDuration *= 0.8;
+                
+                return Math.round(baseDuration);
+            }
+            
+            // Get required resources for appointment
+            getRequiredResources(patientData) {
+                const type = patientData.type || 'routine';
+                const requirements = this.dataModel.constraints.appointmentTypes[type];
+                
+                return {
+                    rooms: requirements?.resources || ['room_1', 'room_2'],
+                    equipment: this.getEquipmentRequirements(patientData),
+                    providers: requirements?.providers || ['dr_sarah']
+                };
+            }
+            
+            // Get equipment requirements
+            getEquipmentRequirements(patientData) {
+                const equipment = [];
+                const symptoms = patientData.symptoms || [];
+                
+                // Add equipment based on symptoms
+                if (symptoms.some(s => s.toLowerCase().includes('x-ray'))) equipment.push('xray_machine');
+                if (symptoms.some(s => s.toLowerCase().includes('blood'))) equipment.push('lab_station');
+                
+                return equipment;
+            }
+            
+            // Find optimal time slots
+            findOptimalSlots(requirements, preferences) {
+                const availableSlots = [];
+                const daysToCheck = this.getDaysToCheck(requirements.urgency);
+                
+                for (let i = 0; i < daysToCheck; i++) {
+                    const date = new Date();
+                    date.setDate(date.getDate() + i);
+                    
+                    if (this.isValidDate(date, requirements)) {
+                        const daySlots = this.getDaySlots(date, requirements, preferences);
+                        availableSlots.push(...daySlots);
+                    }
+                }
+                
+                return availableSlots;
+            }
+            
+            // Get number of days to check based on urgency
+            getDaysToCheck(urgency) {
+                switch (urgency) {
+                    case 'emergency': return 1; // Same day only
+                    case 'urgent': return 3; // Within 3 days
+                    case 'routine': return 14; // Within 2 weeks
+                    default: return 7;
+                }
+            }
+            
+            // Check if date is valid for scheduling
+            isValidDate(date, requirements) {
+                const dayOfWeek = date.getDay();
+                
+                // Skip weekends if not urgent
+                if (dayOfWeek === 0 || dayOfWeek === 6) {
+                    return requirements.urgency === 'emergency';
+                }
+                
+                // Check for holidays or blocked dates
+                if (this.isHoliday(date)) {
+                    return requirements.urgency === 'emergency';
+                }
+                
+                return true;
+            }
+            
+            // Get available slots for a specific day
+            getDaySlots(date, requirements, preferences) {
+                const slots = [];
+                const workingHours = this.dataModel.constraints.workingHours;
+                const startTime = this.parseTime(workingHours.start);
+                const endTime = this.parseTime(workingHours.end);
+                const lunchStart = this.parseTime(workingHours.lunch.start);
+                const lunchEnd = this.parseTime(workingHours.lunch.end);
+                
+                // Generate time slots
+                let currentTime = new Date(date);
+                currentTime.setHours(startTime.hours, startTime.minutes, 0, 0);
+                
+                const endDateTime = new Date(date);
+                endDateTime.setHours(endTime.hours, endTime.minutes, 0, 0);
+                
+                while (currentTime < endDateTime) {
+                    // Skip lunch break
+                    const currentHour = currentTime.getHours();
+                    const currentMinute = currentTime.getMinutes();
+                    
+                    if (currentHour >= lunchStart.hours && currentHour < lunchEnd.hours) {
+                        currentTime = new Date(currentTime);
+                        currentTime.setHours(lunchEnd.hours, lunchEnd.minutes, 0, 0);
+                        continue;
+                    }
+                    
+                    // Check if slot is available
+                    if (this.isSlotAvailable(currentTime, requirements)) {
+                        const slot = {
+                            datetime: new Date(currentTime),
+                            date: date.toISOString().split('T')[0],
+                            time: this.formatTime(currentTime),
+                            score: this.calculateSlotScore(currentTime, requirements, preferences),
+                            resources: this.getAvailableResources(currentTime, requirements),
+                            waitDays: Math.ceil((currentTime - new Date()) / (1000 * 60 * 60 * 24))
+                        };
+                        
+                        slots.push(slot);
+                    }
+                    
+                    // Move to next slot
+                    currentTime = new Date(currentTime.getTime() + (requirements.duration + this.dataModel.constraints.bufferTimes.between_appointments) * 60000);
+                }
+                
+                return slots;
+            }
+            
+            // Check if a specific time slot is available
+            isSlotAvailable(datetime, requirements) {
+                // Check provider availability
+                const availableProviders = this.getAvailableProviders(datetime, requirements);
+                if (availableProviders.length === 0) return false;
+                
+                // Check room availability
+                const availableRooms = this.getAvailableRooms(datetime, requirements);
+                if (availableRooms.length === 0) return false;
+                
+                // Check equipment availability
+                const requiredEquipment = requirements.requiredResources.equipment;
+                const availableEquipment = this.getAvailableEquipment(datetime, requiredEquipment);
+                if (requiredEquipment.length > 0 && availableEquipment.length < requiredEquipment.length) return false;
+                
+                return true;
+            }
+            
+            // Get available providers for a time slot
+            getAvailableProviders(datetime, requirements) {
+                const availableProviders = [];
+                const requiredProviders = requirements.requiredResources.providers;
+                
+                for (const providerId of requiredProviders) {
+                    const provider = this.dataModel.resources.providers.find(p => p.id === providerId);
+                    if (provider && this.isProviderAvailable(datetime, provider)) {
+                        availableProviders.push(provider);
+                    }
+                }
+                
+                return availableProviders;
+            }
+            
+            // Check if provider is available at specific time
+            isProviderAvailable(datetime, provider) {
+                const hour = datetime.getHours();
+                const minute = datetime.getMinutes();
+                const timeInMinutes = hour * 60 + minute;
+                
+                const startTime = this.parseTime(provider.workingHours.start);
+                const endTime = this.parseTime(provider.workingHours.end);
+                const startMinutes = startTime.hours * 60 + startTime.minutes;
+                const endMinutes = endTime.hours * 60 + endTime.minutes;
+                
+                // Check working hours
+                if (timeInMinutes < startMinutes || timeInMinutes >= endMinutes) {
+                    return false;
+                }
+                
+                // Check existing appointments
+                const existingAppointments = appointments.filter(apt => 
+                    apt.providerId === provider.id && 
+                    apt.status !== 'cancelled' &&
+                    apt.status !== 'completed'
+                );
+                
+                for (const appointment of existingAppointments) {
+                    if (this.isTimeOverlapping(datetime, appointment)) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            }
+            
+            // Get available rooms for a time slot
+            getAvailableRooms(datetime, requirements) {
+                const availableRooms = [];
+                const requiredRooms = requirements.requiredResources.rooms;
+                
+                for (const roomId of requiredRooms) {
+                    const room = this.dataModel.resources.rooms.find(r => r.id === roomId);
+                    if (room && this.isRoomAvailable(datetime, room)) {
+                        availableRooms.push(room);
+                    }
+                }
+                
+                return availableRooms;
+            }
+            
+            // Check if room is available
+            isRoomAvailable(datetime, room) {
+                const existingAppointments = appointments.filter(apt => 
+                    apt.roomId === room.id && 
+                    apt.status !== 'cancelled' &&
+                    apt.status !== 'completed'
+                );
+                
+                for (const appointment of existingAppointments) {
+                    if (this.isTimeOverlapping(datetime, appointment)) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            }
+            
+            // Check time overlap between datetime and appointment
+            isTimeOverlapping(datetime, appointment) {
+                const appointmentStart = new Date(appointment.scheduledDate);
+                const appointmentEnd = new Date(appointmentStart.getTime() + (appointment.estimatedDuration || 30) * 60000);
+                const slotEnd = new Date(datetime.getTime() + 30 * 60000); // Default 30 min slot
+                
+                return datetime < appointmentEnd && slotEnd > appointmentStart;
+            }
+            
+            // Calculate slot score for optimization
+            calculateSlotScore(datetime, requirements, preferences) {
+                let score = 100; // Base score
+                
+                // Urgency bonus
+                if (requirements.urgency === 'emergency') score += 50;
+                if (requirements.urgency === 'urgent') score += 25;
+                
+                // Time preference bonus
+                const hour = datetime.getHours();
+                if (preferences.timePreference === 'morning' && hour >= 8 && hour < 12) score += 20;
+                if (preferences.timePreference === 'afternoon' && hour >= 12 && hour < 17) score += 20;
+                
+                // Wait time penalty
+                const waitDays = Math.ceil((datetime - new Date()) / (1000 * 60 * 60 * 24));
+                if (waitDays > requirements.estimatedWaitTime) score -= (waitDays - requirements.estimatedWaitTime) * 10;
+                
+                // Peak hours penalty
+                const timeStr = this.formatTime(datetime);
+                if (this.dataModel.historicalData.peakHours.some(peak => timeStr >= peak.split('-')[0] && timeStr <= peak.split('-')[1])) {
+                    score -= 15;
+                }
+                
+                return Math.max(0, score);
+            }
+            
+            // Select best slot from available options
+            selectBestSlot(optimizedSlots, patientData) {
+                if (optimizedSlots.length === 0) {
+                    console.warn('⚠️ No available slots found');
+                    return null;
+                }
+                
+                // Sort by score (highest first)
+                optimizedSlots.sort((a, b) => b.score - a.score);
+                
+                const bestSlot = optimizedSlots[0];
+                
+                // Add additional slot information
+                bestSlot.patientId = patientData.id;
+                bestSlot.patientName = patientData.patientName;
+                bestSlot.priority = patientData.priority;
+                bestSlot.type = patientData.type || 'routine';
+                bestSlot.estimatedDuration = this.getAppointmentDuration(patientData);
+                
+                return bestSlot;
+            }
+            
+            // Utility methods
+            parseTime(timeStr) {
+                const [hours, minutes] = timeStr.split(':').map(Number);
+                return { hours, minutes };
+            }
+            
+            formatTime(datetime) {
+                return datetime.toTimeString().slice(0, 5);
+            }
+            
+            isHoliday(date) {
+                // Simple holiday check - can be expanded
+                const month = date.getMonth();
+                const day = date.getDate();
+                
+                // New Year's Day, Christmas, etc.
+                if (month === 0 && day === 1) return true; // New Year
+                if (month === 11 && day === 25) return true; // Christmas
+                
+                return false;
+            }
+            
+            getPreferredProviders(patientData) {
+                // Return preferred providers based on patient history or preferences
+                return patientData.preferredProvider ? [patientData.preferredProvider] : ['dr_sarah'];
+            }
+            
+            calculateEstimatedWaitTime(urgency) {
+                return this.dataModel.historicalData.averageWaitTimes[urgency] || 3;
+            }
+            
+            getPatientConstraints(patientData) {
+                return {
+                    maxWaitDays: this.calculateEstimatedWaitTime(this.determineUrgency(patientData)) * 2,
+                    preferredTimes: patientData.preferredTimes || [],
+                    excludedDates: patientData.excludedDates || []
+                };
+            }
+            
+            getAvailableResources(datetime, requirements) {
+                return {
+                    providers: this.getAvailableProviders(datetime, requirements),
+                    rooms: this.getAvailableRooms(datetime, requirements),
+                    equipment: this.getAvailableEquipment(datetime, requirements.requiredResources.equipment)
+                };
+            }
+            
+            getAvailableEquipment(datetime, requiredEquipment) {
+                const available = [];
+                
+                for (const equipmentId of requiredEquipment) {
+                    const equipment = this.dataModel.resources.equipment.find(e => e.id === equipmentId);
+                    if (equipment && this.isEquipmentAvailable(datetime, equipment)) {
+                        available.push(equipment);
+                    }
+                }
+                
+                return available;
+            }
+            
+            isEquipmentAvailable(datetime, equipment) {
+                // Check maintenance schedule
+                for (const maintenance of equipment.maintenance_schedule) {
+                    const start = new Date(maintenance.start);
+                    const end = new Date(maintenance.end);
+                    if (datetime >= start && datetime <= end) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            }
+        }
+        
+        // Scheduling Optimizer
+        class SchedulingOptimizer {
+            optimize(availableSlots, requirements) {
+                console.log('🔧 Optimizing scheduling options...');
+                
+                // Apply various optimization strategies
+                let optimized = [...availableSlots];
+                
+                // 1. Load balancing
+                optimized = this.applyLoadBalancing(optimized);
+                
+                // 2. Resource efficiency
+                optimized = this.optimizeResourceUsage(optimized, requirements);
+                
+                // 3. Patient satisfaction optimization
+                optimized = this.optimizePatientSatisfaction(optimized, requirements);
+                
+                // 4. Revenue optimization (if applicable)
+                optimized = this.optimizeRevenue(optimized);
+                
+                return optimized;
+            }
+            
+            applyLoadBalancing(slots) {
+                // Distribute appointments evenly across providers and times
+                const providerLoads = {};
+                const timeSlotLoads = {};
+                
+                // Calculate current loads
+                appointments.forEach(apt => {
+                    if (apt.providerId && apt.status !== 'cancelled') {
+                        providerLoads[apt.providerId] = (providerLoads[apt.providerId] || 0) + 1;
+                    }
+                });
+                
+                // Adjust scores based on load balancing
+                return slots.map(slot => {
+                    const provider = slot.resources.providers[0];
+                    if (provider) {
+                        const currentLoad = providerLoads[provider.id] || 0;
+                        const loadFactor = Math.max(0.1, 1 - (currentLoad / 20)); // Normalize load
+                        slot.score *= loadFactor;
+                    }
+                    return slot;
+                });
+            }
+            
+            optimizeResourceUsage(slots, requirements) {
+                // Prefer slots that use resources efficiently
+                return slots.map(slot => {
+                    const resourceEfficiency = this.calculateResourceEfficiency(slot, requirements);
+                    slot.score *= (1 + resourceEfficiency * 0.1); // 10% bonus for efficiency
+                    return slot;
+                });
+            }
+            
+            calculateResourceEfficiency(slot, requirements) {
+                const usedResources = Object.keys(slot.resources).length;
+                const totalResources = Object.keys(requirements.requiredResources).length;
+                return usedResources / Math.max(1, totalResources);
+            }
+            
+            optimizePatientSatisfaction(slots, requirements) {
+                // Prioritize slots that improve patient satisfaction
+                return slots.map(slot => {
+                    const satisfactionScore = this.calculateSatisfactionScore(slot, requirements);
+                    slot.score += satisfactionScore;
+                    return slot;
+                });
+            }
+            
+            calculateSatisfactionScore(slot, requirements) {
+                let score = 0;
+                
+                // Shorter wait times = higher satisfaction
+                if (slot.waitDays <= requirements.estimatedWaitTime) {
+                    score += 20;
+                }
+                
+                // Preferred time slots
+                const hour = slot.datetime.getHours();
+                if (hour >= 9 && hour <= 11) score += 10; // Morning preference
+                if (hour >= 14 && hour <= 16) score += 10; // Afternoon preference
+                
+                return score;
+            }
+            
+            optimizeRevenue(slots) {
+                // Optimize for revenue if applicable (can be customized)
+                // This is a placeholder for revenue optimization logic
+                return slots;
+            }
+        }
+        
+        // Constraint Solver
+        class ConstraintSolver {
+            constructor() {
+                this.constraints = [];
+            }
+            
+            addConstraint(constraint) {
+                this.constraints.push(constraint);
+            }
+            
+            solve(availableSlots) {
+                let validSlots = [...availableSlots];
+                
+                // Apply each constraint
+                for (const constraint of this.constraints) {
+                    validSlots = constraint.filter(validSlots);
+                }
+                
+                return validSlots;
+            }
+        }
+        
+        // Initialize intelligent scheduler
+        const intelligentScheduler = new IntelligentScheduler();
+        
+        // Test function for intelligent scheduling
+        function testIntelligentScheduling() {
+            console.log('🧪 Testing Intelligent Scheduling System...');
+            
+            // Test cases
+            const testPatients = [
+                {
+                    id: 'test_1',
+                    patientName: 'Test Emergency Patient',
+                    priority: 'urgent',
+                    type: 'urgent',
+                    symptoms: ['chest pain', 'difficulty breathing'],
+                    complexity: 'complex',
+                    estimatedDuration: 45
+                },
+                {
+                    id: 'test_2',
+                    patientName: 'Test Routine Patient',
+                    priority: 'low',
+                    type: 'routine',
+                    symptoms: ['checkup'],
+                    complexity: 'simple',
+                    estimatedDuration: 30,
+                    preferredTimeOfDay: 'afternoon'
+                },
+                {
+                    id: 'test_3',
+                    patientName: 'Test Procedure Patient',
+                    priority: 'medium',
+                    type: 'procedure',
+                    symptoms: ['x-ray needed'],
+                    complexity: 'complex',
+                    estimatedDuration: 90,
+                    preferredTimeOfDay: 'morning'
+                }
+            ];
+            
+            testPatients.forEach((patient, index) => {
+                console.log(`\n🧪 Test ${index + 1}: ${patient.patientName}`);
+                const result = intelligentScheduler.scheduleAppointment(patient);
+                if (result) {
+                    console.log('✅ Scheduling successful:', {
+                        date: result.date,
+                        time: result.time,
+                        waitDays: result.waitDays,
+                        score: result.score,
+                        providers: result.resources.providers.map(p => p.name),
+                        rooms: result.resources.rooms.map(r => r.name)
+                    });
+                } else {
+                    console.log('❌ Scheduling failed - no available slots');
+                }
+            });
+            
+            console.log('\n🎯 Intelligent Scheduling Test Complete!');
+        }
+        
+        // Add test function to global scope for debugging
+        window.testIntelligentScheduling = testIntelligentScheduling;
+        
         // Calculate average wait days
         function calculateAverageWaitDays() {
             console.log('🧮 Calculating average wait days...');
@@ -4110,8 +4775,49 @@ Notes: ${appointment.notes || 'None'}
             };
         }
 
-        // Advanced Scheduling Algorithm - Consider duration and prevent conflicts
+        // Intelligent Scheduling Algorithm - Uses advanced AI-based scheduling
         function findOptimalScheduleSlot(patient) {
+            console.log('🧠 Using Intelligent Scheduling for:', patient.patientName);
+            
+            // Convert patient data to format expected by intelligent scheduler
+            const patientData = {
+                id: patient.id,
+                patientName: patient.patientName,
+                priority: patient.priority,
+                type: patient.type || 'routine',
+                symptoms: patient.symptoms || [],
+                complexity: patient.complexity || 'standard',
+                estimatedDuration: patient.estimatedDuration || 30,
+                preferredProvider: patient.preferredProvider,
+                preferredTimes: patient.preferredTimes || [],
+                excludedDates: patient.excludedDates || []
+            };
+            
+            // Use intelligent scheduler
+            const optimalSlot = intelligentScheduler.scheduleAppointment(patientData, {
+                timePreference: patient.preferredTimeOfDay || 'morning'
+            });
+            
+            if (optimalSlot) {
+                // Convert intelligent scheduler result to legacy format
+                return {
+                    date: optimalSlot.date,
+                    time: optimalSlot.time,
+                    provider: optimalSlot.resources.providers[0]?.name || 'Dr. Sarah Johnson',
+                    room: optimalSlot.resources.rooms[0]?.name || 'Exam Room 1',
+                    score: optimalSlot.score,
+                    estimatedDuration: optimalSlot.estimatedDuration,
+                    waitDays: optimalSlot.waitDays
+                };
+            }
+            
+            // Fallback to original simple logic if intelligent scheduling fails
+            console.log('⚠️ Intelligent scheduling failed, using fallback method');
+            return findOptimalScheduleSlotFallback(patient);
+        }
+        
+        // Fallback scheduling method (original advanced logic)
+        function findOptimalScheduleSlotFallback(patient) {
             const estimatedDuration = patient.estimatedDuration || 30;
             const timeSlots = [
                 '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM',
