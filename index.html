@@ -1267,6 +1267,31 @@
             </div>
         </div>
 
+        <!-- Dynamic Wait Time Monitor -->
+        <div class="card" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-left: 5px solid #2196f3; margin-bottom: 20px;">
+            <h2 style="color: #1565c0; margin-bottom: 15px;">⏱️ Dynamic Wait Time Monitor</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div>
+                    <h4 style="color: #1565c0; margin-bottom: 10px;">📊 Current Wait Analysis</h4>
+                    <div style="font-size: 0.9rem; color: #1565c0;">
+                        <div><strong>Total Estimated Wait:</strong> <span id="totalWaitMinutes">0</span> minutes</div>
+                        <div><strong>Estimated Wait Days:</strong> <span id="estimatedWaitDays">0</span> days</div>
+                        <div><strong>Waiting Patients:</strong> <span id="waitingPatientsCount">0</span></div>
+                        <div><strong>Avg Duration/Patient:</strong> <span id="avgDurationPerPatient">0</span> min</div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color: #1565c0; margin-bottom: 10px;">🎯 Resource Utilization</h4>
+                    <div style="font-size: 0.9rem; color: #1565c0;">
+                        <div><strong>Daily Capacity:</strong> 510 minutes</div>
+                        <div><strong>Remaining Today:</strong> <span id="remainingMinutesToday">0</span> minutes</div>
+                        <div><strong>Utilization:</strong> <span id="dailyUtilization">0</span>%</div>
+                        <div><strong>Next Available:</strong> <span id="nextAvailableSlot">N/A</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
             </div>
         </div>
 
@@ -1313,6 +1338,22 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactNumber">Contact Number</label>
+                        <input type="tel" id="contactNumber" placeholder="(555) 123-4567" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="estimatedDuration">Estimated Duration (minutes)</label>
+                        <select id="estimatedDuration" required>
+                            <option value="">Select Duration</option>
+                            <option value="15">15 minutes</option>
+                            <option value="30">30 minutes</option>
+                            <option value="45">45 minutes</option>
+                            <option value="60">60 minutes</option>
+                            <option value="90">90 minutes</option>
+                            <option value="120">120 minutes</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="notes">Special Notes</label>
@@ -1915,6 +1956,7 @@
                 updateClinicProgress();
                 updateOperationalPerformanceAchievement();
                 updateProfessionalImpactSummary();
+                updateDynamicWaitTimeMonitor();
             }
             
             // Update ALL calendar and scheduling components simultaneously
@@ -2308,6 +2350,8 @@
                             <div class="patient-details">
                                 <span>📅 ${scheduledDate.toLocaleDateString()} ${scheduledDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
                                 <span>⏱️ ${Math.max(0, waitDays)} days wait</span>
+                                <span>📞 ${apt.contactNumber || 'N/A'}</span>
+                                <span>⏰ ${apt.estimatedDuration || 30} min</span>
                                 <span class="wait-time">${dateStatus}</span>
                             </div>
                         </div>
@@ -2537,23 +2581,39 @@
                 return;
             }
             
+            // Use advanced scheduling algorithm to find optimal slot
             const nextUrgent = urgentWaiting[0];
-            const nextAvailableSlot = findNextAvailableSlot();
+            const optimalSlot = findOptimalScheduleSlot(nextUrgent);
             
-            if (nextAvailableSlot) {
-                nextUrgent.scheduledDate = nextAvailableSlot.toISOString();
+            if (optimalSlot) {
+                // Create scheduled date with optimal time
+                const scheduledDateTime = new Date(optimalSlot.date);
+                const timeParts = optimalSlot.time.split(' ');
+                const time = timeParts[0].split(':');
+                const isPM = timeParts[1] === 'PM';
+                let hours = parseInt(time[0]);
+                if (isPM && hours !== 12) hours += 12;
+                if (!isPM && hours === 12) hours = 0;
+                
+                scheduledDateTime.setHours(hours, parseInt(time[1]), 0, 0);
+                
+                nextUrgent.scheduledDate = scheduledDateTime.toISOString();
                 nextUrgent.status = 'scheduled';
+                nextUrgent.time = optimalSlot.time;
+                
+                // Show detailed scheduling information
+                alert(`✅ Urgent patient scheduled successfully!\n\nPatient: ${nextUrgent.patientName}\nDate: ${optimalSlot.date.toLocaleDateString()}\nTime: ${optimalSlot.time} - ${optimalSlot.endTime}\nDuration: ${optimalSlot.duration} minutes\nSlots Used: ${optimalSlot.slotsNeeded}`);
                 
                 // Trigger data change notification and global update
                 onDataChange('Urgent Patient Scheduled', {
                     patient: nextUrgent.patientName,
-                    date: nextAvailableSlot.toLocaleDateString(),
+                    date: optimalSlot.date.toLocaleDateString(),
+                    time: optimalSlot.time,
+                    duration: optimalSlot.duration,
                     priority: 'urgent'
                 });
-                
-                alert(`Scheduled ${nextUrgent.patientName} for ${nextAvailableSlot.toLocaleDateString()}`);
             } else {
-                alert('No available slots found. Consider rescheduling non-urgent appointments.');
+                alert('❌ No available slots found for urgent patient scheduling');
             }
         }
 
@@ -3041,6 +3101,11 @@
                 if (i <= 2) status = 'in-progress'; // First 2 are in progress
                 else if (i <= 5) status = 'completed'; // Some completed
                 
+                // Generate contact number and estimated duration
+                const contactNumber = `(555) ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`;
+                const durationOptions = [15, 30, 45, 60, 90, 120];
+                const estimatedDuration = durationOptions[Math.floor(Math.random() * durationOptions.length)];
+                
                 appointments.push({
                     id: i,
                     patientName: `Patient ${i}`,
@@ -3048,6 +3113,8 @@
                     requestDate: new Date(today.getTime() - requestDaysAgo * 24 * 60 * 60 * 1000).toISOString(),
                     priority: priority,
                     status: status,
+                    contactNumber: contactNumber,
+                    estimatedDuration: estimatedDuration,
                     notes: `Appointment for Patient ${i}`
                 });
             }
@@ -3061,6 +3128,11 @@
                 if (i >= 26 && i <= 33) priority = 'urgent'; // 8 urgent cases (Patients 26-33)
                 else if (i >= 34 && i <= 45) priority = 'low'; // Some low priority
                 
+                // Generate contact number and estimated duration for waiting patients
+                const contactNumber = `(555) ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`;
+                const durationOptions = [15, 30, 45, 60, 90, 120];
+                const estimatedDuration = durationOptions[Math.floor(Math.random() * durationOptions.length)];
+                
                 appointments.push({
                     id: i,
                     patientName: `Patient ${i}`,
@@ -3068,6 +3140,8 @@
                     requestDate: new Date(today.getTime() - requestDaysAgo * 24 * 60 * 60 * 1000).toISOString(),
                     priority: priority,
                     status: 'waiting',
+                    contactNumber: contactNumber,
+                    estimatedDuration: estimatedDuration,
                     notes: `Waiting list - Patient ${i}`
                 });
             }
@@ -3358,11 +3432,13 @@ Notes: ${appointment.notes || 'None'}
             const patientType = document.getElementById('patientType').value;
             const priority = document.getElementById('priority').value;
             const preferredDate = document.getElementById('preferredDate').value;
+            const contactNumber = document.getElementById('contactNumber').value;
+            const estimatedDuration = parseInt(document.getElementById('estimatedDuration').value);
             const notes = document.getElementById('notes').value;
             const selectedTime = document.getElementById('selectedTime').value;
             
             // Validate required fields
-            if (!patientName || !patientType || !priority || !preferredDate) {
+            if (!patientName || !patientType || !priority || !preferredDate || !contactNumber || !estimatedDuration) {
                 alert('Please fill in all required fields');
                 return;
             }
@@ -3411,6 +3487,8 @@ Notes: ${appointment.notes || 'None'}
                 type: patientType,
                 priority: priority,
                 preferredDate: preferredDate,
+                contactNumber: contactNumber,
+                estimatedDuration: estimatedDuration,
                 notes: notes,
                 status: 'scheduled',
                 provider: doctor,
@@ -3457,6 +3535,43 @@ Notes: ${appointment.notes || 'None'}
             alert('Feedback submitted successfully! Thank you for your input.');
         });
 
+        // Update Dynamic Wait Time Monitor
+        function updateDynamicWaitTimeMonitor() {
+            const waitTimeData = calculateDynamicWaitTime();
+            
+            // Update wait analysis
+            document.getElementById('totalWaitMinutes').textContent = waitTimeData.estimatedWaitMinutes;
+            document.getElementById('estimatedWaitDays').textContent = waitTimeData.estimatedWaitDays;
+            document.getElementById('waitingPatientsCount').textContent = waitTimeData.waitingPatientsCount;
+            document.getElementById('avgDurationPerPatient').textContent = waitTimeData.averageDurationPerPatient;
+            
+            // Calculate daily utilization
+            const today = new Date();
+            const todayAppointments = appointments.filter(apt => {
+                if (!apt.scheduledDate) return false;
+                const aptDate = new Date(apt.scheduledDate).toLocaleString("en-US", {timeZone: "America/New_York"});
+                return new Date(aptDate).toDateString() === today.toDateString();
+            });
+            
+            const totalScheduledMinutes = todayAppointments.reduce((sum, apt) => {
+                return sum + (apt.estimatedDuration || 30);
+            }, 0);
+            
+            const dailyUtilization = Math.round((totalScheduledMinutes / 510) * 100);
+            
+            // Update resource utilization
+            document.getElementById('remainingMinutesToday').textContent = Math.max(0, 510 - totalScheduledMinutes);
+            document.getElementById('dailyUtilization').textContent = dailyUtilization;
+            
+            // Find next available slot
+            const nextSlot = findNextAvailableSlot();
+            if (nextSlot) {
+                document.getElementById('nextAvailableSlot').textContent = nextSlot.toLocaleDateString();
+            } else {
+                document.getElementById('nextAvailableSlot').textContent = 'No slots available';
+            }
+        }
+
         // Calculate average wait days
         function calculateAverageWaitDays() {
             const activeAppointments = appointments.filter(apt => apt.status !== 'completed');
@@ -3467,6 +3582,106 @@ Notes: ${appointment.notes || 'None'}
             }, 0);
             
             return Math.round(totalWaitDays / activeAppointments.length);
+        }
+
+        // Dynamic Wait Time Algorithm - Calculate estimated wait time based on duration
+        function calculateDynamicWaitTime() {
+            const waitingPatients = appointments.filter(apt => apt.status === 'waiting');
+            if (waitingPatients.length === 0) return { estimatedWaitMinutes: 0, estimatedWaitDays: 0 };
+            
+            // Calculate total estimated duration for all waiting patients
+            const totalEstimatedDuration = waitingPatients.reduce((sum, apt) => {
+                return sum + (apt.estimatedDuration || 30); // Default to 30 minutes if not set
+            }, 0);
+            
+            // Calculate working hours per day (8:00 AM to 4:30 PM = 8.5 hours = 510 minutes)
+            const workingMinutesPerDay = 510;
+            
+            // Calculate estimated wait days based on total duration
+            const estimatedWaitDays = Math.ceil(totalEstimatedDuration / workingMinutesPerDay);
+            
+            // Calculate remaining minutes for the current day
+            const remainingMinutesToday = totalEstimatedDuration % workingMinutesPerDay;
+            
+            return {
+                estimatedWaitMinutes: totalEstimatedDuration,
+                estimatedWaitDays: estimatedWaitDays,
+                remainingMinutesToday: remainingMinutesToday,
+                waitingPatientsCount: waitingPatients.length,
+                averageDurationPerPatient: Math.round(totalEstimatedDuration / waitingPatients.length)
+            };
+        }
+
+        // Advanced Scheduling Algorithm - Consider duration and prevent conflicts
+        function findOptimalScheduleSlot(patient) {
+            const estimatedDuration = patient.estimatedDuration || 30;
+            const timeSlots = [
+                '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM',
+                '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM',
+                '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM'
+            ];
+            
+            // Find next available business day
+            const today = new Date();
+            const nyTime = new Date(today.toLocaleString("en-US", {timeZone: "America/New_York"}));
+            
+            for (let dayOffset = 1; dayOffset <= 90; dayOffset++) {
+                const testDate = new Date(nyTime);
+                testDate.setDate(testDate.getDate() + dayOffset);
+                
+                // Skip weekends and holidays
+                if (testDate.getDay() === 0 || testDate.getDay() === 6 || isHoliday(testDate)) {
+                    continue;
+                }
+                
+                // Get appointments for this date
+                const appointmentsOnDate = appointments.filter(apt => {
+                    if (!apt.scheduledDate) return false;
+                    const aptDate = new Date(apt.scheduledDate).toLocaleString("en-US", {timeZone: "America/New_York"});
+                    return new Date(aptDate).toDateString() === testDate.toDateString();
+                });
+                
+                // Create a schedule map for this day
+                const scheduleMap = new Map();
+                appointmentsOnDate.forEach(apt => {
+                    const aptTime = new Date(apt.scheduledDate).toLocaleTimeString("en-US", {timeZone: "America/New_York", hour: '2-digit', minute: '2-digit', hour12: true});
+                    const duration = apt.estimatedDuration || 30;
+                    const startIndex = timeSlots.indexOf(aptTime);
+                    
+                    // Mark occupied slots
+                    for (let i = startIndex; i < startIndex + Math.ceil(duration / 30); i++) {
+                        if (i < timeSlots.length) {
+                            scheduleMap.set(i, apt);
+                        }
+                    }
+                });
+                
+                // Find optimal slot considering duration
+                for (let i = 0; i < timeSlots.length; i++) {
+                    const slotsNeeded = Math.ceil(estimatedDuration / 30);
+                    let canSchedule = true;
+                    
+                    // Check if all required slots are available
+                    for (let j = i; j < i + slotsNeeded && j < timeSlots.length; j++) {
+                        if (scheduleMap.has(j)) {
+                            canSchedule = false;
+                            break;
+                        }
+                    }
+                    
+                    if (canSchedule && i + slotsNeeded <= timeSlots.length) {
+                        return {
+                            date: testDate,
+                            time: timeSlots[i],
+                            duration: estimatedDuration,
+                            slotsNeeded: slotsNeeded,
+                            endTime: timeSlots[Math.min(i + slotsNeeded - 1, timeSlots.length - 1)]
+                        };
+                    }
+                }
+            }
+            
+            return null; // No available slot found
         }
 
         // Main optimization function - Reduce Wait Days
