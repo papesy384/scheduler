@@ -2003,7 +2003,7 @@
                 if (urgentCountAnalyticsDisplayEl) urgentCountAnalyticsDisplayEl.textContent = urgentAppointments;
                 
                 const avgWaitDaysSummaryEl = document.getElementById('avgWaitDaysSummary');
-                if (avgWaitDaysSummaryEl) avgWaitDaysSummaryEl.textContent = avgWaitDays.toFixed(0);
+                if (avgWaitDaysSummaryEl) avgWaitDaysSummaryEl.textContent = avgWaitDays.toFixed(1);
                 
                 // Update additional analytics values
                 const activePatientsEl = document.getElementById('activePatients');
@@ -4076,7 +4076,7 @@ Notes: ${appointment.notes || 'None'}
                 }
             });
             
-            const average = validAppointments > 0 ? Math.round(totalWaitDays / validAppointments) : 0;
+            const average = validAppointments > 0 ? totalWaitDays / validAppointments : 0;
             console.log(`📊 Total wait days: ${totalWaitDays}, Valid appointments: ${validAppointments}, Average: ${average}`);
             
             return average;
@@ -4467,7 +4467,7 @@ FEEDBACK SUMMARY:
             
             // Update analytics cards
             document.getElementById('todayAppointments').textContent = todayAppointments;
-            document.getElementById('avgWaitDaysAnalytics').textContent = avgWaitDays;
+            document.getElementById('avgWaitDaysAnalytics').textContent = avgWaitDays.toFixed(1);
             document.getElementById('utilizationAnalytics').textContent = '78%'; // Static for now
             document.getElementById('nextAvailable').textContent = nextAvailable;
             
@@ -4477,7 +4477,7 @@ FEEDBACK SUMMARY:
             document.getElementById('scheduledCount').textContent = scheduledCount;
             document.getElementById('waitingCount').textContent = waitingCount;
             document.getElementById('urgentCount').textContent = urgentCount;
-            document.getElementById('avgWaitDaysSummary').textContent = avgWaitDays;
+            document.getElementById('avgWaitDaysSummary').textContent = avgWaitDays.toFixed(1);
             
             // Update insights based on current data
             updateScheduleInsights();
