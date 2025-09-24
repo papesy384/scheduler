@@ -1598,27 +1598,27 @@
             <div class="dashboard">
                 <div class="card">
                     <h2>📈 Operational Excellence Metrics</h2>
-                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-                    <h3 style="margin: 0 0 10px 0; font-size: 1.5rem;">🎯 Operational Performance Achievement</h3>
+                <div id="operationalPerformanceAchievement" style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+                    <h3 style="margin: 0 0 10px 0; font-size: 1.5rem;">⚠️ Operational Performance Issues</h3>
                     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; text-align: center;">
                         <div>
-                            <div style="font-size: 2.5rem; font-weight: bold;">67%</div>
-                            <div style="font-size: 0.9rem; opacity: 0.9;">Wait Time Reduction</div>
+                            <div id="waitTimeReduction" style="font-size: 2.5rem; font-weight: bold;">+147%</div>
+                            <div style="font-size: 0.9rem; opacity: 0.9;">Wait Time Increase</div>
                         </div>
                         <div>
-                            <div style="font-size: 2.5rem; font-weight: bold;">4.2</div>
+                            <div id="currentAvgWaitDays" style="font-size: 2.5rem; font-weight: bold;">12.3</div>
                             <div style="font-size: 0.9rem; opacity: 0.9;">Current Avg (Days)</div>
                         </div>
                         <div>
-                            <div style="font-size: 2.5rem; font-weight: bold;">12.8</div>
-                            <div style="font-size: 0.9rem; opacity: 0.9;">Baseline Avg (Days)</div>
+                            <div id="targetWaitDays" style="font-size: 2.5rem; font-weight: bold;">5.0</div>
+                            <div style="font-size: 0.9rem; opacity: 0.9;">Target Avg (Days)</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Progress Timeline -->
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                    <h4 style="margin: 0 0 15px 0; color: #2c3e50;">📅 Optimization Timeline</h4>
+                    <h4 style="margin: 0 0 15px 0; color: #2c3e50;">📅 Performance Timeline</h4>
                     <div style="position: relative;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
                             <div style="text-align: center; flex: 1;">
@@ -1634,32 +1634,32 @@
                                 <div style="font-size: 0.8rem; color: #7f8c8d;">Month 3<br>System Implementation</div>
                             </div>
                             <div style="text-align: center; flex: 1;">
-                                <div style="width: 60px; height: 60px; background: #27ae60; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">4.2</div>
-                                <div style="font-size: 0.8rem; color: #7f8c8d;">Current<br>Target Achieved!</div>
+                                <div style="width: 60px; height: 60px; background: #e74c3c; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">12.3</div>
+                                <div style="font-size: 0.8rem; color: #7f8c8d;">Current<br>Target Missed!</div>
                             </div>
                         </div>
-                        <div style="position: absolute; top: 30px; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #e74c3c, #f39c12, #3498db, #27ae60); border-radius: 2px;"></div>
+                        <div style="position: absolute; top: 30px; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #e74c3c, #f39c12, #3498db, #e74c3c); border-radius: 2px;"></div>
                     </div>
                 </div>
 
                 <!-- Professional Achievements -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                    <div style="background: #e8f5e8; padding: 15px; border-radius: 10px; border-left: 4px solid #27ae60;">
-                        <h4 style="margin: 0 0 10px 0; color: #27ae60;">✅ Operational Achievements</h4>
+                    <div style="background: #ffeaea; padding: 15px; border-radius: 10px; border-left: 4px solid #e74c3c;">
+                        <h4 style="margin: 0 0 10px 0; color: #e74c3c;">❌ Performance Issues</h4>
                         <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #2c3e50;">
-                            <li>67% reduction in average wait time</li>
-                            <li>95% of appointments scheduled within 7 days</li>
-                            <li>100% urgent case coverage within 24 hours</li>
-                            <li>4.8/5 patient satisfaction rating</li>
+                            <li>147% increase in average wait time</li>
+                            <li>Only 15% of appointments scheduled within 7 days</li>
+                            <li>25% urgent case coverage within 24 hours</li>
+                            <li>2.1/5 patient satisfaction rating</li>
                         </ul>
                     </div>
                     <div style="background: #fff3cd; padding: 15px; border-radius: 10px; border-left: 4px solid #ffc107;">
-                        <h4 style="margin: 0 0 10px 0; color: #856404;">🎯 Strategic Objectives</h4>
+                        <h4 style="margin: 0 0 10px 0; color: #856404;">🎯 Recovery Objectives</h4>
                         <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #2c3e50;">
-                            <li>Target: 3-day average wait time</li>
-                            <li>Implement same-day urgent appointment slots</li>
-                            <li>Increase clinic capacity by 20%</li>
-                            <li>Achieve 5.0/5 patient satisfaction rating</li>
+                            <li>Target: Reduce to 7-day average wait time</li>
+                            <li>Implement emergency appointment slots</li>
+                            <li>Increase clinic capacity utilization</li>
+                            <li>Achieve 3.5/5 patient satisfaction rating</li>
                         </ul>
                     </div>
                 </div>
@@ -1669,37 +1669,10 @@
                 <h2>📊 Professional Performance Analytics</h2>
                 
                 <!-- Weekly Progress Chart -->
-                <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <div id="weeklyTrendsChart" style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                     <h4 style="margin: 0 0 15px 0; color: #2c3e50;">📈 Weekly Wait Time Trends</h4>
-                    <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; height: 120px; align-items: end;">
-                        <div style="text-align: center;">
-                            <div style="height: 80px; background: linear-gradient(to top, #e74c3c, #ff6b6b); border-radius: 4px 4px 0 0; margin-bottom: 5px;"></div>
-                            <div style="font-size: 0.8rem; color: #7f8c8d;">Mon<br>12.5</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="height: 70px; background: linear-gradient(to top, #f39c12, #ffa726); border-radius: 4px 4px 0 0; margin-bottom: 5px;"></div>
-                            <div style="font-size: 0.8rem; color: #7f8c8d;">Tue<br>11.2</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="height: 60px; background: linear-gradient(to top, #3498db, #42a5f5); border-radius: 4px 4px 0 0; margin-bottom: 5px;"></div>
-                            <div style="font-size: 0.8rem; color: #7f8c8d;">Wed<br>9.8</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="height: 50px; background: linear-gradient(to top, #27ae60, #4caf50); border-radius: 4px 4px 0 0; margin-bottom: 5px;"></div>
-                            <div style="font-size: 0.8rem; color: #7f8c8d;">Thu<br>7.3</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="height: 45px; background: linear-gradient(to top, #27ae60, #4caf50); border-radius: 4px 4px 0 0; margin-bottom: 5px;"></div>
-                            <div style="font-size: 0.8rem; color: #7f8c8d;">Fri<br>5.1</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="height: 40px; background: linear-gradient(to top, #27ae60, #4caf50); border-radius: 4px 4px 0 0; margin-bottom: 5px;"></div>
-                            <div style="font-size: 0.8rem; color: #7f8c8d;">Sat<br>4.2</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="height: 35px; background: linear-gradient(to top, #27ae60, #4caf50); border-radius: 4px 4px 0 0; margin-bottom: 5px;"></div>
-                            <div style="font-size: 0.8rem; color: #7f8c8d;">Sun<br>3.8</div>
-                        </div>
+                    <div id="weeklyChartContainer" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; height: 120px; align-items: end;">
+                        <!-- Chart will be dynamically generated -->
                     </div>
                 </div>
 
@@ -1731,23 +1704,23 @@
                 </div>
 
                 <!-- Professional Impact Summary -->
-                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 20px; border-radius: 15px;">
+                <div id="professionalImpactSummary" style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 20px; border-radius: 15px;">
                     <h4 style="margin: 0 0 15px 0;">📊 Professional Performance Impact</h4>
                     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; text-align: center;">
                         <div>
-                            <div style="font-size: 1.8rem; font-weight: bold;">67%</div>
+                            <div id="waitTimeImpact" style="font-size: 1.8rem; font-weight: bold;">67%</div>
                             <div style="font-size: 0.8rem; opacity: 0.9;">Wait Time Reduction</div>
                         </div>
                         <div>
-                            <div style="font-size: 1.8rem; font-weight: bold;">95%</div>
+                            <div id="targetAchievementImpact" style="font-size: 1.8rem; font-weight: bold;">95%</div>
                             <div style="font-size: 0.8rem; opacity: 0.9;">Target Achievement</div>
                         </div>
                         <div>
-                            <div style="font-size: 1.8rem; font-weight: bold;">4.8/5</div>
+                            <div id="patientSatisfactionImpact" style="font-size: 1.8rem; font-weight: bold;">4.8/5</div>
                             <div style="font-size: 0.8rem; opacity: 0.9;">Patient Satisfaction</div>
                         </div>
                         <div>
-                            <div style="font-size: 1.8rem; font-weight: bold;">100%</div>
+                            <div id="urgentCareCoverageImpact" style="font-size: 1.8rem; font-weight: bold;">100%</div>
                             <div style="font-size: 0.8rem; opacity: 0.9;">Urgent Care Coverage</div>
                         </div>
                     </div>
@@ -1914,14 +1887,356 @@
         let schedule = {};
         let doctor = 'Dr. Sarah Johnson'; // Single doctor
         let currentQueueFilter = 'all';
+        
+        // Global update system - tracks all components that need updating
+        const updateComponents = {
+            dashboard: true,
+            calendar: true,
+            patientQueue: true,
+            analytics: true,
+            priorityManagement: true,
+            dateSuggestions: true
+        };
+        
+        // Global update function - refreshes ALL interconnected components simultaneously
+        function updateAllComponents() {
+            console.log('🔄 Updating ALL components simultaneously...');
+            
+            // Calculate all metrics once for efficiency
+            const avgWaitDays = calculateAverageWaitDays();
+            const totalAppointments = appointments.length;
+            const urgentAppointments = appointments.filter(apt => apt.priority === 'urgent').length;
+            const waitingAppointments = appointments.filter(apt => apt.status === 'waiting').length;
+            const scheduledAppointments = appointments.filter(apt => apt.status === 'scheduled').length;
+            
+            // Update ALL dashboard metrics simultaneously
+            if (updateComponents.dashboard) {
+                updatePatientCentricDashboard();
+                updateClinicProgress();
+                updateOperationalPerformanceAchievement();
+                updateProfessionalImpactSummary();
+            }
+            
+            // Update ALL calendar and scheduling components simultaneously
+            if (updateComponents.calendar) {
+                updateScheduleGrid();
+                updateCalendarAvailability();
+                generateAvailableDateSuggestions();
+            }
+            
+            // Update ALL patient management components simultaneously (no duplicates)
+            if (updateComponents.patientQueue) {
+                updatePatientQueue();
+                updateUrgentCases();
+                populateRescheduleDropdown();
+            }
+            
+            // Update ALL analytics components simultaneously
+            if (updateComponents.analytics) {
+                updateAnalyticsDashboard();
+                updateWeeklyChart(generateWeeklyTrends(avgWaitDays));
+                updateScheduleInsights();
+            }
+            
+            // Update ALL priority management components simultaneously (no duplicates)
+            if (updateComponents.priorityManagement) {
+                updatePriorityCases(); // This calls updateUrgentCases() and updateNonUrgentCases()
+                populateRescheduleDropdown();
+            }
+            
+            // Update ALL performance tracking simultaneously
+            updatePerformanceMetrics();
+            updateAchievementStatus();
+            
+            console.log('✅ ALL components updated simultaneously');
+        }
+        
+        // Trigger update when appointments change
+        function triggerGlobalUpdate() {
+            updateAllComponents();
+        }
+        
+        // Verify all update functions exist and work
+        function verifyUpdateFunctions() {
+            const requiredFunctions = [
+                'updatePatientCentricDashboard',
+                'updateClinicProgress', 
+                'updateOperationalPerformanceAchievement',
+                'updateProfessionalImpactSummary',
+                'updateScheduleGrid',
+                'updateCalendarAvailability',
+                'generateAvailableDateSuggestions',
+                'updatePatientQueue',
+                'updateUrgentCases',
+                'populateRescheduleDropdown',
+                'updateAnalyticsDashboard',
+                'updateWeeklyChart',
+                'updateScheduleInsights',
+                'updatePriorityCases',
+                'updatePerformanceMetrics',
+                'updateAchievementStatus'
+            ];
+            
+            const missingFunctions = [];
+            requiredFunctions.forEach(funcName => {
+                if (typeof window[funcName] !== 'function') {
+                    missingFunctions.push(funcName);
+                }
+            });
+            
+            if (missingFunctions.length > 0) {
+                console.error('❌ Missing update functions:', missingFunctions);
+                return false;
+            } else {
+                console.log('✅ All update functions verified');
+                return true;
+            }
+        }
+        
+        // Enhanced data change listener - ensures ALL content updates simultaneously
+        function onDataChange(changeType, details) {
+            console.log(`📊 Data change detected: ${changeType}`, details);
+            
+            // Immediately update ALL components simultaneously
+            triggerGlobalUpdate();
+            
+            // Show visual feedback for the change
+            showDataChangeNotification(changeType, details);
+        }
+        
+        // Show notification when data changes
+        function showDataChangeNotification(changeType, details) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #3498db, #2980b9);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10000;
+                font-size: 0.9rem;
+                font-weight: 500;
+                animation: slideInRight 0.3s ease-out;
+            `;
+            
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span>🔄</span>
+                    <span>${changeType} - All content updated simultaneously</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-in';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+        
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Update performance metrics across all sections
+        function updatePerformanceMetrics() {
+            const avgWaitDays = calculateAverageWaitDays();
+            const totalAppointments = appointments.length;
+            const urgentAppointments = appointments.filter(apt => apt.priority === 'urgent').length;
+            const waitingAppointments = appointments.filter(apt => apt.status === 'waiting').length;
+            const scheduledAppointments = appointments.filter(apt => apt.status === 'scheduled').length;
+            
+            // Update all metric displays across the system
+            updateMetricDisplays({
+                avgWaitDays: avgWaitDays,
+                totalAppointments: totalAppointments,
+                urgentAppointments: urgentAppointments,
+                waitingAppointments: waitingAppointments,
+                scheduledAppointments: scheduledAppointments
+            });
+        }
+        
+        // Update metric displays across all sections
+        function updateMetricDisplays(metrics) {
+            // Update dashboard metrics
+            const avgWaitDaysElement = document.getElementById('avgWaitDays');
+            if (avgWaitDaysElement) {
+                avgWaitDaysElement.textContent = metrics.avgWaitDays.toFixed(1);
+            }
+            
+            // Update current average wait days in performance section
+            const currentAvgWaitDaysElement = document.getElementById('currentAvgWaitDays');
+            if (currentAvgWaitDaysElement) {
+                currentAvgWaitDaysElement.textContent = metrics.avgWaitDays.toFixed(1);
+            }
+            
+            // Update urgent count in priority management
+            const urgentCountElement = document.getElementById('urgentCount');
+            if (urgentCountElement) {
+                urgentCountElement.textContent = metrics.urgentAppointments;
+            }
+            
+            // Update non-urgent count in priority management
+            const nonUrgentCountElement = document.getElementById('nonUrgentCount');
+            if (nonUrgentCountElement) {
+                nonUrgentCountElement.textContent = metrics.totalAppointments - metrics.urgentAppointments;
+            }
+            
+            // Update patient count displays
+            const patientsTodayElement = document.getElementById('patientsToday');
+            if (patientsTodayElement) {
+                patientsTodayElement.textContent = metrics.scheduledAppointments;
+            }
+            
+            const waitingTodayElement = document.getElementById('waitingToday');
+            if (waitingTodayElement) {
+                waitingTodayElement.textContent = metrics.waitingAppointments;
+            }
+        }
+        
+        // Update priority cases (both urgent and non-urgent)
+        function updatePriorityCases() {
+            updateUrgentCases();
+            updateNonUrgentCases();
+        }
+        
+        // Update non-urgent cases display
+        function updateNonUrgentCases() {
+            const nonUrgentCountElement = document.getElementById('nonUrgentCount');
+            const nonUrgentListElement = document.getElementById('nonUrgentCasesList');
+            
+            if (!nonUrgentCountElement || !nonUrgentListElement) return;
+            
+            const nonUrgentCases = appointments.filter(apt => apt.priority !== 'urgent');
+            
+            nonUrgentCountElement.textContent = nonUrgentCases.length;
+            
+            // Show first 10 non-urgent cases
+            const displayCases = nonUrgentCases.slice(0, 10);
+            nonUrgentListElement.innerHTML = '';
+            
+            displayCases.forEach(apt => {
+                const waitDays = calculateWaitDays(apt);
+                const statusText = apt.status === 'waiting' ? 'WAITING' : 'SCHEDULED';
+                const statusIcon = apt.status === 'waiting' ? '⏳' : '📅';
+                
+                const listItem = document.createElement('div');
+                listItem.style.cssText = `
+                    padding: 8px 12px;
+                    margin: 5px 0;
+                    background: #e3f2fd;
+                    border-radius: 6px;
+                    border-left: 3px solid #2196f3;
+                    font-size: 0.85rem;
+                `;
+                
+                listItem.innerHTML = `
+                    <div style="font-weight: 600; color: #1976d2;">${apt.patientName}</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 0.75rem; color: #666;">
+                        <div><strong>Status:</strong> ${statusIcon} ${statusText}</div>
+                        <div><strong>Wait:</strong> ${waitDays} days</div>
+                        <div><strong>Priority:</strong> ${apt.priority.toUpperCase()}</div>
+                        <div><strong>Type:</strong> ${apt.type || 'General'}</div>
+                    </div>
+                `;
+                
+                nonUrgentListElement.appendChild(listItem);
+            });
+            
+            if (nonUrgentCases.length > 10) {
+                const moreItem = document.createElement('div');
+                moreItem.style.cssText = `
+                    padding: 8px 12px;
+                    margin: 5px 0;
+                    background: #f5f5f5;
+                    border-radius: 6px;
+                    font-size: 0.8rem;
+                    color: #666;
+                    text-align: center;
+                `;
+                moreItem.textContent = `+ ${nonUrgentCases.length - 10} more routine appointments`;
+                nonUrgentListElement.appendChild(moreItem);
+            }
+        }
+        
+        // Update calendar availability when appointments change
+        function updateCalendarAvailability() {
+            const preferredDateInput = document.getElementById('preferredDate');
+            const weekendWarning = document.getElementById('weekendWarning');
+            
+            if (!preferredDateInput) return;
+            
+            // Add event listener for date changes
+            preferredDateInput.addEventListener('input', function() {
+                const selectedDate = new Date(this.value);
+                const dayOfWeek = selectedDate.getDay();
+                const isHolidayDate = isHoliday(selectedDate);
+                
+                if (dayOfWeek === 0 || dayOfWeek === 6) {
+                    // Weekend - adjust to next business day
+                    const nextBusinessDay = new Date(selectedDate);
+                    while (nextBusinessDay.getDay() === 0 || nextBusinessDay.getDay() === 6 || isHoliday(nextBusinessDay)) {
+                        nextBusinessDay.setDate(nextBusinessDay.getDate() + 1);
+                    }
+                    this.value = nextBusinessDay.toISOString().split('T')[0];
+                    
+                    if (weekendWarning) {
+                        weekendWarning.innerHTML = '⚠️ Weekend selected - automatically adjusted to next business day';
+                        weekendWarning.style.display = 'block';
+                        setTimeout(() => weekendWarning.style.display = 'none', 3000);
+                    }
+                } else if (isHolidayDate) {
+                    // Holiday - adjust to next business day
+                    const nextBusinessDay = new Date(selectedDate);
+                    while (isHoliday(nextBusinessDay)) {
+                        nextBusinessDay.setDate(nextBusinessDay.getDate() + 1);
+                    }
+                    this.value = nextBusinessDay.toISOString().split('T')[0];
+                    
+                    if (weekendWarning) {
+                        weekendWarning.innerHTML = '🎄 Holiday selected - automatically adjusted to next business day';
+                        weekendWarning.style.display = 'block';
+                        setTimeout(() => weekendWarning.style.display = 'none', 3000);
+                    }
+                }
+                
+                // Check availability and update suggestions
+                checkDateAvailability(selectedDate);
+                generateAvailableDateSuggestions();
+            });
+        }
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
             initializeSchedule();
             loadSampleData();
-            updateDashboard();
-            updatePatientQueue();
-            startRealTimeUpdates();
+            
+            // Verify all functions exist before updating
+            if (verifyUpdateFunctions()) {
+                updateAllComponents(); // Use global update system
+                startRealTimeUpdates();
+                console.log('🚀 System initialized with simultaneous updates');
+            } else {
+                console.error('❌ System initialization failed - missing functions');
+            }
         });
 
         // Filter patient queue
@@ -1934,6 +2249,7 @@
             });
             event.target.classList.add('active');
             
+            // Only update patient queue for filtering (not all components)
             updatePatientQueue();
         }
 
@@ -2112,7 +2428,7 @@
             // Find next available slot
             const nextAvailableSlot = findNextAvailableSlot();
             if (!nextAvailableSlot) {
-                alert('No available slots found in the next 30 days.');
+                alert('🚨 No available slots found in the next 90 days - Clinic is severely overbooked due to underperformance!');
                 return;
             }
             
@@ -2129,10 +2445,13 @@
                 // Update appointment
                 patient.scheduledDate = nextAvailableSlot.toISOString();
                 
-                // Update UI
-                updatePatientQueue();
-                updateDashboard();
-                populateRescheduleDropdown();
+                // Trigger data change notification and global update
+                onDataChange('Patient Rescheduled', {
+                    patient: patient.patientName,
+                    oldDate: currentDate,
+                    newDate: newDate,
+                    priority: patient.priority
+                });
                 
                 // Clear selection
                 select.value = '';
@@ -2224,8 +2543,14 @@
             if (nextAvailableSlot) {
                 nextUrgent.scheduledDate = nextAvailableSlot.toISOString();
                 nextUrgent.status = 'scheduled';
-                updatePatientQueue();
-                updateUrgentCases();
+                
+                // Trigger data change notification and global update
+                onDataChange('Urgent Patient Scheduled', {
+                    patient: nextUrgent.patientName,
+                    date: nextAvailableSlot.toLocaleDateString(),
+                    priority: 'urgent'
+                });
+                
                 alert(`Scheduled ${nextUrgent.patientName} for ${nextAvailableSlot.toLocaleDateString()}`);
             } else {
                 alert('No available slots found. Consider rescheduling non-urgent appointments.');
@@ -2253,7 +2578,14 @@
             newDate.setDate(newDate.getDate() + 7);
             furthestAppointment.scheduledDate = newDate.toISOString();
             
-            updatePatientQueue();
+            // Trigger data change notification and global update
+            onDataChange('Non-Urgent Patient Rescheduled', {
+                patient: furthestAppointment.patientName,
+                oldDate: furthestAppointment.scheduledDate,
+                newDate: newDate.toLocaleDateString(),
+                priority: furthestAppointment.priority
+            });
+            
             alert(`Rescheduled ${furthestAppointment.patientName} to ${newDate.toLocaleDateString()}`);
         }
 
@@ -2267,8 +2599,8 @@
             const today = new Date();
             const nyTime = new Date(today.toLocaleString("en-US", {timeZone: "America/New_York"}));
             
-            // Find first available business day slot that's not a holiday
-            for (let i = 1; i <= 60; i++) { // Increased range to account for holidays
+            // Find first available business day slot that's not a holiday (underperformance - need to look further)
+            for (let i = 1; i <= 90; i++) { // Increased range due to severe underperformance
                 const testDate = new Date(nyTime);
                 testDate.setDate(testDate.getDate() + i);
                 
@@ -2427,8 +2759,8 @@
             const availableDates = [];
             const totalSlots = 18; // 8:00 AM to 4:30 PM in 30-min slots
             
-            // Check next 60 days for available dates (underperformance scenario)
-            for (let i = 1; i <= 60; i++) {
+            // Check next 90 days for available dates (underperformance scenario - need to look further)
+            for (let i = 1; i <= 90; i++) {
                 const testDate = new Date(currentDate);
                 testDate.setDate(testDate.getDate() + i);
                 
@@ -2455,15 +2787,15 @@
                     });
                 }
                 
-                // Stop after finding 5 available dates (underperformance: limited options)
-                if (availableDates.length >= 5) break;
+                // Stop after finding 3 available dates (underperformance: very limited options)
+                if (availableDates.length >= 3) break;
             }
             
             // Clear existing suggestions
             suggestedDatesList.innerHTML = '';
             
             if (availableDates.length === 0) {
-                suggestedDatesList.innerHTML = '<div class="no-dates-available">⚠️ No available dates in the next 60 days - Clinic is fully booked due to high demand</div>';
+                suggestedDatesList.innerHTML = '<div class="no-dates-available">🚨 No available dates in the next 90 days - Clinic is severely overbooked due to underperformance</div>';
                 return;
             }
             
@@ -2756,8 +3088,8 @@
                 '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM'
             ];
             
-            // Fill next 14 business days with heavy booking (80-90% capacity)
-            for (let dayOffset = 1; dayOffset <= 14; dayOffset++) {
+            // Fill next 21 business days with heavy booking (85-95% capacity - severe underperformance)
+            for (let dayOffset = 1; dayOffset <= 21; dayOffset++) {
                 const testDate = new Date(today);
                 testDate.setDate(testDate.getDate() + dayOffset);
                 
@@ -2771,8 +3103,8 @@
                     continue;
                 }
                 
-                // Book 14-16 out of 18 slots (78-89% capacity)
-                const slotsToBook = Math.floor(Math.random() * 3) + 14; // 14-16 slots
+                // Book 15-17 out of 18 slots (83-94% capacity - severe underperformance)
+                const slotsToBook = Math.floor(Math.random() * 3) + 15; // 15-17 slots
                 const shuffledSlots = [...timeSlots].sort(() => Math.random() - 0.5);
                 
                 for (let i = 0; i < slotsToBook; i++) {
@@ -3088,11 +3420,13 @@ Notes: ${appointment.notes || 'None'}
             };
 
             appointments.push(formData);
-            updatePatientQueue();
-            updateDashboard();
             
-            // Refresh date suggestions
-            generateAvailableDateSuggestions();
+            // Trigger data change notification and global update
+            onDataChange('New Appointment Scheduled', {
+                patient: patientName,
+                date: preferredDate,
+                priority: priority
+            });
             
             // Clear form
             this.reset();
@@ -3344,13 +3678,8 @@ FEEDBACK SUMMARY:
             const completedAppointments = appointments.filter(apt => apt.status === 'completed').length;
             const urgentAppointments = appointments.filter(apt => apt.priority === 'urgent').length;
             
-            // Calculate progress metrics
-            const previousAvgWaitDays = 12.8; // Historical data
-            const waitTimeReduction = Math.round(((previousAvgWaitDays - avgWaitDays) / previousAvgWaitDays) * 100);
-            const targetAchievement = Math.round((appointments.filter(apt => {
-                const waitDays = calculateWaitDays(apt);
-                return waitDays <= 7;
-            }).length / totalAppointments) * 100);
+            // Update operational performance achievement
+            updateOperationalPerformanceAchievement();
             
             // Update progress metrics
             document.getElementById('patientWaitDays').textContent = avgWaitDays;
@@ -3360,41 +3689,150 @@ FEEDBACK SUMMARY:
             updateWeeklyChart(weeklyTrends);
             
             // Update achievement status
-            updateAchievementStatus(waitTimeReduction, targetAchievement);
+            updateAchievementStatus();
+        }
+        
+        // Update operational performance achievement dynamically
+        function updateOperationalPerformanceAchievement() {
+            const currentAvgWaitDays = 12.3; // Fixed underperformance value
+            const targetWaitDays = 5.0;
+            const baselineWaitDays = 5.0; // Original target baseline
+            
+            // Calculate wait time increase percentage (underperformance scenario)
+            const waitTimeIncrease = ((currentAvgWaitDays - baselineWaitDays) / baselineWaitDays) * 100;
+            
+            // Update the achievement section
+            const waitTimeReductionElement = document.getElementById('waitTimeReduction');
+            const currentAvgWaitDaysElement = document.getElementById('currentAvgWaitDays');
+            const targetWaitDaysElement = document.getElementById('targetWaitDays');
+            const achievementContainer = document.getElementById('operationalPerformanceAchievement');
+            
+            if (waitTimeReductionElement) {
+                waitTimeReductionElement.textContent = `+${waitTimeIncrease.toFixed(0)}%`;
+            }
+            
+            if (currentAvgWaitDaysElement) {
+                currentAvgWaitDaysElement.textContent = currentAvgWaitDays.toFixed(1);
+            }
+            
+            if (targetWaitDaysElement) {
+                targetWaitDaysElement.textContent = targetWaitDays.toFixed(1);
+            }
+            
+            // Update background color based on performance (good performance scenario)
+            if (achievementContainer) {
+                if (currentAvgWaitDays <= targetWaitDays) {
+                    // Excellent performance - green
+                    achievementContainer.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                } else if (currentAvgWaitDays <= targetWaitDays * 1.2) {
+                    // Good performance - light green
+                    achievementContainer.style.background = 'linear-gradient(135deg, #2ecc71, #58d68d)';
+                } else {
+                    // Acceptable performance - blue
+                    achievementContainer.style.background = 'linear-gradient(135deg, #3498db, #5dade2)';
+                }
+            }
         }
 
-        // Generate weekly trends based on current performance
+        // Generate weekly trends based on current performance (good performance scenario)
         function generateWeeklyTrends(currentAvg) {
-            const baseValues = [12.5, 11.2, 9.8, 7.3, 5.1, 4.2, 3.8];
-            const adjustment = currentAvg - 4.2; // Adjust from baseline
-            return baseValues.map(val => Math.max(0, val - adjustment));
+            // Underperformance scenario - increasing wait times
+            const baseValues = [8.5, 9.2, 10.1, 11.3, 12.0, 12.3, 12.3];
+            const adjustment = currentAvg - 12.3; // Adjust from current baseline
+            return baseValues.map(val => Math.max(0, val + adjustment));
         }
 
         // Update weekly chart with new data
         function updateWeeklyChart(trends) {
             const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-            const chartContainer = document.querySelector('.dashboard .card:nth-child(2) .chart-container');
-            if (chartContainer) {
-                // Update chart bars dynamically
-                const bars = chartContainer.querySelectorAll('.chart-bar');
-                bars.forEach((bar, index) => {
-                    if (trends[index]) {
-                        const height = Math.max(20, (trends[index] / 15) * 100); // Scale to max 15 days
-                        bar.style.height = height + 'px';
-                        bar.nextElementSibling.textContent = `${days[index]}\n${trends[index].toFixed(1)}`;
-                    }
-                });
-            }
+            const chartContainer = document.getElementById('weeklyChartContainer');
+            
+            if (!chartContainer) return;
+            
+            chartContainer.innerHTML = '';
+            
+            trends.forEach((value, index) => {
+                const barHeight = Math.max(20, (value / Math.max(...trends)) * 100);
+                const color = value <= 5 ? '#27ae60' : value <= 8 ? '#f39c12' : '#e74c3c';
+                
+                const barDiv = document.createElement('div');
+                barDiv.style.cssText = `
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    height: 120px;
+                `;
+                
+                barDiv.innerHTML = `
+                    <div style="
+                        width: 30px;
+                        height: ${barHeight}px;
+                        background: linear-gradient(to top, ${color}, ${color}88);
+                        border-radius: 4px 4px 0 0;
+                        margin-bottom: 5px;
+                        transition: all 0.3s ease;
+                    "></div>
+                    <div style="font-size: 0.8rem; color: #7f8c8d;">
+                        ${days[index]}<br>${value.toFixed(1)}
+                    </div>
+                `;
+                
+                chartContainer.appendChild(barDiv);
+            });
         }
 
         // Update achievement status
-        function updateAchievementStatus(waitTimeReduction, targetAchievement) {
-            // Update achievement metrics in the progress section
-            const achievementElements = document.querySelectorAll('.dashboard .card:nth-child(1) .metric-value');
-            if (achievementElements.length >= 3) {
-                achievementElements[0].textContent = waitTimeReduction + '%';
-                achievementElements[1].textContent = calculateAverageWaitDays().toFixed(1);
-                achievementElements[2].textContent = '12.8'; // Previous average
+        function updateAchievementStatus() {
+            // Update professional impact summary
+            updateProfessionalImpactSummary();
+        }
+        
+        // Update professional impact summary dynamically
+        function updateProfessionalImpactSummary() {
+            const currentAvgWaitDays = calculateAverageWaitDays();
+            const targetWaitDays = 5.0;
+            const urgentCases = appointments.filter(apt => apt.priority === 'urgent').length;
+            const totalAppointments = appointments.length;
+            
+            // Calculate metrics (good performance scenario)
+            const baselineWaitDays = 12.8;
+            const waitTimeReduction = ((baselineWaitDays - currentAvgWaitDays) / baselineWaitDays) * 100;
+            const targetAchievement = Math.round((appointments.filter(apt => {
+                const waitDays = calculateWaitDays(apt);
+                return waitDays <= 7;
+            }).length / totalAppointments) * 100);
+            
+            // Update elements
+            const waitTimeImpactElement = document.getElementById('waitTimeImpact');
+            const targetAchievementImpactElement = document.getElementById('targetAchievementImpact');
+            const urgentCareCoverageImpactElement = document.getElementById('urgentCareCoverageImpact');
+            const impactContainer = document.getElementById('professionalImpactSummary');
+            
+            if (waitTimeImpactElement) {
+                waitTimeImpactElement.textContent = `${waitTimeReduction.toFixed(0)}%`;
+            }
+            
+            if (targetAchievementImpactElement) {
+                targetAchievementImpactElement.textContent = `${targetAchievement}%`;
+            }
+            
+            if (urgentCareCoverageImpactElement) {
+                // Good performance - high urgent coverage
+                urgentCareCoverageImpactElement.textContent = '100%';
+            }
+            
+            // Update background color based on performance (good performance scenario)
+            if (impactContainer) {
+                if (currentAvgWaitDays <= targetWaitDays) {
+                    // Excellent performance - dark blue
+                    impactContainer.style.background = 'linear-gradient(135deg, #2c3e50, #34495e)';
+                } else if (currentAvgWaitDays <= targetWaitDays * 1.2) {
+                    // Good performance - green
+                    impactContainer.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                } else {
+                    // Acceptable performance - blue
+                    impactContainer.style.background = 'linear-gradient(135deg, #3498db, #5dade2)';
+                }
             }
         }
 
@@ -3480,10 +3918,8 @@ FEEDBACK SUMMARY:
                 updateScheduleGrid();
             }, 60000); // Every minute
             
-            // Simulate real-time updates every 30 seconds
+            // Simulate real-time updates every 10 seconds for maximum responsiveness
             setInterval(() => {
-                updateDashboard();
-                
                 // Simulate patient status changes
                 appointments.forEach(appointment => {
                     if (appointment.status === 'waiting' && Math.random() > 0.7) {
@@ -3493,8 +3929,20 @@ FEEDBACK SUMMARY:
                     }
                 });
                 
-                updatePatientList();
-            }, 30000);
+                // Trigger global update - ALL components refresh simultaneously
+                triggerGlobalUpdate();
+            }, 10000); // Every 10 seconds for maximum responsiveness
+            
+            // Update performance metrics every 5 seconds
+            setInterval(() => {
+                updatePerformanceMetrics();
+            }, 5000); // Every 5 seconds
+            
+            // Update calendar availability every 15 seconds
+            setInterval(() => {
+                updateCalendarAvailability();
+                generateAvailableDateSuggestions();
+            }, 15000); // Every 15 seconds
         }
 
         // Utility functions
