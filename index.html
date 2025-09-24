@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Sarah Johnson's Schedule Management System - Professional Dashboard</title>
+    <title>Schedule Management System - Professional Dashboard</title>
     <style>
         * {
             margin: 0;
@@ -36,14 +36,16 @@
         .header h1 {
             color: #2c3e50;
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 2.5rem;
+            margin-bottom: 8px;
+            font-size: 1.8rem;
+            font-weight: 600;
         }
 
         .header p {
             text-align: center;
             color: #7f8c8d;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
+            margin-bottom: 0;
         }
 
         /* Navigation Menu Styles */
@@ -67,13 +69,13 @@
             background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
+            padding: 8px 16px;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
         }
 
         .nav-btn:hover {
@@ -101,6 +103,121 @@
             display: block;
         }
 
+        /* Patient Queue Styles */
+        .queue-filter-btn {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.2s ease;
+        }
+
+        .queue-filter-btn:hover {
+            background: #e9ecef;
+            border-color: #3498db;
+        }
+
+        .queue-filter-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .patient-queue {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .queue-item {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .queue-item:hover {
+            background: #f8f9fa;
+        }
+
+        .queue-item:last-child {
+            border-bottom: none;
+        }
+
+        .patient-info {
+            flex: 1;
+        }
+
+        .patient-name {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .patient-details {
+            font-size: 0.75rem;
+            color: #666;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .patient-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .status-scheduled {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-waiting {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .status-urgent {
+            background: #ffebee;
+            color: #d32f2f;
+            animation: pulse 2s infinite;
+        }
+
+        .status-completed {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .wait-time {
+            font-size: 0.75rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
         .dashboard {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -111,9 +228,9 @@
         .card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease;
         }
 
@@ -123,10 +240,11 @@
 
         .card h2 {
             color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 8px;
         }
 
         .metrics {
@@ -276,6 +394,13 @@
             color: white;
             animation: pulse 2s infinite;
             border: 3px solid #e67e22;
+        }
+
+        .time-slot.weekend {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            color: white;
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
         .time-slot.patient-info {
@@ -781,7 +906,7 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>🏥 Dr. Sarah Johnson's Schedule Management System</h1>
+            <h1>🏥 Schedule Management System</h1>
             <p>Professional scheduling • Operational efficiency • Staff management</p>
         </div>
 
@@ -803,36 +928,36 @@
             <div class="dashboard">
                 <div class="card">
                     <h2>📊 Clinic Performance Metrics</h2>
-                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 3rem; font-weight: bold; margin-bottom: 10px;" id="avgWaitDays">4.2</div>
-                    <div style="font-size: 1.2rem; margin-bottom: 5px;">Average Wait Days</div>
-                    <div style="font-size: 0.9rem; opacity: 0.9;">Target: ≤7 days | Current Performance</div>
+                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 16px; border-radius: 10px; text-align: center; margin-bottom: 15px;">
+                    <div style="font-size: 2.2rem; font-weight: bold; margin-bottom: 6px;" id="avgWaitDays">4.2</div>
+                    <div style="font-size: 0.9rem; margin-bottom: 3px;">Average Wait Days</div>
+                    <div style="font-size: 0.75rem; opacity: 0.8;">Target: ≤7 days</div>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; border-left: 4px solid #27ae60;">
-                        <div style="font-weight: bold; color: #27ae60;">✅ Target Achieved</div>
-                        <div style="font-size: 0.9rem; color: #7f8c8d;">67% reduction from baseline (12.8 days)</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 3px solid #27ae60;">
+                        <div style="font-weight: 600; color: #27ae60; font-size: 0.85rem;">✅ Target Met</div>
+                        <div style="font-size: 0.75rem; color: #7f8c8d;">67% reduction</div>
                     </div>
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; border-left: 4px solid #3498db;">
-                        <div style="font-weight: bold; color: #3498db;">📈 Efficiency Rate</div>
-                        <div style="font-size: 0.9rem; color: #7f8c8d;">78% schedule utilization</div>
+                    <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 3px solid #3498db;">
+                        <div style="font-weight: 600; color: #3498db; font-size: 0.85rem;">📈 Efficiency</div>
+                        <div style="font-size: 0.75rem; color: #7f8c8d;">78% utilization</div>
                     </div>
                 </div>
             </div>
 
             <div class="card">
                 <h2>👩‍⚕️ Dr. Sarah's Professional Status</h2>
-                <div style="background: linear-gradient(135deg, #27ae60, #229954); color: white; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 2rem; margin-bottom: 10px;">🟢 ACTIVE</div>
-                    <div style="font-size: 1.1rem;">Dr. Sarah is currently seeing patients</div>
-                    <div style="font-size: 0.9rem; opacity: 0.9; margin-top: 5px;">Status updated: <span id="lastUpdated">Just now</span></div>
+                <div style="background: linear-gradient(135deg, #27ae60, #229954); color: white; padding: 16px; border-radius: 10px; text-align: center; margin-bottom: 15px;">
+                    <div style="font-size: 1.4rem; margin-bottom: 6px;">🟢 ACTIVE</div>
+                    <div style="font-size: 0.9rem;">Currently seeing patients</div>
+                    <div style="font-size: 0.75rem; opacity: 0.8; margin-top: 3px;">Updated: <span id="lastUpdated">Just now</span></div>
                 </div>
                 
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
-                    <h4 style="margin: 0 0 10px 0; color: #2c3e50;">📋 Daily Operations Summary</h4>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.9rem;">
-                        <div><strong>Total Appointments:</strong> <span id="patientsToday">1</span></div>
+                <div style="background: #f8f9fa; padding: 12px; border-radius: 8px;">
+                    <h4 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 0.9rem;">📋 Daily Operations</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem;">
+                        <div><strong>Total:</strong> <span id="patientsToday">1</span></div>
                         <div><strong>Completed:</strong> <span id="completedTodayPatient">0</span></div>
                         <div><strong>In Progress:</strong> <span id="inProgressToday">1</span></div>
                         <div><strong>Pending:</strong> <span id="waitingToday">0</span></div>
@@ -909,15 +1034,58 @@
             <div class="dashboard">
                 <div class="card">
                     <div class="queue-header">
-                        <h2>👥 Patient Management System</h2>
-                    <div style="background: rgba(52, 152, 219, 0.1); padding: 10px; border-radius: 8px; border-left: 4px solid #3498db;">
-                        <div style="font-size: 0.9rem; color: #2c3e50;">
-                            <strong>Professional Operations:</strong> Monitor patient flow, manage appointments, and track clinical efficiency
+                        <h2>👥 Patient Queue</h2>
+                        <div style="background: rgba(52, 152, 219, 0.1); padding: 8px; border-radius: 6px; border-left: 3px solid #3498db;">
+                            <div style="font-size: 0.8rem; color: #2c3e50;">
+                                <strong>Queue Status:</strong> Monitor scheduled patients and appointment flow
+                            </div>
                         </div>
                     </div>
+                    
+                    <!-- Queue Filters -->
+                    <div style="display: flex; gap: 8px; margin: 12px 0; flex-wrap: wrap;">
+                        <button class="queue-filter-btn active" onclick="filterQueue('all')">All</button>
+                        <button class="queue-filter-btn" onclick="filterQueue('today')">Today</button>
+                        <button class="queue-filter-btn" onclick="filterQueue('urgent')">Urgent</button>
+                        <button class="queue-filter-btn" onclick="filterQueue('waiting')">Waiting</button>
+                        <button class="queue-filter-btn" onclick="filterQueue('scheduled')">Scheduled</button>
+                    </div>
+                    
+                    <!-- Patient Queue List -->
+                    <div class="patient-queue" id="patientQueue">
+                        <!-- Patient queue items will be populated by JavaScript -->
+                    </div>
                 </div>
-                <div class="patient-list" id="patientList">
-                    <!-- Patient items will be populated by JavaScript -->
+                
+                <!-- Priority Management Card -->
+                <div class="card">
+                    <h2>🚨 Priority Management</h2>
+                    <div style="background: rgba(231, 76, 60, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #e74c3c; margin-bottom: 15px;">
+                        <div style="font-size: 0.85rem; color: #2c3e50;">
+                            <strong>Urgent Cases:</strong> <span id="urgentCount">0</span> patients need immediate attention
+                        </div>
+                    </div>
+                    
+                    <!-- Urgent Cases List -->
+                    <div style="margin-bottom: 15px;">
+                        <h4 style="font-size: 0.9rem; margin-bottom: 8px; color: #2c3e50;">🚨 Urgent Cases Requiring Immediate Scheduling</h4>
+                        <div id="urgentCasesList" style="max-height: 200px; overflow-y: auto; border: 1px solid #e0e0e0; border-radius: 6px; background: #fafafa;">
+                            <!-- Urgent cases will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="scheduleNextUrgent()" style="background: #e74c3c; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">
+                            📅 Schedule Next Urgent
+                        </button>
+                        <button onclick="rescheduleNonUrgent()" style="background: #f39c12; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">
+                            🔄 Reschedule Non-Urgent
+                        </button>
+                        <button onclick="viewWaitingList()" style="background: #3498db; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">
+                            📋 View Waiting List
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -1325,21 +1493,225 @@
         let feedback = [];
         let schedule = {};
         let doctor = 'Dr. Sarah Johnson'; // Single doctor
+        let currentQueueFilter = 'all';
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
             initializeSchedule();
             loadSampleData();
             updateDashboard();
+            updatePatientQueue();
             startRealTimeUpdates();
         });
 
-        // Initialize schedule grid with real-time status
+        // Filter patient queue
+        function filterQueue(filter) {
+            currentQueueFilter = filter;
+            
+            // Update filter buttons
+            document.querySelectorAll('.queue-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            updatePatientQueue();
+        }
+
+        // Update patient queue display
+        function updatePatientQueue() {
+            const queueContainer = document.getElementById('patientQueue');
+            if (!queueContainer) return;
+            
+            let filteredAppointments = appointments;
+            
+            // Apply filter
+            switch(currentQueueFilter) {
+                case 'today':
+                    const today = new Date();
+                    filteredAppointments = appointments.filter(apt => {
+                        const aptDate = new Date(apt.scheduledDate);
+                        return aptDate.toDateString() === today.toDateString();
+                    });
+                    break;
+                case 'urgent':
+                    filteredAppointments = appointments.filter(apt => apt.priority === 'urgent');
+                    break;
+                case 'waiting':
+                    filteredAppointments = appointments.filter(apt => apt.status === 'waiting');
+                    break;
+                case 'scheduled':
+                    filteredAppointments = appointments.filter(apt => apt.status === 'scheduled');
+                    break;
+            }
+            
+            // Sort by scheduled date
+            filteredAppointments.sort((a, b) => new Date(a.scheduledDate) - new Date(b.scheduledDate));
+            
+            // Generate queue HTML
+            if (filteredAppointments.length === 0) {
+                queueContainer.innerHTML = '<div style="text-align: center; padding: 20px; color: #666; font-size: 0.8rem;">No patients found for this filter</div>';
+                return;
+            }
+            
+            queueContainer.innerHTML = filteredAppointments.map(apt => {
+                const waitDays = calculateWaitDays(apt);
+                const scheduledDate = new Date(apt.scheduledDate);
+                const today = new Date();
+                const isToday = scheduledDate.toDateString() === today.toDateString();
+                const isPast = scheduledDate < today && !isToday;
+                
+                let dateStatus = '';
+                if (isToday) dateStatus = 'TODAY';
+                else if (isPast) dateStatus = 'PAST';
+                else dateStatus = 'FUTURE';
+                
+                return `
+                    <div class="queue-item">
+                        <div class="patient-info">
+                            <div class="patient-name">${apt.patientName}</div>
+                            <div class="patient-details">
+                                <span>📅 ${scheduledDate.toLocaleDateString()} ${scheduledDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                                <span>⏱️ ${waitDays} days wait</span>
+                                <span class="wait-time">${dateStatus}</span>
+                            </div>
+                        </div>
+                        <div class="patient-status">
+                            <span class="status-badge status-${apt.status}">${apt.status.toUpperCase()}</span>
+                            ${apt.priority === 'urgent' ? '<span class="status-badge status-urgent">URGENT</span>' : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Update urgent cases display
+        function updateUrgentCases() {
+            const urgentCases = appointments.filter(apt => apt.priority === 'urgent');
+            const urgentCountElement = document.getElementById('urgentCount');
+            const urgentListElement = document.getElementById('urgentCasesList');
+            
+            if (urgentCountElement) {
+                urgentCountElement.textContent = urgentCases.length;
+            }
+            
+            if (urgentListElement) {
+                if (urgentCases.length === 0) {
+                    urgentListElement.innerHTML = '<div style="text-align: center; padding: 20px; color: #666; font-size: 0.8rem;">No urgent cases</div>';
+                    return;
+                }
+                
+                urgentListElement.innerHTML = urgentCases.map(apt => {
+                    const requestDate = new Date(apt.requestDate);
+                    const daysWaiting = Math.floor((new Date() - requestDate) / (1000 * 60 * 60 * 24));
+                    
+                    return `
+                        <div style="padding: 10px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.85rem; color: #2c3e50;">${apt.patientName}</div>
+                                <div style="font-size: 0.75rem; color: #666;">Waiting ${daysWaiting} days</div>
+                            </div>
+                            <div style="font-size: 0.7rem; color: #e74c3c; font-weight: 600;">URGENT</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        // Schedule next urgent patient
+        function scheduleNextUrgent() {
+            const urgentWaiting = appointments.filter(apt => apt.priority === 'urgent' && apt.status === 'waiting');
+            if (urgentWaiting.length === 0) {
+                alert('No urgent patients on waiting list');
+                return;
+            }
+            
+            const nextUrgent = urgentWaiting[0];
+            const nextAvailableSlot = findNextAvailableSlot();
+            
+            if (nextAvailableSlot) {
+                nextUrgent.scheduledDate = nextAvailableSlot.toISOString();
+                nextUrgent.status = 'scheduled';
+                updatePatientQueue();
+                updateUrgentCases();
+                alert(`Scheduled ${nextUrgent.patientName} for ${nextAvailableSlot.toLocaleDateString()}`);
+            } else {
+                alert('No available slots found. Consider rescheduling non-urgent appointments.');
+            }
+        }
+
+        // Reschedule non-urgent appointments to make room
+        function rescheduleNonUrgent() {
+            const nonUrgentScheduled = appointments.filter(apt => 
+                apt.priority !== 'urgent' && apt.status === 'scheduled'
+            );
+            
+            if (nonUrgentScheduled.length === 0) {
+                alert('No non-urgent appointments to reschedule');
+                return;
+            }
+            
+            // Move the furthest non-urgent appointment
+            const furthestAppointment = nonUrgentScheduled.reduce((furthest, current) => {
+                return new Date(current.scheduledDate) > new Date(furthest.scheduledDate) ? current : furthest;
+            });
+            
+            // Move it 7 days later
+            const newDate = new Date(furthestAppointment.scheduledDate);
+            newDate.setDate(newDate.getDate() + 7);
+            furthestAppointment.scheduledDate = newDate.toISOString();
+            
+            updatePatientQueue();
+            alert(`Rescheduled ${furthestAppointment.patientName} to ${newDate.toLocaleDateString()}`);
+        }
+
+        // View waiting list
+        function viewWaitingList() {
+            filterQueue('waiting');
+        }
+
+        // Find next available slot (USA business days only)
+        function findNextAvailableSlot() {
+            const today = new Date();
+            const nyTime = new Date(today.toLocaleString("en-US", {timeZone: "America/New_York"}));
+            const scheduledDates = appointments
+                .filter(apt => apt.scheduledDate)
+                .map(apt => {
+                    const aptDate = new Date(apt.scheduledDate);
+                    return new Date(aptDate.toLocaleString("en-US", {timeZone: "America/New_York"}));
+                })
+                .sort((a, b) => a - b);
+            
+            // Find first available business day slot
+            for (let i = 1; i <= 30; i++) {
+                const testDate = new Date(nyTime);
+                testDate.setDate(testDate.getDate() + i);
+                
+                // Skip weekends (Saturday = 6, Sunday = 0)
+                if (testDate.getDay() === 0 || testDate.getDay() === 6) {
+                    continue;
+                }
+                
+                const hasConflict = scheduledDates.some(scheduled => 
+                    scheduled.toDateString() === testDate.toDateString()
+                );
+                
+                if (!hasConflict) {
+                    return testDate;
+                }
+            }
+            
+            return null;
+        }
+
+        // Initialize schedule grid with USA working hours (New York timezone)
         function initializeSchedule() {
             const grid = document.getElementById('scheduleGrid');
+            
+            // USA business hours: Monday-Friday, 8:00 AM - 5:00 PM (New York time)
             const timeSlots = [
-                '8:00', '8:30', '9:00', '9:30', '10:00', '10:30', '11:00', '11:30',
-                '1:00', '1:30', '2:00', '2:30', '3:00', '3:30', '4:00', '4:30'
+                '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', 
+                '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', 
+                '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM'
             ];
 
             grid.innerHTML = '';
@@ -1359,16 +1731,27 @@
         function updateScheduleGrid() {
             const grid = document.getElementById('scheduleGrid');
             const slots = grid.querySelectorAll('.time-slot');
+            
+            // Get current time in New York timezone
             const now = new Date();
-            const currentHour = now.getHours();
-            const currentMinute = now.getMinutes();
+            const nyTime = new Date(now.toLocaleString("en-US", {timeZone: "America/New_York"}));
+            const currentHour = nyTime.getHours();
+            const currentMinute = nyTime.getMinutes();
+            const currentDay = nyTime.getDay(); // 0 = Sunday, 1 = Monday, etc.
+            
+            // Check if it's a business day (Monday-Friday)
+            const isBusinessDay = currentDay >= 1 && currentDay <= 5;
             
             slots.forEach(slot => {
                 const timeText = slot.textContent.split('\n')[0]; // Get just the time part
-                const [hour, minute] = timeText.split(':').map(Number);
+                const [time, period] = timeText.split(' ');
+                const [hour, minute] = time.split(':').map(Number);
                 
                 // Convert to 24-hour format for comparison
-                const slotHour = hour === 12 ? 12 : hour;
+                let slotHour = hour;
+                if (period === 'PM' && hour !== 12) slotHour += 12;
+                if (period === 'AM' && hour === 12) slotHour = 0;
+                
                 const slotTime = slotHour * 60 + minute;
                 const currentTime = currentHour * 60 + currentMinute;
                 
@@ -1376,20 +1759,29 @@
                 slot.className = 'time-slot';
                 slot.innerHTML = timeText;
                 
-                // Find if there's an appointment for this time slot today
+                // Check if slot is booked for today
                 const today = new Date();
                 const appointmentForSlot = appointments.find(apt => {
+                    if (!apt.scheduledDate) return false;
                     const aptDate = new Date(apt.scheduledDate);
-                    return aptDate.toDateString() === today.toDateString() && apt.time === timeText;
+                    const aptNyTime = new Date(aptDate.toLocaleString("en-US", {timeZone: "America/New_York"}));
+                    return aptNyTime.toDateString() === nyTime.toDateString() && apt.time === timeText;
                 });
                 
-                if (appointmentForSlot) {
+                if (!isBusinessDay) {
+                    // Weekend - no appointments
+                    slot.classList.add('weekend');
+                    slot.innerHTML = `
+                        <div class="time-slot-status">WEEKEND</div>
+                        ${timeText}
+                    `;
+                } else if (appointmentForSlot) {
                     // Slot is booked
                     slot.classList.add('booked');
                     slot.innerHTML = `
                         <div class="time-slot-status">BOOKED</div>
                         ${timeText}
-                        <div class="time-slot.patient-info">${appointmentForSlot.name}</div>
+                        <div class="patient-info">${appointmentForSlot.patientName}</div>
                     `;
                     
                     // Check if it's currently happening
@@ -1399,7 +1791,7 @@
                         slot.innerHTML = `
                             <div class="time-slot-status">NOW</div>
                             ${timeText}
-                            <div class="time-slot.patient-info">${appointmentForSlot.name}</div>
+                            <div class="patient-info">${appointmentForSlot.patientName}</div>
                         `;
                     }
                 } else if (slotTime < currentTime) {
@@ -1432,94 +1824,64 @@
 
         // Load sample data
         function loadSampleData() {
-            // Sample appointments with wait days calculation
+            // Comprehensive patient data: 55 patients (25 existing + 30 waiting)
             const today = new Date();
-            appointments = [
-                { 
-                    id: 1, 
-                    name: 'John Doe', 
-                    type: 'consultation', 
-                    priority: 'high', 
-                    time: '9:00', 
-                    provider: doctor, 
-                    status: 'completed',
-                    scheduledDate: new Date(today.getTime() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
-                    requestDate: new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
-                    notes: 'Initial consultation for chest pain'
-                },
-                { 
-                    id: 2, 
-                    name: 'Jane Miller', 
-                    type: 'followup', 
-                    priority: 'medium', 
-                    time: '10:30', 
-                    provider: doctor, 
-                    status: 'in-progress',
-                    scheduledDate: today, // Today
-                    requestDate: new Date(today.getTime() - 5 * 24 * 60 * 60 * 1000), // 5 days ago
-                    notes: 'Follow-up for diabetes management'
-                },
-                { 
-                    id: 3, 
-                    name: 'Bob Wilson', 
-                    type: 'treatment', 
-                    priority: 'low', 
-                    time: '2:00', 
-                    provider: doctor, 
-                    status: 'scheduled',
-                    scheduledDate: new Date(today.getTime() + 1 * 24 * 60 * 60 * 1000), // Tomorrow
-                    requestDate: new Date(today.getTime() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
-                    notes: 'Routine chemotherapy session'
-                },
-                { 
-                    id: 4, 
-                    name: 'Alice Taylor', 
-                    type: 'urgent', 
-                    priority: 'urgent', 
-                    time: '11:00', 
-                    provider: doctor, 
+            appointments = [];
+            
+            // Generate 25 existing appointments (Patients 1-25)
+            for (let i = 1; i <= 25; i++) {
+                const daysFromNow = Math.floor(Math.random() * 14) + 1; // 1-14 days from now
+                const requestDaysAgo = Math.floor(Math.random() * 7) + 1; // 1-7 days ago
+                
+                // Determine priority (some urgent cases in existing appointments)
+                let priority = 'medium';
+                if (i <= 3) priority = 'urgent'; // First 3 are urgent
+                else if (i <= 8) priority = 'low'; // Some low priority
+                
+                // Determine status
+                let status = 'scheduled';
+                if (i <= 2) status = 'in-progress'; // First 2 are in progress
+                else if (i <= 5) status = 'completed'; // Some completed
+                
+                appointments.push({
+                    id: i,
+                    patientName: `Patient ${i}`,
+                    scheduledDate: new Date(today.getTime() + daysFromNow * 24 * 60 * 60 * 1000).toISOString(),
+                    requestDate: new Date(today.getTime() - requestDaysAgo * 24 * 60 * 60 * 1000).toISOString(),
+                    priority: priority,
+                    status: status,
+                    notes: `Appointment for Patient ${i}`
+                });
+            }
+            
+            // Generate 30 waiting list patients (Patients 26-55)
+            for (let i = 26; i <= 55; i++) {
+                const requestDaysAgo = Math.floor(Math.random() * 10) + 1; // 1-10 days ago
+                
+                // Determine priority - 8 urgent cases on waiting list
+                let priority = 'medium';
+                if (i >= 26 && i <= 33) priority = 'urgent'; // 8 urgent cases (Patients 26-33)
+                else if (i >= 34 && i <= 45) priority = 'low'; // Some low priority
+                
+                appointments.push({
+                    id: i,
+                    patientName: `Patient ${i}`,
+                    scheduledDate: null, // No scheduled date yet
+                    requestDate: new Date(today.getTime() - requestDaysAgo * 24 * 60 * 60 * 1000).toISOString(),
+                    priority: priority,
                     status: 'waiting',
-                    scheduledDate: new Date(today.getTime() + 2 * 24 * 60 * 60 * 1000), // Day after tomorrow
-                    requestDate: new Date(today.getTime() - 1 * 24 * 60 * 60 * 1000), // 1 day ago
-                    notes: 'URGENT: Severe symptoms requiring immediate attention'
-                },
-                { 
-                    id: 5, 
-                    name: 'Michael Davis', 
-                    type: 'consultation', 
-                    priority: 'medium', 
-                    time: '3:30', 
-                    provider: doctor, 
-                    status: 'scheduled',
-                    scheduledDate: new Date(today.getTime() + 3 * 24 * 60 * 60 * 1000), // 3 days from now
-                    requestDate: new Date(today.getTime() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
-                    notes: 'Routine check-up and blood work review'
-                },
-                { 
-                    id: 6, 
-                    name: 'Lisa Garcia', 
-                    type: 'followup', 
-                    priority: 'high', 
-                    time: '4:00', 
-                    provider: doctor, 
-                    status: 'waiting',
-                    scheduledDate: new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000), // 5 days from now
-                    requestDate: new Date(today.getTime() - 4 * 24 * 60 * 60 * 1000), // 4 days ago
-                    notes: 'High priority follow-up for test results'
-                },
-                { 
-                    id: 7, 
-                    name: 'Sarah Johnson', 
-                    type: 'consultation', 
-                    priority: 'high', 
-                    time: '1:00', 
-                    provider: doctor, 
-                    status: 'scheduled',
-                    scheduledDate: new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
-                    requestDate: new Date(today.getTime() - 6 * 24 * 60 * 60 * 1000), // 6 days ago
-                    notes: 'Follow-up for recent test results'
+                    notes: `Waiting list - Patient ${i}`
+                });
+            }
+            
+            // Sort appointments by priority and request date
+            appointments.sort((a, b) => {
+                const priorityOrder = { urgent: 1, medium: 2, low: 3 };
+                if (priorityOrder[a.priority] !== priorityOrder[b.priority]) {
+                    return priorityOrder[a.priority] - priorityOrder[b.priority];
                 }
-            ];
+                return new Date(a.requestDate) - new Date(b.requestDate);
+            });
 
             // Sample feedback
             feedback = [
@@ -1937,6 +2299,12 @@ FEEDBACK SUMMARY:
             
             // Update schedule grid
             updateScheduleGrid();
+            
+            // Update patient queue
+            updatePatientQueue();
+            
+            // Update urgent cases
+            updateUrgentCases();
         }
 
         // Update patient-centric dashboard
