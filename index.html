@@ -14,8 +14,16 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             color: #333;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
@@ -218,6 +226,142 @@
             100% { opacity: 1; }
         }
 
+        /* Animated Counters */
+        .counter {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: counterGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes counterGlow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+
+        /* Progress Bars */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: progressShimmer 2s infinite;
+        }
+
+        @keyframes progressShimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Floating Action Buttons */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        .fab:active {
+            transform: scale(0.95);
+        }
+
+        /* Live Status Indicators */
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: statusPulse 2s infinite;
+        }
+
+        .status-indicator.active {
+            background: #27ae60;
+        }
+
+        .status-indicator.warning {
+            background: #f39c12;
+        }
+
+        .status-indicator.danger {
+            background: #e74c3c;
+        }
+
+        @keyframes statusPulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1001;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            border-left: 4px solid #27ae60;
+        }
+
+        .toast.warning {
+            border-left: 4px solid #f39c12;
+        }
+
+        .toast.error {
+            border-left: 4px solid #e74c3c;
+        }
+
         .dashboard {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -227,15 +371,34 @@
 
         .card {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 18px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card:hover::before {
+            left: 100%;
         }
 
         .card h2 {
@@ -401,6 +564,13 @@
             color: white;
             opacity: 0.7;
             cursor: not-allowed;
+        }
+
+        .time-slot.selected {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: 3px solid #2980b9;
+            transform: scale(1.05);
         }
 
         .time-slot.patient-info {
@@ -928,10 +1098,13 @@
             <div class="dashboard">
                 <div class="card">
                     <h2>📊 Clinic Performance Metrics</h2>
-                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 16px; border-radius: 10px; text-align: center; margin-bottom: 15px;">
-                    <div style="font-size: 2.2rem; font-weight: bold; margin-bottom: 6px;" id="avgWaitDays">4.2</div>
-                    <div style="font-size: 0.9rem; margin-bottom: 3px;">Average Wait Days</div>
-                    <div style="font-size: 0.75rem; opacity: 0.8;">Target: ≤7 days</div>
+                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden;">
+                    <div class="counter" id="avgWaitDays">4.2</div>
+                    <div style="font-size: 0.9rem; margin-bottom: 8px;">Average Wait Days</div>
+                    <div style="font-size: 0.75rem; opacity: 0.8; margin-bottom: 10px;">Target: ≤7 days</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="waitDaysProgress" style="width: 60%;"></div>
+                    </div>
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
@@ -948,10 +1121,15 @@
 
             <div class="card">
                 <h2>👩‍⚕️ Dr. Sarah's Professional Status</h2>
-                <div style="background: linear-gradient(135deg, #27ae60, #229954); color: white; padding: 16px; border-radius: 10px; text-align: center; margin-bottom: 15px;">
-                    <div style="font-size: 1.4rem; margin-bottom: 6px;">🟢 ACTIVE</div>
-                    <div style="font-size: 0.9rem;">Currently seeing patients</div>
-                    <div style="font-size: 0.75rem; opacity: 0.8; margin-top: 3px;">Updated: <span id="lastUpdated">Just now</span></div>
+                <div style="background: linear-gradient(135deg, #27ae60, #229954); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden;">
+                    <div style="font-size: 1.4rem; margin-bottom: 8px;">
+                        <span class="status-indicator active"></span>ACTIVE
+                    </div>
+                    <div style="font-size: 0.9rem; margin-bottom: 8px;">Currently seeing patients</div>
+                    <div style="font-size: 0.75rem; opacity: 0.8;">Updated: <span id="lastUpdated">Just now</span></div>
+                    <div class="progress-bar" style="margin-top: 10px;">
+                        <div class="progress-fill" id="doctorStatusProgress" style="width: 85%;"></div>
+                    </div>
                 </div>
                 
                 <div style="background: #f8f9fa; padding: 12px; border-radius: 8px;">
@@ -1459,20 +1637,33 @@
         </div>
     </div>
 
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="showUrgentAlert()" title="Urgent Cases Alert">
+        🚨
+    </button>
+
     <script>
-        // Navigation function
+        // Navigation function with smooth transitions
         function showSection(sectionId) {
-            // Hide all sections
+            // Hide all sections with fade out
             const sections = document.querySelectorAll('.section');
             sections.forEach(section => {
-                section.classList.remove('active');
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.classList.remove('active');
+                }, 200);
             });
             
-            // Show selected section
-            const targetSection = document.getElementById(sectionId + '-section');
-            if (targetSection) {
-                targetSection.classList.add('active');
-            }
+            // Show selected section with fade in
+            setTimeout(() => {
+                const targetSection = document.getElementById(sectionId + '-section');
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                    targetSection.style.opacity = '1';
+                    targetSection.style.transform = 'translateY(0)';
+                }
+            }, 200);
             
             // Update navigation buttons
             const navButtons = document.querySelectorAll('.nav-btn');
@@ -1482,6 +1673,67 @@
             
             // Activate clicked button
             event.target.classList.add('active');
+        }
+
+        // Show urgent cases alert
+        function showUrgentAlert() {
+            const urgentCases = appointments.filter(apt => apt.priority === 'urgent' && apt.status === 'waiting');
+            if (urgentCases.length > 0) {
+                showToast(`🚨 ${urgentCases.length} urgent patients waiting!`, 'warning');
+                showSection('patients');
+            } else {
+                showToast('✅ No urgent cases pending', 'success');
+            }
+        }
+
+        // Toast notification system
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <div style="font-weight: 600; margin-bottom: 5px;">${message}</div>
+                <div style="font-size: 0.8rem; opacity: 0.8;">${new Date().toLocaleTimeString()}</div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Show toast
+            setTimeout(() => toast.classList.add('show'), 100);
+            
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => document.body.removeChild(toast), 300);
+            }, 3000);
+        }
+
+        // Animate counter values
+        function animateCounter(elementId, targetValue, duration = 1000) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            const startValue = parseFloat(element.textContent) || 0;
+            const increment = (targetValue - startValue) / (duration / 16);
+            let currentValue = startValue;
+            
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if ((increment > 0 && currentValue >= targetValue) || 
+                    (increment < 0 && currentValue <= targetValue)) {
+                    currentValue = targetValue;
+                    clearInterval(timer);
+                }
+                element.textContent = currentValue.toFixed(1);
+            }, 16);
+        }
+
+        // Animate progress bars
+        function animateProgress(elementId, targetWidth, duration = 1000) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            element.style.transition = `width ${duration}ms ease-in-out`;
+            element.style.width = targetWidth + '%';
         }
 
         // Prevent Firebase initialization
@@ -2106,28 +2358,50 @@ Notes: ${appointment.notes || 'None'}
         document.getElementById('appointmentForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            const patientName = document.getElementById('patientName').value;
+            const patientType = document.getElementById('patientType').value;
+            const priority = document.getElementById('priority').value;
+            const preferredDate = document.getElementById('preferredDate').value;
+            const notes = document.getElementById('notes').value;
+            const selectedTime = document.getElementById('selectedTime').value;
+            
+            // Validate required fields
+            if (!patientName || !patientType || !priority || !preferredDate) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Check if it's a business day
+            const appointmentDate = new Date(preferredDate);
+            const appointmentDay = appointmentDate.getDay();
+            if (appointmentDay === 0 || appointmentDay === 6) {
+                alert('Appointments can only be scheduled on business days (Monday-Friday)');
+                return;
+            }
+            
             const formData = {
                 id: appointments.length + 1,
-                name: document.getElementById('patientName').value,
-                type: document.getElementById('patientType').value,
-                priority: document.getElementById('priority').value,
-                date: document.getElementById('preferredDate').value,
-                notes: document.getElementById('notes').value,
+                patientName: patientName,
+                type: patientType,
+                priority: priority,
+                preferredDate: preferredDate,
+                notes: notes,
                 status: 'scheduled',
                 provider: doctor,
-                requestDate: new Date(),
-                scheduledDate: new Date(document.getElementById('preferredDate').value)
+                time: selectedTime || '9:00 AM',
+                scheduledDate: new Date(preferredDate + ' ' + (selectedTime || '9:00 AM')).toISOString(),
+                requestDate: new Date().toISOString()
             };
 
             appointments.push(formData);
-            updatePatientList();
+            updatePatientQueue();
             updateDashboard();
             
             // Clear form
             this.reset();
             
             // Show success message
-            alert('Appointment scheduled successfully!');
+            alert(`Appointment scheduled successfully for ${patientName}!`);
         });
 
         // Handle feedback form submission
@@ -2282,9 +2556,31 @@ FEEDBACK SUMMARY:
                 return;
             }
             
-            // Toggle selection
-            element.classList.toggle('optimized');
-            alert(`Time slot ${time} selected for optimization.`);
+            if (element.classList.contains('weekend')) {
+                alert('Cannot schedule appointments on weekends.');
+                return;
+            }
+            
+            if (element.classList.contains('passed')) {
+                alert('Cannot schedule appointments in the past.');
+                return;
+            }
+            
+            // Set the selected time in the form
+            const selectedTimeInput = document.getElementById('selectedTime');
+            if (selectedTimeInput) {
+                selectedTimeInput.value = time;
+            }
+            
+            // Remove previous selection
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.classList.remove('selected');
+            });
+            
+            // Add selection to current slot
+            element.classList.add('selected');
+            
+            alert(`Time slot ${time} selected for appointment.`);
         }
 
         function updateDashboard() {
@@ -2307,13 +2603,17 @@ FEEDBACK SUMMARY:
             updateUrgentCases();
         }
 
-        // Update patient-centric dashboard
+        // Update patient-centric dashboard with animations
         function updatePatientCentricDashboard() {
             const avgWaitDays = calculateAverageWaitDays();
             const today = new Date();
             
-            // Update patient wait days display
-            document.getElementById('patientWaitDays').textContent = avgWaitDays;
+            // Animate counter for wait days
+            animateCounter('avgWaitDays', avgWaitDays);
+            
+            // Animate progress bar (60% = good performance)
+            const progressPercent = Math.min(100, (avgWaitDays / 7) * 100);
+            animateProgress('waitDaysProgress', progressPercent);
             
             // Update Dr. Sarah's status
             const inProgressToday = appointments.filter(apt => {
@@ -2323,6 +2623,9 @@ FEEDBACK SUMMARY:
             
             const statusElement = document.getElementById('lastUpdated');
             statusElement.textContent = new Date().toLocaleTimeString();
+            
+            // Animate doctor status progress (85% = busy but manageable)
+            animateProgress('doctorStatusProgress', 85);
             
             // Update today's schedule overview
             const todayAppointments = appointments.filter(apt => {
