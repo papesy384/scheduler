@@ -1188,6 +1188,9 @@
         <div class="header">
             <h1>🏥 Schedule Management System</h1>
             <p>Professional scheduling • Operational efficiency • Staff management</p>
+            <button onclick="refreshAllData()" style="background: #3498db; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; margin-top: 10px;">
+                🔄 Refresh All Data
+            </button>
         </div>
 
         <!-- Navigation Menu -->
@@ -1667,19 +1670,19 @@
                     <div style="background: #eafaf1; padding: 15px; border-radius: 10px; border-left: 4px solid #27ae60;">
                         <h4 style="margin: 0 0 10px 0; color: #27ae60;">✅ Operational Achievements</h4>
                         <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #2c3e50;">
-                            <li>69% reduction in average wait time</li>
-                            <li>95% of appointments scheduled within 7 days</li>
-                            <li>100% urgent case coverage within 24 hours</li>
-                            <li>4.8/5 patient satisfaction rating</li>
+                            <li id="waitTimeReductionAchievement">0% reduction in average wait time</li>
+                            <li id="appointmentsWithinTarget">0% of appointments scheduled within 7 days</li>
+                            <li id="urgentCoverageAchievement">0% urgent case coverage within 24 hours</li>
+                            <li id="patientSatisfactionAchievement">0/5 patient satisfaction rating</li>
                         </ul>
                     </div>
                     <div style="background: #fff3cd; padding: 15px; border-radius: 10px; border-left: 4px solid #ffc107;">
                         <h4 style="margin: 0 0 10px 0; color: #1976d2;">🎯 Strategic Objectives</h4>
                         <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #2c3e50;">
-                            <li>Maintain 4-day average wait time</li>
+                            <li id="maintainWaitTimeTarget">Maintain ≤7-day average wait time</li>
                             <li>Expand emergency appointment capacity</li>
                             <li>Optimize clinic capacity utilization</li>
-                            <li>Sustain 4.8/5 patient satisfaction rating</li>
+                            <li id="sustainSatisfactionTarget">Sustain ≥4.0/5 patient satisfaction rating</li>
                         </ul>
                     </div>
                 </div>
@@ -1954,13 +1957,13 @@
                 const todayInProgress = todayAppointments.filter(apt => apt.status === 'in-progress').length;
                 const todayWaiting = waitingAppointments; // All waiting patients
                 
-                // Calculate performance metrics - Good Performance Scenario
+                // Calculate performance metrics - UNDERPERFORMANCE Scenario
                 const targetWaitDays = 7.0;
-                const baselineWaitDays = 4.0; // Old baseline (before optimization)
-                const currentWaitDays = avgWaitDays; // New current value
+                const baselineWaitDays = 8.0; // Baseline was 8 days (good performance)
+                const currentWaitDays = avgWaitDays; // Current value showing underperformance
                 
-                // Wait time change: (new - old) / old
-                const waitTimeChange = baselineWaitDays > 0 ? ((currentWaitDays - baselineWaitDays) / baselineWaitDays) * 100 : 0;
+                // Wait time change: (old - new) / old * 100 (positive = improvement)
+                const waitTimeChange = baselineWaitDays > 0 ? ((baselineWaitDays - currentWaitDays) / baselineWaitDays) * 100 : 0;
                 
                 // Target achievement: (target - current) / target
                 const targetAchievement = targetWaitDays > 0 ? ((targetWaitDays - currentWaitDays) / targetWaitDays) * 100 : 0;
@@ -1976,8 +1979,8 @@
                 const patientsTodayEl = document.getElementById('patientsToday');
                 if (patientsTodayEl) patientsTodayEl.textContent = todayAppointments.length;
                 
-                const completedTodayEl = document.getElementById('completedTodayPatient');
-                if (completedTodayEl) completedTodayEl.textContent = todayCompleted;
+                const completedTodayPatientEl = document.getElementById('completedTodayPatient');
+                if (completedTodayPatientEl) completedTodayPatientEl.textContent = todayCompleted;
                 
                 const inProgressTodayEl = document.getElementById('inProgressToday');
                 if (inProgressTodayEl) inProgressTodayEl.textContent = todayInProgress;
@@ -1986,8 +1989,8 @@
                 if (waitingTodayEl) waitingTodayEl.textContent = todayWaiting;
                 
                 // Update Priority Management Section
-                const urgentCountEl = document.getElementById('urgentCount');
-                if (urgentCountEl) urgentCountEl.textContent = urgentWaitingAppointments;
+                const urgentWaitingCountEl = document.getElementById('urgentCount');
+                if (urgentWaitingCountEl) urgentWaitingCountEl.textContent = urgentWaitingAppointments;
                 
                 const nonUrgentCountEl = document.getElementById('nonUrgentCount');
                 if (nonUrgentCountEl) nonUrgentCountEl.textContent = totalAppointments - urgentAppointments;
@@ -1996,11 +1999,27 @@
                 const avgWaitDaysAnalyticsEl = document.getElementById('avgWaitDaysAnalytics');
                 if (avgWaitDaysAnalyticsEl) avgWaitDaysAnalyticsEl.textContent = avgWaitDays.toFixed(1);
                 
-                const urgentCountAnalyticsEl = document.getElementById('urgentCountAnalytics');
-                if (urgentCountAnalyticsEl) urgentCountAnalyticsEl.textContent = urgentAppointments;
+                const urgentCountAnalyticsDisplayEl = document.getElementById('urgentCountAnalytics');
+                if (urgentCountAnalyticsDisplayEl) urgentCountAnalyticsDisplayEl.textContent = urgentAppointments;
                 
                 const avgWaitDaysSummaryEl = document.getElementById('avgWaitDaysSummary');
                 if (avgWaitDaysSummaryEl) avgWaitDaysSummaryEl.textContent = avgWaitDays.toFixed(0);
+                
+                // Update additional analytics values
+                const activePatientsEl = document.getElementById('activePatients');
+                if (activePatientsEl) activePatientsEl.textContent = appointments.filter(apt => apt.status !== 'completed').length;
+                
+                const completedTodayAnalyticsEl = document.getElementById('completedToday');
+                if (completedTodayAnalyticsEl) completedTodayAnalyticsEl.textContent = appointments.filter(apt => apt.status === 'completed').length;
+                
+                const scheduledCountEl = document.getElementById('scheduledCount');
+                if (scheduledCountEl) scheduledCountEl.textContent = scheduledAppointments;
+                
+                const waitingCountEl = document.getElementById('waitingCount');
+                if (waitingCountEl) waitingCountEl.textContent = waitingAppointments;
+                
+                const urgentCountAnalyticsEl = document.getElementById('urgentCount');
+                if (urgentCountAnalyticsEl) urgentCountAnalyticsEl.textContent = urgentAppointments;
                 
                 // Update Performance Section
                 const waitTimeReductionEl = document.getElementById('waitTimeReduction');
@@ -2024,10 +2043,32 @@
                 const urgentCareCoverageImpactEl = document.getElementById('urgentCareCoverageImpact');
                 if (urgentCareCoverageImpactEl) urgentCareCoverageImpactEl.textContent = `${urgentCoverage.toFixed(0)}%`;
                 
-                // Calculate patient satisfaction (simulated based on wait times)
-                const satisfaction = avgWaitDays <= 3 ? 4.8 : avgWaitDays <= 7 ? 3.5 : avgWaitDays <= 14 ? 2.5 : 1.5;
+                // Calculate patient satisfaction (simulated based on wait times) - UNDERPERFORMANCE
+                const satisfaction = avgWaitDays <= 3 ? 4.8 : avgWaitDays <= 7 ? 4.2 : avgWaitDays <= 14 ? 2.8 : 1.8;
                 const patientSatisfactionImpactEl = document.getElementById('patientSatisfactionImpact');
                 if (patientSatisfactionImpactEl) patientSatisfactionImpactEl.textContent = `${satisfaction.toFixed(1)}/5`;
+                
+                // Update OPTIMIZED section achievements dynamically
+                const waitTimeReductionAchievementEl = document.getElementById('waitTimeReductionAchievement');
+                if (waitTimeReductionAchievementEl) waitTimeReductionAchievementEl.textContent = `${waitTimeChange.toFixed(0)}% reduction in average wait time`;
+                
+                // Calculate appointments within target (≤7 days)
+                const appointmentsWithinTarget = appointments.filter(apt => {
+                    const waitDays = calculateWaitDays(apt);
+                    return waitDays <= 7;
+                }).length;
+                const appointmentsWithinTargetPercent = appointments.length > 0 ? (appointmentsWithinTarget / appointments.length) * 100 : 0;
+                const appointmentsWithinTargetEl = document.getElementById('appointmentsWithinTarget');
+                if (appointmentsWithinTargetEl) appointmentsWithinTargetEl.textContent = `${appointmentsWithinTargetPercent.toFixed(0)}% of appointments scheduled within 7 days`;
+                
+                // Calculate urgent coverage (urgent patients not waiting)
+                const urgentCoveragePercent = urgentAppointments > 0 ? ((urgentAppointments - urgentWaitingAppointments) / urgentAppointments) * 100 : 100;
+                const urgentCoverageAchievementEl = document.getElementById('urgentCoverageAchievement');
+                if (urgentCoverageAchievementEl) urgentCoverageAchievementEl.textContent = `${urgentCoveragePercent.toFixed(0)}% urgent case coverage within 24 hours`;
+                
+                // Update patient satisfaction achievement
+                const patientSatisfactionAchievementEl = document.getElementById('patientSatisfactionAchievement');
+                if (patientSatisfactionAchievementEl) patientSatisfactionAchievementEl.textContent = `${satisfaction.toFixed(1)}/5 patient satisfaction rating`;
                 
                 // Update progress bars
                 const progressPercent = Math.min(100, (avgWaitDays / targetWaitDays) * 100);
@@ -2050,7 +2091,7 @@
                     if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #f39c12, #e67e22)';
                     if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #f39c12, #e67e22)';
                 } else {
-                    // Poor performance
+                    // Critical underperformance - RED ALERT
                     if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
                     if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
                 }
@@ -2122,6 +2163,36 @@
         // Trigger update when appointments change
         function triggerGlobalUpdate() {
             updateAllComponents();
+        }
+        
+        // Manual refresh function for user
+        function refreshAllData() {
+            console.log('🔄 Manual refresh requested by user...');
+            triggerGlobalUpdate();
+            
+            // Show refresh notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #27ae60;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                z-index: 1000;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            `;
+            notification.textContent = '✅ All data refreshed!';
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 3000);
         }
         
         // Verify all update functions exist and work
@@ -3353,8 +3424,8 @@
                 
                 scheduledTime.setHours(hours, parseInt(time[1]), 0, 0);
                 
-                // Create specific wait times to achieve 6-day average
-                const waitDays = [5, 6, 7, 6, 6]; // Specific wait days for each patient
+                // Create specific wait times to simulate UNDERPERFORMANCE scenario
+                const waitDays = [12, 15, 18, 14, 16]; // High wait days showing poor performance
                 const requestDate = new Date(scheduledTime.getTime() - waitDays[index] * 24 * 60 * 60 * 1000);
                 
                 appointments.push({
@@ -3371,8 +3442,8 @@
                 });
             });
             
-            // 2. UPCOMING APPOINTMENTS (15 patients over next 2 weeks) - Specific wait times for 6-day average
-            const upcomingWaitDays = [5, 6, 7, 6, 5, 7, 6, 5, 6, 7, 6, 5, 6, 7, 6]; // Specific wait days
+            // 2. UPCOMING APPOINTMENTS (15 patients over next 2 weeks) - UNDERPERFORMANCE scenario
+            const upcomingWaitDays = [10, 12, 14, 11, 13, 15, 12, 10, 11, 14, 13, 12, 15, 16, 14]; // High wait days
             for (let i = 6; i <= 20; i++) {
                 const daysFromNow = Math.floor(Math.random() * 14) + 1;
                 const requestDaysAgo = upcomingWaitDays[i - 6]; // Use specific wait days
@@ -3413,11 +3484,13 @@
                 });
             }
             
-            // 3. WAITING LIST (3 patients - Good Performance Scenario) - Specific wait times for 6-day average
+            // 3. WAITING LIST (5 patients - UNDERPERFORMANCE Scenario) - High wait times, more urgent cases
             const waitingPatients = [
-                { name: 'Follow-up Patient', priority: 'high', daysWaiting: 5 },
-                { name: 'Routine Check', priority: 'medium', daysWaiting: 6 },
-                { name: 'New Patient', priority: 'medium', daysWaiting: 7 }
+                { name: 'Emergency Follow-up', priority: 'urgent', daysWaiting: 8 },
+                { name: 'Critical Patient', priority: 'urgent', daysWaiting: 10 },
+                { name: 'Follow-up Patient', priority: 'high', daysWaiting: 12 },
+                { name: 'Routine Check', priority: 'medium', daysWaiting: 15 },
+                { name: 'New Patient', priority: 'medium', daysWaiting: 18 }
             ];
             
             waitingPatients.forEach((patient, index) => {
@@ -3438,7 +3511,7 @@
                 });
             });
             
-            console.log(`✅ Loaded ${appointments.length} appointments:`);
+            console.log(`⚠️ UNDERPERFORMANCE SCENARIO LOADED: ${appointments.length} appointments:`);
             console.log(`   - Today: ${appointments.filter(apt => {
                 const aptDate = new Date(apt.scheduledDate);
                 return aptDate.toDateString() === today.toDateString();
@@ -3446,6 +3519,7 @@
             console.log(`   - Scheduled: ${appointments.filter(apt => apt.status === 'scheduled').length} patients`);
             console.log(`   - Waiting: ${appointments.filter(apt => apt.status === 'waiting').length} patients`);
             console.log(`   - Urgent: ${appointments.filter(apt => apt.priority === 'urgent').length} patients`);
+            console.log(`🚨 ALERT: Clinic is experiencing high wait times and underperformance!`);
             
             // Test the calculateAverageWaitDays function
             const testAvgWaitDays = calculateAverageWaitDays();
@@ -3481,15 +3555,19 @@
                 // Calculate the intended wait days based on the request date and current time
                 const daysSinceRequest = Math.max(0, Math.ceil((today - requestDate) / (1000 * 60 * 60 * 24)));
                 
-                // For sample data, use the intended wait days (5, 6, 7) based on patient name
+                // For UNDERPERFORMANCE scenario, use the intended wait days based on patient name
                 let intendedWaitDays = daysSinceRequest; // Default to actual days
                 
-                if (appointment.patientName === 'Follow-up Patient') {
-                    intendedWaitDays = 5;
+                if (appointment.patientName === 'Emergency Follow-up') {
+                    intendedWaitDays = 8;
+                } else if (appointment.patientName === 'Critical Patient') {
+                    intendedWaitDays = 10;
+                } else if (appointment.patientName === 'Follow-up Patient') {
+                    intendedWaitDays = 12;
                 } else if (appointment.patientName === 'Routine Check') {
-                    intendedWaitDays = 6;
+                    intendedWaitDays = 15;
                 } else if (appointment.patientName === 'New Patient') {
-                    intendedWaitDays = 7;
+                    intendedWaitDays = 18;
                 }
                 
                 console.log(`   Wait Days (waiting): ${intendedWaitDays} (intended), ${daysSinceRequest} (actual)`);
