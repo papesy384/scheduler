@@ -16,11 +16,11 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b1b 50%, #1a1a1a 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
-            color: #333;
+            color: #ffffff;
         }
 
         @keyframes gradientShift {
@@ -36,37 +36,41 @@
         }
 
         .header {
-            background: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(135deg, #1a1a1a, #2d1b1b);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
+            border: 2px solid #dc143c;
+            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .header h1 {
-            color: #2c3e50;
+            color: #ffffff;
             text-align: center;
             margin-bottom: 8px;
             font-size: 1.8rem;
             font-weight: 600;
+            text-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
         }
 
         .header p {
             text-align: center;
-            color: #7f8c8d;
+            color: #cccccc;
             font-size: 0.9rem;
             margin-bottom: 0;
         }
 
         /* Navigation Menu Styles */
         .navigation-menu {
-            background: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(135deg, #2d1b1b, #1a1a1a);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3);
             padding: 15px;
+            border: 1px solid #dc143c;
         }
 
         .nav-container {
@@ -77,7 +81,7 @@
         }
 
         .nav-btn {
-            background: linear-gradient(135deg, #3498db, #2980b9);
+            background: linear-gradient(135deg, #dc143c, #b71c1c);
             color: white;
             border: none;
             padding: 8px 16px;
@@ -86,23 +90,24 @@
             font-size: 0.8rem;
             font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 2px 8px rgba(220, 20, 60, 0.3);
         }
 
         .nav-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
-            background: linear-gradient(135deg, #2980b9, #3498db);
+            box-shadow: 0 6px 20px rgba(220, 20, 60, 0.6);
+            background: linear-gradient(135deg, #b71c1c, #dc143c);
         }
 
         .nav-btn.active {
-            background: linear-gradient(135deg, #27ae60, #229954);
-            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+            background: linear-gradient(135deg, #dc143c, #ff1744);
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.5);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
         }
 
         .nav-btn.active:hover {
-            background: linear-gradient(135deg, #229954, #27ae60);
-            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+            background: linear-gradient(135deg, #ff1744, #dc143c);
+            box-shadow: 0 6px 20px rgba(220, 20, 60, 0.7);
         }
 
         /* Section Visibility */
@@ -471,13 +476,13 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(135deg, #2d1b1b, #1a1a1a);
             backdrop-filter: blur(15px);
             border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid #dc143c;
             position: relative;
             overflow: hidden;
         }
@@ -503,12 +508,13 @@
         }
 
         .card h2 {
-            color: #2c3e50;
+            color: #ffffff;
             margin-bottom: 15px;
             font-size: 1.2rem;
             font-weight: 600;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid #dc143c;
             padding-bottom: 8px;
+            text-shadow: 0 0 5px rgba(220, 20, 60, 0.3);
         }
 
         .metrics {
@@ -553,7 +559,7 @@
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
-            color: #2c3e50;
+            color: #ffffff;
         }
 
         .form-group input,
@@ -561,21 +567,24 @@
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e1e8ed;
+            border: 2px solid #dc143c;
             border-radius: 8px;
             font-size: 1rem;
             transition: border-color 0.3s ease;
+            background: #1a1a1a;
+            color: #ffffff;
         }
 
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #3498db;
+            border-color: #ff1744;
+            box-shadow: 0 0 10px rgba(220, 20, 60, 0.3);
         }
 
         .btn {
-            background: linear-gradient(135deg, #3498db, #2980b9);
+            background: linear-gradient(135deg, #dc143c, #b71c1c);
             color: white;
             border: none;
             padding: 12px 25px;
@@ -588,15 +597,15 @@
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            box-shadow: 0 5px 15px rgba(220, 20, 60, 0.6);
         }
 
         .btn-success {
-            background: linear-gradient(135deg, #27ae60, #229954);
+            background: linear-gradient(135deg, #dc143c, #b71c1c);
         }
 
         .btn-warning {
-            background: linear-gradient(135deg, #f39c12, #e67e22);
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
         }
 
         .btn-danger {
@@ -1199,72 +1208,72 @@
             <div class="dashboard">
                 <div class="card">
                     <h2>📊 Clinic Performance Metrics</h2>
-                <div style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden;">
-                    <div class="counter" id="avgWaitDays">0</div>
+                <div style="background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden;">
+                    <div class="counter" id="avgWaitDays">4.0</div>
                     <div style="font-size: 0.9rem; margin-bottom: 8px;">Average Wait Days</div>
                     <div style="font-size: 0.75rem; opacity: 0.8; margin-bottom: 10px;">Target: ≤7 days</div>
                     <div class="progress-bar">
-                        <div class="progress-fill" id="waitDaysProgress" style="width: 100%; background: linear-gradient(90deg, #e74c3c, #c0392b);"></div>
+                        <div class="progress-fill" id="waitDaysProgress" style="width: 57%; background: linear-gradient(90deg, #27ae60, #2ecc71);"></div>
                     </div>
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                    <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 3px solid #e74c3c;">
-                        <div style="font-weight: 600; color: #e74c3c; font-size: 0.85rem;">❌ Target Missed</div>
-                        <div style="font-size: 0.75rem; color: #7f8c8d;">76% over target</div>
+                    <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 3px solid #27ae60;">
+                        <div style="font-weight: 600; color: #27ae60; font-size: 0.85rem;">✅ Target Exceeded</div>
+                        <div style="font-size: 0.75rem; color: #7f8c8d;">43% below target</div>
                     </div>
-                    <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 3px solid #e74c3c;">
-                        <div style="font-weight: 600; color: #e74c3c; font-size: 0.85rem;">📉 Declining</div>
-                        <div style="font-size: 0.75rem; color: #7f8c8d;">+23% this week</div>
+                    <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 3px solid #27ae60;">
+                        <div style="font-weight: 600; color: #27ae60; font-size: 0.85rem;">📈 Improving</div>
+                        <div style="font-size: 0.75rem; color: #7f8c8d;">69% improvement</div>
                     </div>
                 </div>
             </div>
 
             <div class="card">
                 <h2>👩‍⚕️ Dr. Sarah's Professional Status</h2>
-                <div style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden;">
+                <div style="background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden;">
                     <div style="font-size: 1.4rem; margin-bottom: 8px;">
-                        <span class="status-indicator danger"></span>OVERWHELMED
+                        <span class="status-indicator success"></span>OPTIMIZED
                     </div>
-                    <div style="font-size: 0.9rem; margin-bottom: 8px;">Behind schedule - 3 patients waiting</div>
+                    <div style="font-size: 0.9rem; margin-bottom: 8px;">Excellent performance - 4 days average wait</div>
                     <div style="font-size: 0.75rem; opacity: 0.8;">Updated: <span id="lastUpdated">Just now</span></div>
                     <div class="progress-bar" style="margin-top: 10px;">
-                        <div class="progress-fill" id="doctorStatusProgress" style="width: 100%; background: linear-gradient(90deg, #e74c3c, #c0392b);"></div>
+                        <div class="progress-fill" id="doctorStatusProgress" style="width: 57%; background: linear-gradient(90deg, #27ae60, #2ecc71);"></div>
                     </div>
                 </div>
                 
                 <div style="background: #f8f9fa; padding: 12px; border-radius: 8px;">
                     <h4 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 0.9rem;">📋 Daily Operations</h4>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem;">
-                        <div><strong>Total:</strong> <span id="patientsToday">0</span></div>
-                        <div><strong>Completed:</strong> <span id="completedTodayPatient">0</span></div>
-                        <div><strong>In Progress:</strong> <span id="inProgressToday">0</span></div>
-                        <div><strong>Pending:</strong> <span id="waitingToday">0</span></div>
+                        <div><strong>Total:</strong> <span id="patientsToday">5</span></div>
+                        <div><strong>Completed:</strong> <span id="completedTodayPatient">2</span></div>
+                        <div><strong>In Progress:</strong> <span id="inProgressToday">1</span></div>
+                        <div><strong>Pending:</strong> <span id="waitingToday">2</span></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Performance Alert -->
-        <div class="card" style="background: linear-gradient(135deg, #fff3cd, #ffeaa7); border-left: 5px solid #f39c12; margin-bottom: 20px;">
-            <h2 style="color: #856404; margin-bottom: 15px;">⚠️ Performance Alert</h2>
+        <!-- Performance Success -->
+        <div class="card" style="background: linear-gradient(135deg, #d4edda, #c3e6cb); border-left: 5px solid #28a745; margin-bottom: 20px;">
+            <h2 style="color: #155724; margin-bottom: 15px;">✅ Performance Success</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                 <div>
-                    <h4 style="color: #856404; margin-bottom: 10px;">🚨 Critical Issues</h4>
-                    <ul style="color: #856404; font-size: 0.9rem; margin: 0; padding-left: 20px;">
-                        <li>Wait time 76% over target</li>
-                        <li>5 patients waiting today</li>
-                        <li>Dr. Sarah overwhelmed</li>
-                        <li>Schedule backlog growing</li>
+                    <h4 style="color: #155724; margin-bottom: 10px;">🎉 Excellent Achievements</h4>
+                    <ul style="color: #155724; font-size: 0.9rem; margin: 0; padding-left: 20px;">
+                        <li>Wait time 69% improvement (4 days vs 12.8 day baseline)</li>
+                        <li>Minimal patients waiting</li>
+                        <li>Dr. Sarah operating efficiently</li>
+                        <li>Schedule well managed</li>
                     </ul>
                 </div>
                 <div>
-                    <h4 style="color: #856404; margin-bottom: 10px;">📋 Immediate Actions</h4>
-                    <ul style="color: #856404; font-size: 0.9rem; margin: 0; padding-left: 20px;">
-                        <li>Reschedule non-urgent cases</li>
-                        <li>Extend working hours</li>
-                        <li>Prioritize urgent patients</li>
-                        <li>Consider temporary help</li>
+                    <h4 style="color: #155724; margin-bottom: 10px;">🎯 Continue Excellence</h4>
+                    <ul style="color: #155724; font-size: 0.9rem; margin: 0; padding-left: 20px;">
+                        <li>Maintain current efficiency</li>
+                        <li>Keep urgent patients prioritized</li>
+                        <li>Monitor patient satisfaction</li>
+                        <li>Continue optimization practices</li>
                     </ul>
                 </div>
             </div>
@@ -1366,20 +1375,6 @@
                 </form>
             </div>
 
-            <div class="card">
-                <h2>🔧 Optimization Controls</h2>
-                <div class="optimization-controls">
-                    <button class="btn" onclick="reduceWaitDays()">📅 Reduce Wait Days</button>
-                    <button class="btn btn-warning" onclick="optimizeSchedule()">🚀 Optimize Schedule</button>
-                    <button class="btn btn-success" onclick="balanceWorkload()">⚖️ Balance Workload</button>
-                    <button class="btn" onclick="generateReport()">📈 Generate Report</button>
-                </div>
-                
-                <h3>Today's Schedule Overview</h3>
-                <div class="schedule-grid" id="scheduleGrid">
-                    <!-- Schedule slots will be populated by JavaScript -->
-                </div>
-            </div>
         </div>
 
             </div>
@@ -1643,10 +1638,6 @@
                 <div class="card">
                     <h2>📈 Operational Excellence Metrics</h2>
                     
-                    <!-- TEST BUTTON - Remove after verification -->
-                    <button onclick="testDataLogic()" style="background: #e74c3c; color: white; padding: 10px; margin: 10px; border: none; border-radius: 5px; cursor: pointer;">
-                        🧪 TEST DATA LOGIC
-                    </button>
                     
                     <!-- QUICK DATA CHECK -->
                     <div style="background: #f8f9fa; padding: 15px; margin: 10px; border-radius: 8px; border-left: 4px solid #28a745;">
@@ -1657,15 +1648,15 @@
                             <div><strong>Urgent Waiting:</strong> <span id="quickUrgentWait">0</span></div>
                         </div>
                     </div>
-                <div id="operationalPerformanceAchievement" style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-                    <h3 style="margin: 0 0 10px 0; font-size: 1.5rem;">⚠️ Operational Performance Issues</h3>
+                <div id="operationalPerformanceAchievement" style="background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+                    <h3 style="margin: 0 0 10px 0; font-size: 1.5rem;">✅ Operational Excellence Achieved</h3>
                     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; text-align: center;">
                         <div>
                             <div id="waitTimeReduction" style="font-size: 2.5rem; font-weight: bold;">0%</div>
                             <div style="font-size: 0.9rem; opacity: 0.9;">Wait Time Change</div>
                         </div>
                         <div>
-                            <div id="currentAvgWaitDays" style="font-size: 2.5rem; font-weight: bold;">0</div>
+                            <div id="currentAvgWaitDays" style="font-size: 2.5rem; font-weight: bold;">4.0</div>
                             <div style="font-size: 0.9rem; opacity: 0.9;">Current Avg (Days)</div>
                         </div>
                         <div>
@@ -1677,7 +1668,7 @@
 
                 <!-- Progress Timeline -->
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                    <h4 style="margin: 0 0 15px 0; color: #2c3e50;">📅 Performance Timeline</h4>
+                    <h4 style="margin: 0 0 15px 0; color: #2c3e50;">📅 Optimization Timeline</h4>
                     <div style="position: relative;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
                             <div style="text-align: center; flex: 1;">
@@ -1693,8 +1684,8 @@
                                 <div style="font-size: 0.8rem; color: #7f8c8d;">Month 3<br>System Implementation</div>
                             </div>
                             <div style="text-align: center; flex: 1;">
-                                <div style="width: 60px; height: 60px; background: #e74c3c; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">12.3</div>
-                                <div style="font-size: 0.8rem; color: #7f8c8d;">Current<br>Target Missed!</div>
+                                <div style="width: 60px; height: 60px; background: #27ae60; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">4.0</div>
+                                <div style="font-size: 0.8rem; color: #7f8c8d;">Current<br>Target Exceeded!</div>
                             </div>
                         </div>
                         <div style="position: absolute; top: 30px; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #e74c3c, #f39c12, #3498db, #e74c3c); border-radius: 2px;"></div>
@@ -1703,22 +1694,22 @@
 
                 <!-- Professional Achievements -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                    <div style="background: #ffeaea; padding: 15px; border-radius: 10px; border-left: 4px solid #e74c3c;">
-                        <h4 style="margin: 0 0 10px 0; color: #e74c3c;">❌ Performance Issues</h4>
+                    <div style="background: #eafaf1; padding: 15px; border-radius: 10px; border-left: 4px solid #27ae60;">
+                        <h4 style="margin: 0 0 10px 0; color: #27ae60;">✅ Operational Achievements</h4>
                         <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #2c3e50;">
-                            <li>147% increase in average wait time</li>
-                            <li>Only 15% of appointments scheduled within 7 days</li>
-                            <li>25% urgent case coverage within 24 hours</li>
-                            <li>2.1/5 patient satisfaction rating</li>
+                            <li>69% reduction in average wait time</li>
+                            <li>95% of appointments scheduled within 7 days</li>
+                            <li>100% urgent case coverage within 24 hours</li>
+                            <li>4.8/5 patient satisfaction rating</li>
                         </ul>
                     </div>
                     <div style="background: #fff3cd; padding: 15px; border-radius: 10px; border-left: 4px solid #ffc107;">
-                        <h4 style="margin: 0 0 10px 0; color: #856404;">🎯 Recovery Objectives</h4>
+                        <h4 style="margin: 0 0 10px 0; color: #1976d2;">🎯 Strategic Objectives</h4>
                         <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #2c3e50;">
-                            <li>Target: Reduce to 7-day average wait time</li>
-                            <li>Implement emergency appointment slots</li>
-                            <li>Increase clinic capacity utilization</li>
-                            <li>Achieve 3.5/5 patient satisfaction rating</li>
+                            <li>Maintain 4-day average wait time</li>
+                            <li>Expand emergency appointment capacity</li>
+                            <li>Optimize clinic capacity utilization</li>
+                            <li>Sustain 4.8/5 patient satisfaction rating</li>
                         </ul>
                     </div>
                 </div>
@@ -1873,16 +1864,16 @@
             event.target.classList.add('active');
         }
 
-        // Show urgent cases alert (Underperformance Scenario)
+        // Show urgent cases alert (Good Performance Scenario)
         function showUrgentAlert() {
-            // Simulate high urgent cases due to underperformance
-            const urgentCases = 8; // Simulated high number
-            showToast(`🚨 ${urgentCases} urgent patients waiting! Critical backlog!`, 'error');
+            // Simulate low urgent cases due to good performance
+            const urgentCases = 1; // Simulated low number
+            showToast(`✅ Only ${urgentCases} urgent patient waiting! Excellent management!`, 'success');
             showSection('patients');
             
-            // Show additional warning toast
+            // Show additional success toast
             setTimeout(() => {
-                showToast('⚠️ Dr. Sarah is overwhelmed - immediate action needed!', 'warning');
+                showToast('🎉 Dr. Sarah is operating efficiently!', 'success');
             }, 1000);
         }
 
@@ -1993,11 +1984,16 @@
                 const todayInProgress = todayAppointments.filter(apt => apt.status === 'in-progress').length;
                 const todayWaiting = waitingAppointments; // All waiting patients
                 
-                // Calculate performance metrics
+                // Calculate performance metrics - Good Performance Scenario
                 const targetWaitDays = 7.0;
-                const baselineWaitDays = 10.0; // Baseline for comparison
-                const waitTimeChange = avgWaitDays > 0 ? ((avgWaitDays - baselineWaitDays) / baselineWaitDays) * 100 : 0;
-                const targetAchievement = avgWaitDays > 0 ? Math.max(0, ((targetWaitDays - avgWaitDays) / targetWaitDays) * 100) : 0;
+                const baselineWaitDays = 12.8; // Old baseline (before optimization)
+                const currentWaitDays = avgWaitDays; // New current value
+                
+                // Wait time change: (new - old) / old
+                const waitTimeChange = baselineWaitDays > 0 ? ((currentWaitDays - baselineWaitDays) / baselineWaitDays) * 100 : 0;
+                
+                // Target achievement: (target - current) / target
+                const targetAchievement = targetWaitDays > 0 ? ((targetWaitDays - currentWaitDays) / targetWaitDays) * 100 : 0;
                 const urgentCoverage = urgentWaitingAppointments > 0 ? Math.max(0, ((urgentAppointments - urgentWaitingAppointments) / urgentAppointments) * 100) : 100;
                 
                 // Update Dashboard Section
@@ -2035,7 +2031,9 @@
                 
                 // Update Performance Section
                 const waitTimeReductionEl = document.getElementById('waitTimeReduction');
-                if (waitTimeReductionEl) waitTimeReductionEl.textContent = `${waitTimeChange > 0 ? '+' : ''}${waitTimeChange.toFixed(0)}%`;
+                // Display the change as improvement (negative means improvement)
+                const improvementPercent = Math.abs(waitTimeChange);
+                if (waitTimeReductionEl) waitTimeReductionEl.textContent = `${improvementPercent.toFixed(0)}%`;
                 
                 const currentAvgWaitDaysEl = document.getElementById('currentAvgWaitDays');
                 if (currentAvgWaitDaysEl) currentAvgWaitDaysEl.textContent = avgWaitDays.toFixed(1);
@@ -2083,6 +2081,15 @@
                     if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
                     if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
                 }
+                
+                // Update Quick Data Check
+                const quickTotalEl = document.getElementById('quickTotal');
+                const quickAvgWaitEl = document.getElementById('quickAvgWait');
+                const quickUrgentWaitEl = document.getElementById('quickUrgentWait');
+                
+                if (quickTotalEl) quickTotalEl.textContent = totalAppointments;
+                if (quickAvgWaitEl) quickAvgWaitEl.textContent = avgWaitDays.toFixed(1);
+                if (quickUrgentWaitEl) quickUrgentWaitEl.textContent = urgentWaitingAppointments;
                 
                 console.log('✅ All sections updated with consistent data');
                 console.log('📊 Final metrics:', {
@@ -2879,6 +2886,10 @@
         // Initialize schedule grid with USA working hours (New York timezone)
         function initializeSchedule() {
             const grid = document.getElementById('scheduleGrid');
+            if (!grid) {
+                console.log('📅 Schedule grid not found - skipping initialization');
+                return;
+            }
             
             // USA business hours: Monday-Friday, 8:00 AM - 5:00 PM (New York time)
             const timeSlots = [
@@ -2904,6 +2915,10 @@
         // Update schedule grid with real-time status
         function updateScheduleGrid() {
             const grid = document.getElementById('scheduleGrid');
+            if (!grid) {
+                console.log('📅 Schedule grid not found - skipping update');
+                return;
+            }
             const slots = grid.querySelectorAll('.time-slot');
             
             // Get current time in New York timezone
@@ -3344,13 +3359,13 @@
             
             // Create realistic clinic scenario with proper business logic
             
-            // 1. TODAY'S APPOINTMENTS (5 patients)
+            // 1. TODAY'S APPOINTMENTS (5 patients) - Good Performance Scenario
             const todayAppointments = [
-                { name: 'John Smith', priority: 'urgent', duration: 60, time: '9:00 AM', status: 'in-progress' },
-                { name: 'Sarah Johnson', priority: 'high', duration: 30, time: '10:30 AM', status: 'scheduled' },
-                { name: 'Mike Davis', priority: 'medium', duration: 45, time: '2:00 PM', status: 'scheduled' },
+                { name: 'John Smith', priority: 'urgent', duration: 60, time: '9:00 AM', status: 'completed' },
+                { name: 'Sarah Johnson', priority: 'high', duration: 30, time: '10:30 AM', status: 'completed' },
+                { name: 'Mike Davis', priority: 'medium', duration: 45, time: '2:00 PM', status: 'in-progress' },
                 { name: 'Lisa Brown', priority: 'urgent', duration: 90, time: '3:30 PM', status: 'scheduled' },
-                { name: 'Tom Wilson', priority: 'low', duration: 30, time: '4:00 PM', status: 'completed' }
+                { name: 'Tom Wilson', priority: 'low', duration: 30, time: '4:00 PM', status: 'scheduled' }
             ];
             
             todayAppointments.forEach((apt, index) => {
@@ -3364,11 +3379,15 @@
                 
                 scheduledTime.setHours(hours, parseInt(time[1]), 0, 0);
                 
+                // Create specific wait times to achieve 4-day average
+                const waitDays = [3, 4, 5, 4, 4]; // Specific wait days for each patient
+                const requestDate = new Date(scheduledTime.getTime() - waitDays[index] * 24 * 60 * 60 * 1000);
+                
                 appointments.push({
                     id: index + 1,
                     patientName: apt.name,
                     scheduledDate: scheduledTime.toISOString(),
-                    requestDate: new Date(today.getTime() - Math.floor(Math.random() * 7 + 1) * 24 * 60 * 60 * 1000).toISOString(),
+                    requestDate: requestDate.toISOString(),
                     priority: apt.priority,
                     status: apt.status,
                     contactNumber: `(555) ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`,
@@ -3378,10 +3397,11 @@
                 });
             });
             
-            // 2. UPCOMING APPOINTMENTS (15 patients over next 2 weeks)
+            // 2. UPCOMING APPOINTMENTS (15 patients over next 2 weeks) - Specific wait times for 4-day average
+            const upcomingWaitDays = [3, 4, 5, 4, 3, 5, 4, 3, 4, 5, 4, 3, 4, 5, 4]; // Specific wait days
             for (let i = 6; i <= 20; i++) {
                 const daysFromNow = Math.floor(Math.random() * 14) + 1;
-                const requestDaysAgo = Math.floor(Math.random() * 10) + 1;
+                const requestDaysAgo = upcomingWaitDays[i - 6]; // Use specific wait days
                 
                 let priority = 'medium';
                 if (i <= 8) priority = 'urgent';
@@ -3419,16 +3439,11 @@
                 });
             }
             
-            // 3. WAITING LIST (8 patients - realistic number)
+            // 3. WAITING LIST (3 patients - Good Performance Scenario) - Specific wait times for 4-day average
             const waitingPatients = [
-                { name: 'Emergency Case 1', priority: 'urgent', daysWaiting: 3 },
-                { name: 'Emergency Case 2', priority: 'urgent', daysWaiting: 2 },
-                { name: 'Follow-up Patient', priority: 'high', daysWaiting: 5 },
-                { name: 'Routine Check', priority: 'medium', daysWaiting: 7 },
-                { name: 'Consultation', priority: 'medium', daysWaiting: 4 },
-                { name: 'Review Patient', priority: 'low', daysWaiting: 10 },
-                { name: 'New Patient', priority: 'medium', daysWaiting: 6 },
-                { name: 'Urgent Follow-up', priority: 'urgent', daysWaiting: 1 }
+                { name: 'Follow-up Patient', priority: 'high', daysWaiting: 3 },
+                { name: 'Routine Check', priority: 'medium', daysWaiting: 4 },
+                { name: 'New Patient', priority: 'medium', daysWaiting: 5 }
             ];
             
             waitingPatients.forEach((patient, index) => {
@@ -4411,63 +4426,7 @@ FEEDBACK SUMMARY:
             }
         });
 
-        // TEST FUNCTION - Shows actual data values
-        function testDataLogic() {
-            console.log('🧪 TESTING DATA LOGIC...');
-            
-            // Test 1: Check if appointments are loaded
-            console.log('📊 Total appointments:', appointments.length);
-            
-            // Test 2: Check appointment types
-            const today = new Date();
-            const todayAppointments = appointments.filter(apt => {
-                if (!apt.scheduledDate) return false;
-                const aptDate = new Date(apt.scheduledDate);
-                return aptDate.toDateString() === today.toDateString();
-            });
-            console.log('📊 Today appointments:', todayAppointments.length);
-            
-            const waitingAppointments = appointments.filter(apt => apt.status === 'waiting');
-            console.log('📊 Waiting appointments:', waitingAppointments.length);
-            
-            const urgentAppointments = appointments.filter(apt => apt.priority === 'urgent');
-            console.log('📊 Urgent appointments:', urgentAppointments.length);
-            
-            const urgentWaiting = appointments.filter(apt => apt.priority === 'urgent' && apt.status === 'waiting');
-            console.log('📊 Urgent waiting:', urgentWaiting.length);
-            
-            // Test 3: Check wait days calculation
-            const avgWaitDays = calculateAverageWaitDays();
-            console.log('📊 Average wait days:', avgWaitDays);
-            
-            // Test 4: Check UI elements
-            const avgWaitDaysEl = document.getElementById('avgWaitDays');
-            const urgentCountEl = document.getElementById('urgentCount');
-            const patientsTodayEl = document.getElementById('patientsToday');
-            
-            console.log('🔍 UI ELEMENTS:');
-            console.log('   - avgWaitDays:', avgWaitDaysEl ? avgWaitDaysEl.textContent : 'NOT FOUND');
-            console.log('   - urgentCount:', urgentCountEl ? urgentCountEl.textContent : 'NOT FOUND');
-            console.log('   - patientsToday:', patientsTodayEl ? patientsTodayEl.textContent : 'NOT FOUND');
-            
-            // Test 5: Show sample appointments
-            console.log('📋 SAMPLE APPOINTMENTS:');
-            appointments.slice(0, 5).forEach((apt, index) => {
-                const waitDays = calculateWaitDays(apt);
-                console.log(`   ${index + 1}. ${apt.patientName} (${apt.status}, ${apt.priority}): ${waitDays} days wait`);
-            });
-            
-            // Show alert with key metrics
-            alert(`DATA TEST RESULTS:
-Total Appointments: ${appointments.length}
-Today: ${todayAppointments.length}
-Waiting: ${waitingAppointments.length}
-Urgent: ${urgentAppointments.length}
-Urgent Waiting: ${urgentWaiting.length}
-Avg Wait Days: ${avgWaitDays}
 
-Check console for detailed results.`);
-        }
 
         // Debug: Check for Firebase initialization
         console.log('Checking for Firebase...');
