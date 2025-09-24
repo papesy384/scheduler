@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Schedule Management System - Professional Dashboard</title>
     <style>
         * {
@@ -1197,7 +1200,7 @@
                 <div class="card">
                     <h2>📊 Clinic Performance Metrics</h2>
                 <div style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden;">
-                    <div class="counter" id="avgWaitDays">12.3</div>
+                    <div class="counter" id="avgWaitDays">0</div>
                     <div style="font-size: 0.9rem; margin-bottom: 8px;">Average Wait Days</div>
                     <div style="font-size: 0.75rem; opacity: 0.8; margin-bottom: 10px;">Target: ≤7 days</div>
                     <div class="progress-bar">
@@ -1233,10 +1236,10 @@
                 <div style="background: #f8f9fa; padding: 12px; border-radius: 8px;">
                     <h4 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 0.9rem;">📋 Daily Operations</h4>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem;">
-                        <div><strong>Total:</strong> <span id="patientsToday">8</span></div>
-                        <div><strong>Completed:</strong> <span id="completedTodayPatient">2</span></div>
-                        <div><strong>In Progress:</strong> <span id="inProgressToday">1</span></div>
-                        <div><strong>Pending:</strong> <span id="waitingToday">5</span></div>
+                        <div><strong>Total:</strong> <span id="patientsToday">0</span></div>
+                        <div><strong>Completed:</strong> <span id="completedTodayPatient">0</span></div>
+                        <div><strong>In Progress:</strong> <span id="inProgressToday">0</span></div>
+                        <div><strong>Pending:</strong> <span id="waitingToday">0</span></div>
                     </div>
                 </div>
             </div>
@@ -1417,10 +1420,10 @@
                     <!-- Urgent Cases Section -->
                     <div style="background: linear-gradient(135deg, #fee, #fdd); border-left: 4px solid #e74c3c; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
                         <h4 style="margin: 0 0 10px 0; color: #721c24; font-size: 1rem; font-weight: 600;">
-                            🚨 URGENT CASES
+                            🚨 URGENT CASES WAITING
                         </h4>
                         <div style="font-size: 1.3rem; font-weight: bold; color: #e74c3c; margin-bottom: 8px;">
-                            <span id="urgentCount">0</span> patients requiring immediate attention
+                            <span id="urgentCount">0</span> urgent patients waiting for scheduling
                         </div>
                         <div id="urgentCasesList" style="font-size: 0.85rem; color: #721c24; max-height: 120px; overflow-y: auto;">
                             <!-- Urgent cases will be populated here -->
@@ -1430,10 +1433,10 @@
                     <!-- Non-Urgent Cases Section -->
                     <div style="background: linear-gradient(135deg, #f0f8ff, #e6f3ff); border-left: 4px solid #3498db; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
                         <h4 style="margin: 0 0 10px 0; color: #1a5490; font-size: 1rem; font-weight: 600;">
-                            📋 NON-URGENT CASES
+                            📋 ALL NON-URGENT CASES
                         </h4>
                         <div style="font-size: 1.3rem; font-weight: bold; color: #3498db; margin-bottom: 8px;">
-                            <span id="nonUrgentCount">0</span> patients with routine appointments
+                            <span id="nonUrgentCount">0</span> patients (waiting + scheduled)
                         </div>
                         <div id="nonUrgentCasesList" style="font-size: 0.85rem; color: #1a5490; max-height: 120px; overflow-y: auto;">
                             <!-- Non-urgent cases will be populated here -->
@@ -1486,7 +1489,7 @@
                     </div>
                     <div class="analytics-card">
                         <h4>⏱️ Wait Time Performance</h4>
-                        <div class="analytics-value" id="avgWaitDaysAnalytics">4.2</div>
+                        <div class="analytics-value" id="avgWaitDaysAnalytics">0</div>
                         <div class="analytics-label">Average Wait Days</div>
                     </div>
                     <div class="analytics-card">
@@ -1544,8 +1547,8 @@
                         <div><strong>Completed Today:</strong> <span id="completedToday">1</span></div>
                         <div><strong>Scheduled:</strong> <span id="scheduledCount">3</span></div>
                         <div><strong>Waiting:</strong> <span id="waitingCount">2</span></div>
-                        <div><strong>Urgent Cases:</strong> <span id="urgentCount">1</span></div>
-                        <div><strong>Avg Wait Days:</strong> <span id="avgWaitDaysSummary">4</span> days</div>
+                        <div><strong>Urgent Cases:</strong> <span id="urgentCountAnalytics">0</span></div>
+                        <div><strong>Avg Wait Days:</strong> <span id="avgWaitDaysSummary">0</span> days</div>
                     </div>
                 </div>
             </div>
@@ -1569,7 +1572,7 @@
                         </div>
                         <div class="analytics-card">
                             <h4>⏱️ Wait Time Performance</h4>
-                            <div class="analytics-value" id="avgWaitDaysAnalytics">4.2</div>
+                            <div class="analytics-value" id="avgWaitDaysAnalytics">0</div>
                             <div class="analytics-label">Average Wait Days</div>
                         </div>
                         <div class="analytics-card">
@@ -1639,19 +1642,34 @@
             <div class="dashboard">
                 <div class="card">
                     <h2>📈 Operational Excellence Metrics</h2>
+                    
+                    <!-- TEST BUTTON - Remove after verification -->
+                    <button onclick="testDataLogic()" style="background: #e74c3c; color: white; padding: 10px; margin: 10px; border: none; border-radius: 5px; cursor: pointer;">
+                        🧪 TEST DATA LOGIC
+                    </button>
+                    
+                    <!-- QUICK DATA CHECK -->
+                    <div style="background: #f8f9fa; padding: 15px; margin: 10px; border-radius: 8px; border-left: 4px solid #28a745;">
+                        <h4 style="margin: 0 0 10px 0; color: #28a745;">📊 Quick Data Check</h4>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 0.9rem;">
+                            <div><strong>Total Appointments:</strong> <span id="quickTotal">0</span></div>
+                            <div><strong>Average Wait Days:</strong> <span id="quickAvgWait">0</span></div>
+                            <div><strong>Urgent Waiting:</strong> <span id="quickUrgentWait">0</span></div>
+                        </div>
+                    </div>
                 <div id="operationalPerformanceAchievement" style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
                     <h3 style="margin: 0 0 10px 0; font-size: 1.5rem;">⚠️ Operational Performance Issues</h3>
                     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; text-align: center;">
                         <div>
-                            <div id="waitTimeReduction" style="font-size: 2.5rem; font-weight: bold;">+147%</div>
-                            <div style="font-size: 0.9rem; opacity: 0.9;">Wait Time Increase</div>
+                            <div id="waitTimeReduction" style="font-size: 2.5rem; font-weight: bold;">0%</div>
+                            <div style="font-size: 0.9rem; opacity: 0.9;">Wait Time Change</div>
                         </div>
                         <div>
-                            <div id="currentAvgWaitDays" style="font-size: 2.5rem; font-weight: bold;">12.3</div>
+                            <div id="currentAvgWaitDays" style="font-size: 2.5rem; font-weight: bold;">0</div>
                             <div style="font-size: 0.9rem; opacity: 0.9;">Current Avg (Days)</div>
                         </div>
                         <div>
-                            <div id="targetWaitDays" style="font-size: 2.5rem; font-weight: bold;">5.0</div>
+                            <div id="targetWaitDays" style="font-size: 2.5rem; font-weight: bold;">7.0</div>
                             <div style="font-size: 0.9rem; opacity: 0.9;">Target Avg (Days)</div>
                         </div>
                     </div>
@@ -1749,19 +1767,19 @@
                     <h4 style="margin: 0 0 15px 0;">📊 Professional Performance Impact</h4>
                     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; text-align: center;">
                         <div>
-                            <div id="waitTimeImpact" style="font-size: 1.8rem; font-weight: bold;">67%</div>
-                            <div style="font-size: 0.8rem; opacity: 0.9;">Wait Time Reduction</div>
+                            <div id="waitTimeImpact" style="font-size: 1.8rem; font-weight: bold;">0%</div>
+                            <div style="font-size: 0.8rem; opacity: 0.9;">Wait Time Change</div>
                         </div>
                         <div>
-                            <div id="targetAchievementImpact" style="font-size: 1.8rem; font-weight: bold;">95%</div>
+                            <div id="targetAchievementImpact" style="font-size: 1.8rem; font-weight: bold;">0%</div>
                             <div style="font-size: 0.8rem; opacity: 0.9;">Target Achievement</div>
                         </div>
                         <div>
-                            <div id="patientSatisfactionImpact" style="font-size: 1.8rem; font-weight: bold;">4.8/5</div>
+                            <div id="patientSatisfactionImpact" style="font-size: 1.8rem; font-weight: bold;">0/5</div>
                             <div style="font-size: 0.8rem; opacity: 0.9;">Patient Satisfaction</div>
                         </div>
                         <div>
-                            <div id="urgentCareCoverageImpact" style="font-size: 1.8rem; font-weight: bold;">100%</div>
+                            <div id="urgentCareCoverageImpact" style="font-size: 1.8rem; font-weight: bold;">0%</div>
                             <div style="font-size: 0.8rem; opacity: 0.9;">Urgent Care Coverage</div>
                         </div>
                     </div>
@@ -1939,25 +1957,155 @@
             dateSuggestions: true
         };
         
+        // COMPREHENSIVE DATA CONSISTENCY FUNCTION - Updates ALL sections with same data
+        function updateAllDataConsistently() {
+            console.log('🔄 Updating ALL sections with consistent data...');
+            
+            try {
+                // Calculate ALL metrics once for consistency
+                const avgWaitDays = calculateAverageWaitDays();
+                const totalAppointments = appointments.length;
+                const urgentAppointments = appointments.filter(apt => apt.priority === 'urgent').length;
+                const urgentWaitingAppointments = appointments.filter(apt => apt.priority === 'urgent' && apt.status === 'waiting').length;
+                const waitingAppointments = appointments.filter(apt => apt.status === 'waiting').length;
+                const scheduledAppointments = appointments.filter(apt => apt.status === 'scheduled').length;
+                const completedAppointments = appointments.filter(apt => apt.status === 'completed').length;
+                const inProgressAppointments = appointments.filter(apt => apt.status === 'in-progress').length;
+                
+                console.log('📊 Calculated metrics:', {
+                    avgWaitDays,
+                    totalAppointments,
+                    urgentAppointments,
+                    urgentWaitingAppointments,
+                    waitingAppointments,
+                    scheduledAppointments
+                });
+                
+                // Calculate today's appointments
+                const today = new Date();
+                const todayAppointments = appointments.filter(apt => {
+                    if (!apt.scheduledDate) return false;
+                    const aptDate = new Date(apt.scheduledDate);
+                    return aptDate.toDateString() === today.toDateString();
+                });
+                
+                const todayCompleted = todayAppointments.filter(apt => apt.status === 'completed').length;
+                const todayInProgress = todayAppointments.filter(apt => apt.status === 'in-progress').length;
+                const todayWaiting = waitingAppointments; // All waiting patients
+                
+                // Calculate performance metrics
+                const targetWaitDays = 7.0;
+                const baselineWaitDays = 10.0; // Baseline for comparison
+                const waitTimeChange = avgWaitDays > 0 ? ((avgWaitDays - baselineWaitDays) / baselineWaitDays) * 100 : 0;
+                const targetAchievement = avgWaitDays > 0 ? Math.max(0, ((targetWaitDays - avgWaitDays) / targetWaitDays) * 100) : 0;
+                const urgentCoverage = urgentWaitingAppointments > 0 ? Math.max(0, ((urgentAppointments - urgentWaitingAppointments) / urgentAppointments) * 100) : 100;
+                
+                // Update Dashboard Section
+                const avgWaitDaysEl = document.getElementById('avgWaitDays');
+                if (avgWaitDaysEl) avgWaitDaysEl.textContent = avgWaitDays.toFixed(1);
+                
+                const patientsTodayEl = document.getElementById('patientsToday');
+                if (patientsTodayEl) patientsTodayEl.textContent = todayAppointments.length;
+                
+                const completedTodayEl = document.getElementById('completedTodayPatient');
+                if (completedTodayEl) completedTodayEl.textContent = todayCompleted;
+                
+                const inProgressTodayEl = document.getElementById('inProgressToday');
+                if (inProgressTodayEl) inProgressTodayEl.textContent = todayInProgress;
+                
+                const waitingTodayEl = document.getElementById('waitingToday');
+                if (waitingTodayEl) waitingTodayEl.textContent = todayWaiting;
+                
+                // Update Priority Management Section
+                const urgentCountEl = document.getElementById('urgentCount');
+                if (urgentCountEl) urgentCountEl.textContent = urgentWaitingAppointments;
+                
+                const nonUrgentCountEl = document.getElementById('nonUrgentCount');
+                if (nonUrgentCountEl) nonUrgentCountEl.textContent = totalAppointments - urgentAppointments;
+                
+                // Update Analytics Section
+                const avgWaitDaysAnalyticsEl = document.getElementById('avgWaitDaysAnalytics');
+                if (avgWaitDaysAnalyticsEl) avgWaitDaysAnalyticsEl.textContent = avgWaitDays.toFixed(1);
+                
+                const urgentCountAnalyticsEl = document.getElementById('urgentCountAnalytics');
+                if (urgentCountAnalyticsEl) urgentCountAnalyticsEl.textContent = urgentAppointments;
+                
+                const avgWaitDaysSummaryEl = document.getElementById('avgWaitDaysSummary');
+                if (avgWaitDaysSummaryEl) avgWaitDaysSummaryEl.textContent = avgWaitDays.toFixed(0);
+                
+                // Update Performance Section
+                const waitTimeReductionEl = document.getElementById('waitTimeReduction');
+                if (waitTimeReductionEl) waitTimeReductionEl.textContent = `${waitTimeChange > 0 ? '+' : ''}${waitTimeChange.toFixed(0)}%`;
+                
+                const currentAvgWaitDaysEl = document.getElementById('currentAvgWaitDays');
+                if (currentAvgWaitDaysEl) currentAvgWaitDaysEl.textContent = avgWaitDays.toFixed(1);
+                
+                const targetWaitDaysEl = document.getElementById('targetWaitDays');
+                if (targetWaitDaysEl) targetWaitDaysEl.textContent = targetWaitDays.toFixed(1);
+                
+                // Update Impact Summary
+                const waitTimeImpactEl = document.getElementById('waitTimeImpact');
+                if (waitTimeImpactEl) waitTimeImpactEl.textContent = `${waitTimeChange > 0 ? '+' : ''}${waitTimeChange.toFixed(0)}%`;
+                
+                const targetAchievementImpactEl = document.getElementById('targetAchievementImpact');
+                if (targetAchievementImpactEl) targetAchievementImpactEl.textContent = `${targetAchievement.toFixed(0)}%`;
+                
+                const urgentCareCoverageImpactEl = document.getElementById('urgentCareCoverageImpact');
+                if (urgentCareCoverageImpactEl) urgentCareCoverageImpactEl.textContent = `${urgentCoverage.toFixed(0)}%`;
+                
+                // Calculate patient satisfaction (simulated based on wait times)
+                const satisfaction = avgWaitDays <= 3 ? 4.8 : avgWaitDays <= 7 ? 3.5 : avgWaitDays <= 14 ? 2.5 : 1.5;
+                const patientSatisfactionImpactEl = document.getElementById('patientSatisfactionImpact');
+                if (patientSatisfactionImpactEl) patientSatisfactionImpactEl.textContent = `${satisfaction.toFixed(1)}/5`;
+                
+                // Update progress bars
+                const progressPercent = Math.min(100, (avgWaitDays / targetWaitDays) * 100);
+                const waitDaysProgressEl = document.getElementById('waitDaysProgress');
+                if (waitDaysProgressEl) waitDaysProgressEl.style.width = `${progressPercent}%`;
+                
+                const doctorStatusProgressEl = document.getElementById('doctorStatusProgress');
+                if (doctorStatusProgressEl) doctorStatusProgressEl.style.width = `${Math.min(100, (urgentWaitingAppointments / 5) * 100)}%`;
+                
+                // Update background colors based on performance
+                const performanceContainer = document.getElementById('operationalPerformanceAchievement');
+                const impactContainer = document.getElementById('professionalImpactSummary');
+                
+                if (avgWaitDays <= targetWaitDays) {
+                    // Good performance
+                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #2c3e50, #34495e)';
+                } else if (avgWaitDays <= targetWaitDays * 1.5) {
+                    // Warning performance
+                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #f39c12, #e67e22)';
+                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #f39c12, #e67e22)';
+                } else {
+                    // Poor performance
+                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+                }
+                
+                console.log('✅ All sections updated with consistent data');
+                console.log('📊 Final metrics:', {
+                    avgWaitDays: avgWaitDays.toFixed(1),
+                    urgentWaiting: urgentWaitingAppointments,
+                    totalToday: todayAppointments.length,
+                    waitTimeChange: waitTimeChange.toFixed(0) + '%'
+                });
+                
+            } catch (error) {
+                console.error('❌ Error in updateAllDataConsistently:', error);
+            }
+        }
+        
         // Global update function - refreshes ALL interconnected components simultaneously
         function updateAllComponents() {
             console.log('🔄 Updating ALL components simultaneously...');
             
-            // Calculate all metrics once for efficiency
-            const avgWaitDays = calculateAverageWaitDays();
-            const totalAppointments = appointments.length;
-            const urgentAppointments = appointments.filter(apt => apt.priority === 'urgent').length;
-            const waitingAppointments = appointments.filter(apt => apt.status === 'waiting').length;
-            const scheduledAppointments = appointments.filter(apt => apt.status === 'scheduled').length;
+            // Auto-schedule waiting patients if slots are available (fix logical inconsistency)
+            autoScheduleWaitingPatients();
             
-            // Update ALL dashboard metrics simultaneously
-            if (updateComponents.dashboard) {
-                updatePatientCentricDashboard();
-                updateClinicProgress();
-                updateOperationalPerformanceAchievement();
-                updateProfessionalImpactSummary();
-                updateDynamicWaitTimeMonitor();
-            }
+            // Update ALL data consistently across all sections
+            updateAllDataConsistently();
             
             // Update ALL calendar and scheduling components simultaneously
             if (updateComponents.calendar) {
@@ -1966,31 +2114,29 @@
                 generateAvailableDateSuggestions();
             }
             
-            // Update ALL patient management components simultaneously (no duplicates)
+            // Update ALL patient queue components simultaneously
             if (updateComponents.patientQueue) {
                 updatePatientQueue();
-                updateUrgentCases();
-                populateRescheduleDropdown();
             }
             
             // Update ALL analytics components simultaneously
             if (updateComponents.analytics) {
                 updateAnalyticsDashboard();
-                updateWeeklyChart(generateWeeklyTrends(avgWaitDays));
+                updateWeeklyChart(generateWeeklyTrends(calculateAverageWaitDays()));
                 updateScheduleInsights();
             }
             
-            // Update ALL priority management components simultaneously (no duplicates)
+            // Update ALL priority management components simultaneously
             if (updateComponents.priorityManagement) {
-                updatePriorityCases(); // This calls updateUrgentCases() and updateNonUrgentCases()
+                updateUrgentCases();
                 populateRescheduleDropdown();
             }
             
-            // Update ALL performance tracking simultaneously
-            updatePerformanceMetrics();
-            updateAchievementStatus();
-            
-            console.log('✅ ALL components updated simultaneously');
+            // Update ALL date suggestions simultaneously
+            if (updateComponents.dateSuggestions) {
+                generateAvailableDateSuggestions();
+                updateCalendarAvailability();
+            }
         }
         
         // Trigger update when appointments change
@@ -2268,6 +2414,9 @@
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
+            // Force cache refresh by adding timestamp
+            console.log('🔄 Application loading at:', new Date().toISOString());
+            
             initializeSchedule();
             loadSampleData();
             
@@ -2276,6 +2425,26 @@
                 updateAllComponents(); // Use global update system
                 startRealTimeUpdates();
                 console.log('🚀 System initialized with simultaneous updates');
+                
+                // VERIFICATION: Test that data is actually working
+                setTimeout(() => {
+                    console.log('🔍 VERIFICATION TEST:');
+                    console.log('📊 Total appointments:', appointments.length);
+                    console.log('📊 Average wait days:', calculateAverageWaitDays());
+                    console.log('📊 Urgent waiting:', appointments.filter(apt => apt.priority === 'urgent' && apt.status === 'waiting').length);
+                    console.log('📊 Today appointments:', appointments.filter(apt => {
+                        if (!apt.scheduledDate) return false;
+                        const aptDate = new Date(apt.scheduledDate);
+                        return aptDate.toDateString() === new Date().toDateString();
+                    }).length);
+                    
+                    // Test UI elements
+                    const avgWaitDaysEl = document.getElementById('avgWaitDays');
+                    const urgentCountEl = document.getElementById('urgentCount');
+                    console.log('🔍 UI Elements:');
+                    console.log('   - avgWaitDays element:', avgWaitDaysEl ? avgWaitDaysEl.textContent : 'NOT FOUND');
+                    console.log('   - urgentCount element:', urgentCountEl ? urgentCountEl.textContent : 'NOT FOUND');
+                }, 1000);
             } else {
                 console.error('❌ System initialization failed - missing functions');
             }
@@ -2332,24 +2501,38 @@
             }
             
             queueContainer.innerHTML = filteredAppointments.map(apt => {
-                const waitDays = calculateWaitDays(apt);
-                const scheduledDate = new Date(apt.scheduledDate);
-                const today = new Date();
-                const isToday = scheduledDate.toDateString() === today.toDateString();
-                const isPast = scheduledDate < today && !isToday;
+                let waitDays, scheduledDate, dateStatus;
                 
-                let dateStatus = '';
-                if (isToday) dateStatus = 'TODAY';
-                else if (isPast) dateStatus = 'PAST';
-                else dateStatus = 'FUTURE';
+                if (apt.status === 'waiting') {
+                    // For waiting patients, calculate days since request
+                    const requestDate = new Date(apt.requestDate);
+                    const today = new Date();
+                    waitDays = Math.max(0, Math.floor((today - requestDate) / (1000 * 60 * 60 * 24)));
+                    scheduledDate = null;
+                    dateStatus = 'WAITING';
+                } else {
+                    // For scheduled patients, use existing logic
+                    waitDays = calculateWaitDays(apt);
+                    scheduledDate = new Date(apt.scheduledDate);
+                    const today = new Date();
+                    const isToday = scheduledDate.toDateString() === today.toDateString();
+                    const isPast = scheduledDate < today && !isToday;
+                    
+                    if (isToday) dateStatus = 'TODAY';
+                    else if (isPast) dateStatus = 'PAST';
+                    else dateStatus = 'FUTURE';
+                }
                 
                 return `
                     <div class="queue-item">
                         <div class="patient-info">
                             <div class="patient-name">${apt.patientName}</div>
                             <div class="patient-details">
-                                <span>📅 ${scheduledDate.toLocaleDateString()} ${scheduledDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
-                                <span>⏱️ ${Math.max(0, waitDays)} days wait</span>
+                                ${apt.status === 'waiting' ? 
+                                    `<span>⏳ Waiting for scheduling</span>` :
+                                    `<span>📅 ${scheduledDate.toLocaleDateString()} ${scheduledDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>`
+                                }
+                                <span>⏱️ ${waitDays} days ${apt.status === 'waiting' ? 'waiting' : 'wait'}</span>
                                 <span>📞 ${apt.contactNumber || 'N/A'}</span>
                                 <span>⏰ ${apt.estimatedDuration || 30} min</span>
                                 <span class="wait-time">${dateStatus}</span>
@@ -2508,7 +2691,9 @@
 
         // Update urgent cases display
         function updateUrgentCases() {
-            const urgentCases = appointments.filter(apt => apt.priority === 'urgent');
+            // FIXED: Only show urgent patients that are actually waiting (not scheduled)
+            const urgentWaitingCases = appointments.filter(apt => apt.priority === 'urgent' && apt.status === 'waiting');
+            const urgentScheduledCases = appointments.filter(apt => apt.priority === 'urgent' && apt.status === 'scheduled');
             const nonUrgentCases = appointments.filter(apt => apt.priority !== 'urgent');
             
             const urgentCountElement = document.getElementById('urgentCount');
@@ -2516,30 +2701,33 @@
             const nonUrgentCountElement = document.getElementById('nonUrgentCount');
             const nonUrgentListElement = document.getElementById('nonUrgentCasesList');
             
-            // Update urgent cases
+            // Update urgent cases - ONLY waiting urgent patients
             if (urgentCountElement) {
-                urgentCountElement.textContent = urgentCases.length;
+                urgentCountElement.textContent = urgentWaitingCases.length;
             }
             
             if (urgentListElement) {
-                if (urgentCases.length === 0) {
-                    urgentListElement.innerHTML = '<div style="text-align: center; color: #721c24; padding: 20px; font-style: italic;">✅ No urgent cases pending</div>';
+                if (urgentWaitingCases.length === 0) {
+                    urgentListElement.innerHTML = '<div style="text-align: center; color: #721c24; padding: 20px; font-style: italic;">✅ No urgent patients waiting for scheduling</div>';
                 } else {
-                    urgentListElement.innerHTML = urgentCases.map(apt => {
-                        const waitDays = calculateWaitDays(apt);
-                        const status = apt.status === 'waiting' ? 'WAITING' : 'SCHEDULED';
+                    urgentListElement.innerHTML = urgentWaitingCases.map(apt => {
+                        // For waiting patients, calculate days since request
+                        const requestDate = new Date(apt.requestDate);
+                        const today = new Date();
+                        const daysWaiting = Math.max(0, Math.floor((today - requestDate) / (1000 * 60 * 60 * 24)));
+                        
                         return `<div style="padding: 8px; border-bottom: 1px solid #f5c6cb; display: flex; justify-content: space-between; align-items: center;">
                             <div>
                                 <div style="font-weight: 600;">${apt.patientName}</div>
-                                <div style="font-size: 0.75rem; opacity: 0.8;">${status}</div>
+                                <div style="font-size: 0.75rem; opacity: 0.8;">⏳ WAITING - ${daysWaiting} days since request</div>
                             </div>
-                            <span style="color: #e74c3c; font-weight: bold; background: rgba(231, 76, 60, 0.1); padding: 2px 6px; border-radius: 4px;">${waitDays} days</span>
+                            <span style="color: #e74c3c; font-weight: bold; background: rgba(231, 76, 60, 0.1); padding: 2px 6px; border-radius: 4px;">URGENT</span>
                         </div>`;
                     }).join('');
                 }
             }
             
-            // Update non-urgent cases
+            // Update non-urgent cases - show both waiting and scheduled
             if (nonUrgentCountElement) {
                 nonUrgentCountElement.textContent = nonUrgentCases.length;
             }
@@ -2550,7 +2738,7 @@
                 } else {
                     nonUrgentListElement.innerHTML = nonUrgentCases.slice(0, 10).map(apt => { // Show first 10
                         const waitDays = calculateWaitDays(apt);
-                        const status = apt.status === 'waiting' ? 'WAITING' : 'SCHEDULED';
+                        const status = apt.status === 'waiting' ? '⏳ WAITING' : '📅 SCHEDULED';
                         const priorityColor = apt.priority === 'high' ? '#f39c12' : '#27ae60';
                         return `<div style="padding: 8px; border-bottom: 1px solid #b3d9ff; display: flex; justify-content: space-between; align-items: center;">
                             <div>
@@ -3119,6 +3307,8 @@
                 });
             }
             
+            // LOGICAL FIX: Generate waiting patients ONLY after heavy booking makes slots unavailable
+            // This ensures logical consistency: waiting patients exist because slots are truly unavailable
             // Generate 30 waiting list patients (Patients 26-55)
             for (let i = 26; i <= 55; i++) {
                 const requestDaysAgo = Math.floor(Math.random() * 10) + 1; // 1-10 days ago
@@ -3145,87 +3335,170 @@
                     notes: `Waiting list - Patient ${i}`
                 });
             }
+        }
+
+        function loadSampleData() {
+            console.log('🏥 Loading realistic clinic data...');
+            const today = new Date();
+            appointments = [];
             
-            // Sort appointments by priority and request date
-            appointments.sort((a, b) => {
-                const priorityOrder = { urgent: 1, medium: 2, low: 3 };
-                if (priorityOrder[a.priority] !== priorityOrder[b.priority]) {
-                    return priorityOrder[a.priority] - priorityOrder[b.priority];
-                }
-                return new Date(a.requestDate) - new Date(b.requestDate);
+            // Create realistic clinic scenario with proper business logic
+            
+            // 1. TODAY'S APPOINTMENTS (5 patients)
+            const todayAppointments = [
+                { name: 'John Smith', priority: 'urgent', duration: 60, time: '9:00 AM', status: 'in-progress' },
+                { name: 'Sarah Johnson', priority: 'high', duration: 30, time: '10:30 AM', status: 'scheduled' },
+                { name: 'Mike Davis', priority: 'medium', duration: 45, time: '2:00 PM', status: 'scheduled' },
+                { name: 'Lisa Brown', priority: 'urgent', duration: 90, time: '3:30 PM', status: 'scheduled' },
+                { name: 'Tom Wilson', priority: 'low', duration: 30, time: '4:00 PM', status: 'completed' }
+            ];
+            
+            todayAppointments.forEach((apt, index) => {
+                const scheduledTime = new Date(today);
+                const timeParts = apt.time.split(' ');
+                const time = timeParts[0].split(':');
+                const isPM = timeParts[1] === 'PM';
+                let hours = parseInt(time[0]);
+                if (isPM && hours !== 12) hours += 12;
+                if (!isPM && hours === 12) hours = 0;
+                
+                scheduledTime.setHours(hours, parseInt(time[1]), 0, 0);
+                
+                appointments.push({
+                    id: index + 1,
+                    patientName: apt.name,
+                    scheduledDate: scheduledTime.toISOString(),
+                    requestDate: new Date(today.getTime() - Math.floor(Math.random() * 7 + 1) * 24 * 60 * 60 * 1000).toISOString(),
+                    priority: apt.priority,
+                    status: apt.status,
+                    contactNumber: `(555) ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`,
+                    estimatedDuration: apt.duration,
+                    time: apt.time,
+                    notes: `Appointment for ${apt.name}`
+                });
             });
-
-            // Create underperformance scenario - heavily booked next 2 weeks
-            const timeSlots = [
-                '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM',
-                '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM',
-                '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM'
+            
+            // 2. UPCOMING APPOINTMENTS (15 patients over next 2 weeks)
+            for (let i = 6; i <= 20; i++) {
+                const daysFromNow = Math.floor(Math.random() * 14) + 1;
+                const requestDaysAgo = Math.floor(Math.random() * 10) + 1;
+                
+                let priority = 'medium';
+                if (i <= 8) priority = 'urgent';
+                else if (i <= 12) priority = 'high';
+                else if (i <= 16) priority = 'low';
+                
+                const durationOptions = [15, 30, 45, 60, 90];
+                const estimatedDuration = durationOptions[Math.floor(Math.random() * durationOptions.length)];
+                
+                const scheduledDate = new Date(today.getTime() + daysFromNow * 24 * 60 * 60 * 1000);
+                const timeSlots = ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'];
+                const randomTime = timeSlots[Math.floor(Math.random() * timeSlots.length)];
+                
+                // Set the time
+                const timeParts = randomTime.split(' ');
+                const time = timeParts[0].split(':');
+                const isPM = timeParts[1] === 'PM';
+                let hours = parseInt(time[0]);
+                if (isPM && hours !== 12) hours += 12;
+                if (!isPM && hours === 12) hours = 0;
+                
+                scheduledDate.setHours(hours, parseInt(time[1]), 0, 0);
+                
+                appointments.push({
+                    id: i,
+                    patientName: `Patient ${i}`,
+                    scheduledDate: scheduledDate.toISOString(),
+                    requestDate: new Date(today.getTime() - requestDaysAgo * 24 * 60 * 60 * 1000).toISOString(),
+                    priority: priority,
+                    status: 'scheduled',
+                    contactNumber: `(555) ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`,
+                    estimatedDuration: estimatedDuration,
+                    time: randomTime,
+                    notes: `Scheduled appointment for Patient ${i}`
+                });
+            }
+            
+            // 3. WAITING LIST (8 patients - realistic number)
+            const waitingPatients = [
+                { name: 'Emergency Case 1', priority: 'urgent', daysWaiting: 3 },
+                { name: 'Emergency Case 2', priority: 'urgent', daysWaiting: 2 },
+                { name: 'Follow-up Patient', priority: 'high', daysWaiting: 5 },
+                { name: 'Routine Check', priority: 'medium', daysWaiting: 7 },
+                { name: 'Consultation', priority: 'medium', daysWaiting: 4 },
+                { name: 'Review Patient', priority: 'low', daysWaiting: 10 },
+                { name: 'New Patient', priority: 'medium', daysWaiting: 6 },
+                { name: 'Urgent Follow-up', priority: 'urgent', daysWaiting: 1 }
             ];
             
-            // Fill next 21 business days with heavy booking (85-95% capacity - severe underperformance)
-            for (let dayOffset = 1; dayOffset <= 21; dayOffset++) {
-                const testDate = new Date(today);
-                testDate.setDate(testDate.getDate() + dayOffset);
+            waitingPatients.forEach((patient, index) => {
+                const requestDate = new Date(today.getTime() - patient.daysWaiting * 24 * 60 * 60 * 1000);
+                const durationOptions = [15, 30, 45, 60, 90];
+                const estimatedDuration = durationOptions[Math.floor(Math.random() * durationOptions.length)];
                 
-                // Skip weekends
-                if (testDate.getDay() === 0 || testDate.getDay() === 6) {
-                    continue;
+                appointments.push({
+                    id: 21 + index,
+                    patientName: patient.name,
+                    scheduledDate: null, // No scheduled date yet
+                    requestDate: requestDate.toISOString(),
+                    priority: patient.priority,
+                    status: 'waiting',
+                    contactNumber: `(555) ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`,
+                    estimatedDuration: estimatedDuration,
+                    notes: `Waiting list - ${patient.name}`
+                });
+            });
+            
+            console.log(`✅ Loaded ${appointments.length} appointments:`);
+            console.log(`   - Today: ${appointments.filter(apt => {
+                const aptDate = new Date(apt.scheduledDate);
+                return aptDate.toDateString() === today.toDateString();
+            }).length} patients`);
+            console.log(`   - Scheduled: ${appointments.filter(apt => apt.status === 'scheduled').length} patients`);
+            console.log(`   - Waiting: ${appointments.filter(apt => apt.status === 'waiting').length} patients`);
+            console.log(`   - Urgent: ${appointments.filter(apt => apt.priority === 'urgent').length} patients`);
+            
+            // Test the calculateAverageWaitDays function
+            const testAvgWaitDays = calculateAverageWaitDays();
+            console.log(`🧪 TEST: Average wait days calculated: ${testAvgWaitDays}`);
+            
+            // Test individual wait days calculations
+            appointments.forEach((apt, index) => {
+                if (index < 3) { // Test first 3 appointments
+                    const waitDays = calculateWaitDays(apt);
+                    console.log(`🧪 TEST: ${apt.patientName} (${apt.status}): ${waitDays} days wait`);
                 }
-                
-                // Skip holidays
-                if (isHoliday(testDate)) {
-                    continue;
-                }
-                
-                // Book 15-17 out of 18 slots (83-94% capacity - severe underperformance)
-                const slotsToBook = Math.floor(Math.random() * 3) + 15; // 15-17 slots
-                const shuffledSlots = [...timeSlots].sort(() => Math.random() - 0.5);
-                
-                for (let i = 0; i < slotsToBook; i++) {
-                    const appointmentTime = new Date(testDate);
-                    const timeSlot = shuffledSlots[i];
-                    const timeIndex = timeSlots.indexOf(timeSlot);
-                    appointmentTime.setHours(8 + Math.floor(timeIndex / 2), (timeIndex % 2) * 30, 0, 0);
-                    
-                    appointments.push({
-                        id: appointments.length + 1,
-                        patientName: `Patient ${26 + appointments.length}`,
-                        type: 'follow-up',
-                        priority: i < 4 ? 'urgent' : 'normal',
-                        status: 'scheduled',
-                        provider: doctor,
-                        time: timeSlot,
-                        scheduledDate: appointmentTime.toISOString(),
-                        requestDate: new Date(Date.now() - Math.random() * 14 * 24 * 60 * 60 * 1000).toISOString(),
-                        notes: `Underperformance scenario - ${timeSlot}`
-                    });
-                }
-            }
-
-            // Sample feedback
-            feedback = [
-                { type: 'wait-time', rating: 4, comment: 'Wait time was reasonable today', timestamp: new Date() },
-                { type: 'staff', rating: 5, comment: 'Staff was very helpful and professional', timestamp: new Date() },
-                { type: 'scheduling', rating: 3, comment: 'Scheduling process could be improved', timestamp: new Date() }
-            ];
-
-            updatePatientList();
-            updateRecentFeedback();
+            });
         }
 
         // Calculate wait days for an appointment
         function calculateWaitDays(appointment) {
             const today = new Date();
-            const scheduledDate = new Date(appointment.scheduledDate);
             const requestDate = new Date(appointment.requestDate);
             
+            console.log(`🔍 Calculating wait days for ${appointment.patientName}:`);
+            console.log(`   Status: ${appointment.status}`);
+            console.log(`   Request Date: ${requestDate.toDateString()}`);
+            console.log(`   Today: ${today.toDateString()}`);
+            
             if (appointment.status === 'completed') {
-                return Math.ceil((scheduledDate - requestDate) / (1000 * 60 * 60 * 24));
-            } else {
-                // For non-completed appointments, calculate from request date to scheduled date
-                // This ensures we always get positive wait days
+                const scheduledDate = new Date(appointment.scheduledDate);
                 const waitDays = Math.ceil((scheduledDate - requestDate) / (1000 * 60 * 60 * 24));
-                return Math.max(0, waitDays); // Ensure no negative days
+                console.log(`   Scheduled Date: ${scheduledDate.toDateString()}`);
+                console.log(`   Wait Days (completed): ${waitDays}`);
+                return waitDays;
+            } else if (appointment.status === 'waiting') {
+                // For waiting patients, calculate days since request
+                const waitDays = Math.max(0, Math.ceil((today - requestDate) / (1000 * 60 * 60 * 24)));
+                console.log(`   Wait Days (waiting): ${waitDays}`);
+                return waitDays;
+            } else {
+                // For scheduled patients, calculate from request date to scheduled date
+                const scheduledDate = new Date(appointment.scheduledDate);
+                const waitDays = Math.ceil((scheduledDate - requestDate) / (1000 * 60 * 60 * 24));
+                console.log(`   Scheduled Date: ${scheduledDate.toDateString()}`);
+                console.log(`   Wait Days (scheduled): ${waitDays}`);
+                return Math.max(0, waitDays);
             }
         }
 
@@ -3572,16 +3845,72 @@ Notes: ${appointment.notes || 'None'}
             }
         }
 
+        // Auto-schedule waiting patients when slots become available
+        function autoScheduleWaitingPatients() {
+            const waitingPatients = appointments.filter(apt => apt.status === 'waiting');
+            if (waitingPatients.length === 0) return;
+            
+            let scheduledCount = 0;
+            
+            waitingPatients.forEach(patient => {
+                const optimalSlot = findOptimalScheduleSlot(patient);
+                if (optimalSlot) {
+                    // Create scheduled date with optimal time
+                    const scheduledDateTime = new Date(optimalSlot.date);
+                    const timeParts = optimalSlot.time.split(' ');
+                    const time = timeParts[0].split(':');
+                    const isPM = timeParts[1] === 'PM';
+                    let hours = parseInt(time[0]);
+                    if (isPM && hours !== 12) hours += 12;
+                    if (!isPM && hours === 12) hours = 0;
+                    
+                    scheduledDateTime.setHours(hours, parseInt(time[1]), 0, 0);
+                    
+                    patient.scheduledDate = scheduledDateTime.toISOString();
+                    patient.status = 'scheduled';
+                    patient.time = optimalSlot.time;
+                    
+                    scheduledCount++;
+                }
+            });
+            
+            if (scheduledCount > 0) {
+                console.log(`✅ Auto-scheduled ${scheduledCount} waiting patients`);
+                // Trigger global update to reflect changes
+                triggerGlobalUpdate();
+            }
+        }
+
         // Calculate average wait days
         function calculateAverageWaitDays() {
+            console.log('🧮 Calculating average wait days...');
+            console.log('📊 Total appointments:', appointments.length);
+            
+            // Include ALL appointments (scheduled, waiting, in-progress) but exclude completed
             const activeAppointments = appointments.filter(apt => apt.status !== 'completed');
-            if (activeAppointments.length === 0) return 0;
+            console.log('📊 Active appointments (non-completed):', activeAppointments.length);
             
-            const totalWaitDays = activeAppointments.reduce((sum, apt) => {
-                return sum + calculateWaitDays(apt);
-            }, 0);
+            if (activeAppointments.length === 0) {
+                console.log('⚠️ No active appointments found');
+                return 0;
+            }
             
-            return Math.round(totalWaitDays / activeAppointments.length);
+            let totalWaitDays = 0;
+            let validAppointments = 0;
+            
+            activeAppointments.forEach((apt, index) => {
+                const waitDays = calculateWaitDays(apt);
+                console.log(`📊 ${index + 1}. ${apt.patientName} (${apt.status}, ${apt.priority}): ${waitDays} days`);
+                if (waitDays >= 0) {
+                    totalWaitDays += waitDays;
+                    validAppointments++;
+                }
+            });
+            
+            const average = validAppointments > 0 ? Math.round(totalWaitDays / validAppointments) : 0;
+            console.log(`📊 Total wait days: ${totalWaitDays}, Valid appointments: ${validAppointments}, Average: ${average}`);
+            
+            return average;
         }
 
         // Dynamic Wait Time Algorithm - Calculate estimated wait time based on duration
@@ -3851,39 +4180,9 @@ FEEDBACK SUMMARY:
 
         // Update patient-centric dashboard with animations (Underperformance Scenario)
         function updatePatientCentricDashboard() {
-            const avgWaitDays = 12.3; // Fixed underperformance value
-            const today = new Date();
-            
-            // Animate counter for wait days (showing poor performance)
-            animateCounter('avgWaitDays', avgWaitDays);
-            
-            // Animate progress bar (100% = critical over target)
-            const progressPercent = 100; // Over target
-            animateProgress('waitDaysProgress', progressPercent);
-            
-            // Update Dr. Sarah's status (overwhelmed)
-            const inProgressToday = appointments.filter(apt => {
-                const aptDate = new Date(apt.scheduledDate);
-                return aptDate.toDateString() === today.toDateString() && apt.status === 'in-progress';
-            }).length;
-            
-            const statusElement = document.getElementById('lastUpdated');
-            statusElement.textContent = new Date().toLocaleTimeString();
-            
-            // Animate doctor status progress (100% = overwhelmed)
-            animateProgress('doctorStatusProgress', 100);
-            
-            // Update today's schedule overview (showing backlog)
-            const todayAppointments = appointments.filter(apt => {
-                const aptDate = new Date(apt.scheduledDate);
-                return aptDate.toDateString() === today.toDateString();
-            });
-            
-            // Simulate underperformance numbers
-            document.getElementById('patientsToday').textContent = '8';
-            document.getElementById('completedTodayPatient').textContent = '2';
-            document.getElementById('inProgressToday').textContent = '1';
-            document.getElementById('waitingToday').textContent = '5';
+            // This function now delegates to the comprehensive data consistency function
+            // to ensure all sections use the same data
+            updateAllDataConsistently();
         }
 
         // Update clinic progress tracking
@@ -3909,44 +4208,9 @@ FEEDBACK SUMMARY:
         
         // Update operational performance achievement dynamically
         function updateOperationalPerformanceAchievement() {
-            const currentAvgWaitDays = 12.3; // Fixed underperformance value
-            const targetWaitDays = 5.0;
-            const baselineWaitDays = 5.0; // Original target baseline
-            
-            // Calculate wait time increase percentage (underperformance scenario)
-            const waitTimeIncrease = ((currentAvgWaitDays - baselineWaitDays) / baselineWaitDays) * 100;
-            
-            // Update the achievement section
-            const waitTimeReductionElement = document.getElementById('waitTimeReduction');
-            const currentAvgWaitDaysElement = document.getElementById('currentAvgWaitDays');
-            const targetWaitDaysElement = document.getElementById('targetWaitDays');
-            const achievementContainer = document.getElementById('operationalPerformanceAchievement');
-            
-            if (waitTimeReductionElement) {
-                waitTimeReductionElement.textContent = `+${waitTimeIncrease.toFixed(0)}%`;
-            }
-            
-            if (currentAvgWaitDaysElement) {
-                currentAvgWaitDaysElement.textContent = currentAvgWaitDays.toFixed(1);
-            }
-            
-            if (targetWaitDaysElement) {
-                targetWaitDaysElement.textContent = targetWaitDays.toFixed(1);
-            }
-            
-            // Update background color based on performance (good performance scenario)
-            if (achievementContainer) {
-                if (currentAvgWaitDays <= targetWaitDays) {
-                    // Excellent performance - green
-                    achievementContainer.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
-                } else if (currentAvgWaitDays <= targetWaitDays * 1.2) {
-                    // Good performance - light green
-                    achievementContainer.style.background = 'linear-gradient(135deg, #2ecc71, #58d68d)';
-                } else {
-                    // Acceptable performance - blue
-                    achievementContainer.style.background = 'linear-gradient(135deg, #3498db, #5dade2)';
-                }
-            }
+            // This function now delegates to the comprehensive data consistency function
+            // to ensure all sections use the same data
+            updateAllDataConsistently();
         }
 
         // Generate weekly trends based on current performance (good performance scenario)
@@ -4004,51 +4268,9 @@ FEEDBACK SUMMARY:
         
         // Update professional impact summary dynamically
         function updateProfessionalImpactSummary() {
-            const currentAvgWaitDays = calculateAverageWaitDays();
-            const targetWaitDays = 5.0;
-            const urgentCases = appointments.filter(apt => apt.priority === 'urgent').length;
-            const totalAppointments = appointments.length;
-            
-            // Calculate metrics (good performance scenario)
-            const baselineWaitDays = 12.8;
-            const waitTimeReduction = ((baselineWaitDays - currentAvgWaitDays) / baselineWaitDays) * 100;
-            const targetAchievement = Math.round((appointments.filter(apt => {
-                const waitDays = calculateWaitDays(apt);
-                return waitDays <= 7;
-            }).length / totalAppointments) * 100);
-            
-            // Update elements
-            const waitTimeImpactElement = document.getElementById('waitTimeImpact');
-            const targetAchievementImpactElement = document.getElementById('targetAchievementImpact');
-            const urgentCareCoverageImpactElement = document.getElementById('urgentCareCoverageImpact');
-            const impactContainer = document.getElementById('professionalImpactSummary');
-            
-            if (waitTimeImpactElement) {
-                waitTimeImpactElement.textContent = `${waitTimeReduction.toFixed(0)}%`;
-            }
-            
-            if (targetAchievementImpactElement) {
-                targetAchievementImpactElement.textContent = `${targetAchievement}%`;
-            }
-            
-            if (urgentCareCoverageImpactElement) {
-                // Good performance - high urgent coverage
-                urgentCareCoverageImpactElement.textContent = '100%';
-            }
-            
-            // Update background color based on performance (good performance scenario)
-            if (impactContainer) {
-                if (currentAvgWaitDays <= targetWaitDays) {
-                    // Excellent performance - dark blue
-                    impactContainer.style.background = 'linear-gradient(135deg, #2c3e50, #34495e)';
-                } else if (currentAvgWaitDays <= targetWaitDays * 1.2) {
-                    // Good performance - green
-                    impactContainer.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
-                } else {
-                    // Acceptable performance - blue
-                    impactContainer.style.background = 'linear-gradient(135deg, #3498db, #5dade2)';
-                }
-            }
+            // This function now delegates to the comprehensive data consistency function
+            // to ensure all sections use the same data
+            updateAllDataConsistently();
         }
 
         // Update analytics dashboard with real-time data
@@ -4188,6 +4410,64 @@ FEEDBACK SUMMARY:
                 }
             }
         });
+
+        // TEST FUNCTION - Shows actual data values
+        function testDataLogic() {
+            console.log('🧪 TESTING DATA LOGIC...');
+            
+            // Test 1: Check if appointments are loaded
+            console.log('📊 Total appointments:', appointments.length);
+            
+            // Test 2: Check appointment types
+            const today = new Date();
+            const todayAppointments = appointments.filter(apt => {
+                if (!apt.scheduledDate) return false;
+                const aptDate = new Date(apt.scheduledDate);
+                return aptDate.toDateString() === today.toDateString();
+            });
+            console.log('📊 Today appointments:', todayAppointments.length);
+            
+            const waitingAppointments = appointments.filter(apt => apt.status === 'waiting');
+            console.log('📊 Waiting appointments:', waitingAppointments.length);
+            
+            const urgentAppointments = appointments.filter(apt => apt.priority === 'urgent');
+            console.log('📊 Urgent appointments:', urgentAppointments.length);
+            
+            const urgentWaiting = appointments.filter(apt => apt.priority === 'urgent' && apt.status === 'waiting');
+            console.log('📊 Urgent waiting:', urgentWaiting.length);
+            
+            // Test 3: Check wait days calculation
+            const avgWaitDays = calculateAverageWaitDays();
+            console.log('📊 Average wait days:', avgWaitDays);
+            
+            // Test 4: Check UI elements
+            const avgWaitDaysEl = document.getElementById('avgWaitDays');
+            const urgentCountEl = document.getElementById('urgentCount');
+            const patientsTodayEl = document.getElementById('patientsToday');
+            
+            console.log('🔍 UI ELEMENTS:');
+            console.log('   - avgWaitDays:', avgWaitDaysEl ? avgWaitDaysEl.textContent : 'NOT FOUND');
+            console.log('   - urgentCount:', urgentCountEl ? urgentCountEl.textContent : 'NOT FOUND');
+            console.log('   - patientsToday:', patientsTodayEl ? patientsTodayEl.textContent : 'NOT FOUND');
+            
+            // Test 5: Show sample appointments
+            console.log('📋 SAMPLE APPOINTMENTS:');
+            appointments.slice(0, 5).forEach((apt, index) => {
+                const waitDays = calculateWaitDays(apt);
+                console.log(`   ${index + 1}. ${apt.patientName} (${apt.status}, ${apt.priority}): ${waitDays} days wait`);
+            });
+            
+            // Show alert with key metrics
+            alert(`DATA TEST RESULTS:
+Total Appointments: ${appointments.length}
+Today: ${todayAppointments.length}
+Waiting: ${waitingAppointments.length}
+Urgent: ${urgentAppointments.length}
+Urgent Waiting: ${urgentWaiting.length}
+Avg Wait Days: ${avgWaitDays}
+
+Check console for detailed results.`);
+        }
 
         // Debug: Check for Firebase initialization
         console.log('Checking for Firebase...');
