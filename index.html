@@ -16,11 +16,11 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b1b 50%, #1a1a1a 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
-            color: #ffffff;
+            color: #212529;
         }
 
         @keyframes gradientShift {
@@ -36,14 +36,13 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #1a1a1a, #2d1b1b);
+            background: linear-gradient(135deg, #000000, #1a1a1a);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
-            border: 2px solid #dc143c;
-            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 2px solid #000000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
         }
 
         .header h1 {
@@ -52,25 +51,26 @@
             margin-bottom: 8px;
             font-size: 1.8rem;
             font-weight: 600;
-            text-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .header p {
             text-align: center;
-            color: #cccccc;
+            color: #ffffff;
             font-size: 0.9rem;
             margin-bottom: 0;
+            opacity: 0.9;
         }
 
         /* Navigation Menu Styles */
         .navigation-menu {
-            background: linear-gradient(135deg, #2d1b1b, #1a1a1a);
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             padding: 15px;
-            border: 1px solid #dc143c;
+            border: 2px solid #000000;
         }
 
         .nav-container {
@@ -81,33 +81,35 @@
         }
 
         .nav-btn {
-            background: linear-gradient(135deg, #dc143c, #b71c1c);
+            background: linear-gradient(135deg, #000000, #1a1a1a);
             color: white;
-            border: none;
+            border: 2px solid #000000;
             padding: 8px 16px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 0.8rem;
             font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(220, 20, 60, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .nav-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(220, 20, 60, 0.6);
-            background: linear-gradient(135deg, #b71c1c, #dc143c);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #333333, #1a1a1a);
         }
 
         .nav-btn.active {
-            background: linear-gradient(135deg, #dc143c, #ff1744);
-            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.5);
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            color: #000000;
+            border: 2px solid #000000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-shadow: none;
         }
 
         .nav-btn.active:hover {
-            background: linear-gradient(135deg, #ff1744, #dc143c);
-            box-shadow: 0 6px 20px rgba(220, 20, 60, 0.7);
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
 
         /* Section Visibility */
@@ -476,13 +478,13 @@
         }
 
         .card {
-            background: linear-gradient(135deg, #2d1b1b, #1a1a1a);
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
             backdrop-filter: blur(15px);
             border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid #dc143c;
+            border: 2px solid #000000;
             position: relative;
             overflow: hidden;
         }
@@ -508,13 +510,13 @@
         }
 
         .card h2 {
-            color: #ffffff;
+            color: #000000;
             margin-bottom: 15px;
             font-size: 1.2rem;
             font-weight: 600;
-            border-bottom: 1px solid #dc143c;
+            border-bottom: 2px solid #000000;
             padding-bottom: 8px;
-            text-shadow: 0 0 5px rgba(220, 20, 60, 0.3);
+            text-shadow: none;
         }
 
         .metrics {
@@ -525,12 +527,13 @@
         }
 
         .metric {
-            background: linear-gradient(135deg, #74b9ff, #0984e3);
-            color: white;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            color: #000000;
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #000000;
         }
 
         .metric-value {
@@ -2142,16 +2145,16 @@
                 
                 if (avgWaitDays <= targetWaitDays) {
                     // Good performance
-                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
-                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #2c3e50, #34495e)';
+                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
+                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #f8f9fa, #ffffff)';
                 } else if (avgWaitDays <= targetWaitDays * 1.5) {
                     // Warning performance
-                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #f39c12, #e67e22)';
-                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #f39c12, #e67e22)';
+                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #f8f9fa, #e9ecef)';
+                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #e9ecef, #f8f9fa)';
                 } else {
-                    // Critical underperformance - RED ALERT
-                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
-                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+                    // Critical underperformance
+                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #f8f9fa, #dee2e6)';
+                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #dee2e6, #f8f9fa)';
                 }
                 
                 // Update Quick Data Check
@@ -3972,8 +3975,8 @@ Notes: ${appointment.notes || 'None'}
             
             if (avgWaitDays <= targetWaitDays) {
                 // GOOD PERFORMANCE (≤7 days)
-                performanceCard.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
-                progressBar.style.background = 'linear-gradient(90deg, #27ae60, #2ecc71)';
+                performanceCard.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
+                progressBar.style.background = 'linear-gradient(90deg, #000000, #333333)';
                 progressBar.style.width = `${progressPercent}%`;
                 
                 // Status cards - green
