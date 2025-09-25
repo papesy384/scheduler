@@ -972,27 +972,6 @@
             background: #fef9e7;
         }
 
-        .feedback-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .feedback-form {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .feedback-item {
-            background: #f8f9fa;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            border-left: 4px solid #3498db;
-        }
 
         .optimization-controls {
             display: flex;
@@ -1068,72 +1047,7 @@
             font-weight: bold;
         }
 
-        .analytics-chart {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
 
-        .chart-bar {
-            background: #3498db;
-            height: 20px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            transition: width 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .chart-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .analytics-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .analytics-card {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid #3498db;
-        }
-
-        .analytics-card h4 {
-            margin: 0 0 10px 0;
-            color: #2c3e50;
-            font-size: 0.9rem;
-        }
-
-        .analytics-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #3498db;
-            margin-bottom: 5px;
-        }
-
-        .analytics-label {
-            font-size: 0.8rem;
-            color: #7f8c8d;
-        }
 
         .schedule-insights {
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
@@ -1223,8 +1137,7 @@
 
         @media (max-width: 768px) {
             .dashboard,
-            .scheduling-interface,
-            .feedback-section {
+            .scheduling-interface {
                 grid-template-columns: 1fr;
             }
             
@@ -1260,8 +1173,6 @@
                 <button class="nav-btn active" onclick="showSection('dashboard')">🏠 Dashboard</button>
                 <button class="nav-btn" onclick="showSection('scheduling')">📅 Scheduling</button>
                 <button class="nav-btn" onclick="showSection('patients')">👥 Patients</button>
-                <button class="nav-btn" onclick="showSection('feedback')">💬 Feedback</button>
-                <button class="nav-btn" onclick="showSection('analytics')">📈 Analytics</button>
                 <button class="nav-btn" onclick="showSection('performance')">📊 Performance</button>
             </div>
         </nav>
@@ -1652,85 +1563,6 @@
             </div>
         </div>
 
-        <!-- Analytics Section -->
-        <div id="analytics-section" class="section">
-            <div class="dashboard">
-                <div class="card">
-                    <h2>📈 Professional Analytics Dashboard</h2>
-                    
-                    <!-- Key Performance Indicators -->
-                    <div class="analytics-grid">
-                        <div class="analytics-card">
-                            <h4>📅 Daily Capacity</h4>
-                            <div class="analytics-value" id="todayAppointments">1</div>
-                            <div class="analytics-label">Appointments Scheduled</div>
-                        </div>
-                        <div class="analytics-card">
-                            <h4>⏱️ Wait Time Performance</h4>
-                            <div class="analytics-value" id="avgWaitDaysAnalytics">0</div>
-                            <div class="analytics-label">Average Wait Days</div>
-                        </div>
-                        <div class="analytics-card">
-                            <h4>🎯 Resource Utilization</h4>
-                            <div class="analytics-value" id="utilizationAnalytics">78%</div>
-                            <div class="analytics-label">Schedule Efficiency</div>
-                        </div>
-                        <div class="analytics-card">
-                            <h4>⚡ Capacity Planning</h4>
-                            <div class="analytics-value" id="nextAvailable">1</div>
-                            <div class="analytics-label">Next Open Slot (Days)</div>
-                        </div>
-                    </div>
-
-                    <!-- Wait Days Distribution Chart -->
-                    <div class="wait-time-chart">
-                        <h4>📅 Patient Wait Days Distribution</h4>
-                        <div class="wait-time-bar">
-                            <div class="wait-time-fill" style="width: 15%;"></div>
-                            <div class="wait-time-label">≤3 Days</div>
-                            <div class="wait-time-value">15%</div>
-                        </div>
-                        <div class="wait-time-bar">
-                            <div class="wait-time-fill" style="width: 35%;"></div>
-                            <div class="wait-time-label">4-7 Days</div>
-                            <div class="wait-time-value">35%</div>
-                        </div>
-                        <div class="wait-time-bar">
-                            <div class="wait-time-fill" style="width: 30%;"></div>
-                            <div class="wait-time-label">8-14 Days</div>
-                            <div class="wait-time-value">30%</div>
-                        </div>
-                        <div class="wait-time-bar">
-                            <div class="wait-time-fill" style="width: 20%;"></div>
-                            <div class="wait-time-label">>14 Days</div>
-                            <div class="wait-time-value">20%</div>
-                        </div>
-                    </div>
-
-                    <!-- Schedule Insights -->
-                    <div class="schedule-insights">
-                        <h4>💡 Schedule Optimization Insights</h4>
-                        <div class="insight-item" id="insight1">✅ Target achieved: 15% of patients seen within 3 days</div>
-                        <div class="insight-item" id="insight2">⚠️ 20% of patients wait >14 days - needs attention</div>
-                        <div class="insight-item" id="insight3">📈 Peak utilization at 9:00 AM (95%) - consider adding slots</div>
-                        <div class="insight-item" id="insight4">🕐 Low utilization at 4:00 PM (70%) - opportunity for optimization</div>
-                    </div>
-
-                    <!-- Patient Load Summary -->
-                    <div style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #3498db;">
-                        <h4 style="margin: 0 0 10px 0; color: #2c3e50;">📋 Patient Load Summary</h4>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.9rem;">
-                            <div><strong>Active Patients:</strong> <span id="activePatients">6</span></div>
-                            <div><strong>Completed Today:</strong> <span id="completedToday">1</span></div>
-                            <div><strong>Scheduled:</strong> <span id="scheduledCount">3</span></div>
-                            <div><strong>Waiting:</strong> <span id="waitingCount">2</span></div>
-                            <div><strong>Urgent Cases:</strong> <span id="urgentCount">1</span></div>
-                            <div><strong>Avg Wait Days:</strong> <span id="avgWaitDaysSummary">4</span> days</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Performance Section -->
         <div id="performance-section" class="section">
@@ -1881,49 +1713,6 @@
             </div>
         </div>
 
-        <!-- Feedback Section -->
-        <div id="feedback-section" class="section">
-            <div class="feedback-section">
-                <div class="feedback-form">
-                    <h2>💬 Professional Feedback & Quality Assurance</h2>
-                <form id="feedbackForm">
-                    <div class="form-group">
-                        <label for="feedbackType">Feedback Type</label>
-                        <select id="feedbackType" required>
-                            <option value="">Select Type</option>
-                            <option value="wait-time">Wait Time</option>
-                            <option value="staff">Staff Experience</option>
-                            <option value="scheduling">Scheduling Process</option>
-                            <option value="facility">Facility</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="feedbackRating">Rating (1-5)</label>
-                        <select id="feedbackRating" required>
-                            <option value="">Select Rating</option>
-                            <option value="1">1 - Poor</option>
-                            <option value="2">2 - Fair</option>
-                            <option value="3">3 - Good</option>
-                            <option value="4">4 - Very Good</option>
-                            <option value="5">5 - Excellent</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="feedbackComment">Comments</label>
-                        <textarea id="feedbackComment" rows="4" placeholder="Please share your experience..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-success">Submit Feedback</button>
-                </form>
-            </div>
-
-            <div class="feedback-form">
-                <h2>📋 Recent Feedback</h2>
-                <div id="recentFeedback">
-                    <!-- Feedback items will be populated by JavaScript -->
-                </div>
-            </div>
-        </div>
-        </div>
     </div>
 
     <!-- Floating Action Button -->
@@ -2033,7 +1822,6 @@
         
         // Global state management
         let appointments = [];
-        let feedback = [];
         let schedule = {};
         let doctor = 'Dr. Sarah Johnson'; // Single doctor
         
@@ -2101,7 +1889,6 @@
             dashboard: true,
             calendar: true,
             patientQueue: true,
-            analytics: true,
             priorityManagement: true,
             dateSuggestions: true
         };
@@ -2180,31 +1967,6 @@
                 const nonUrgentCountEl = document.getElementById('nonUrgentCount');
                 if (nonUrgentCountEl) nonUrgentCountEl.textContent = totalAppointments - urgentAppointments;
                 
-                // Update Analytics Section
-                const avgWaitDaysAnalyticsEl = document.getElementById('avgWaitDaysAnalytics');
-                if (avgWaitDaysAnalyticsEl) avgWaitDaysAnalyticsEl.textContent = avgWaitDays.toFixed(1);
-                
-                const urgentCountAnalyticsDisplayEl = document.getElementById('urgentCountAnalytics');
-                if (urgentCountAnalyticsDisplayEl) urgentCountAnalyticsDisplayEl.textContent = urgentAppointments;
-                
-                const avgWaitDaysSummaryEl = document.getElementById('avgWaitDaysSummary');
-                if (avgWaitDaysSummaryEl) avgWaitDaysSummaryEl.textContent = avgWaitDays.toFixed(1);
-                
-                // Update additional analytics values
-                const activePatientsEl = document.getElementById('activePatients');
-                if (activePatientsEl) activePatientsEl.textContent = appointments.filter(apt => apt.status !== 'completed').length;
-                
-                const completedTodayAnalyticsEl = document.getElementById('completedToday');
-                if (completedTodayAnalyticsEl) completedTodayAnalyticsEl.textContent = appointments.filter(apt => apt.status === 'completed').length;
-                
-                const scheduledCountEl = document.getElementById('scheduledCount');
-                if (scheduledCountEl) scheduledCountEl.textContent = scheduledAppointments;
-                
-                const waitingCountEl = document.getElementById('waitingCount');
-                if (waitingCountEl) waitingCountEl.textContent = waitingAppointments;
-                
-                const urgentCountAnalyticsEl = document.getElementById('urgentCount');
-                if (urgentCountAnalyticsEl) urgentCountAnalyticsEl.textContent = urgentAppointments;
                 
                 // Update Performance Section
                 const waitTimeReductionEl = document.getElementById('waitTimeReduction');
@@ -2325,12 +2087,6 @@
                 updatePatientQueue();
             }
             
-            // Update ALL analytics components simultaneously
-            if (updateComponents.analytics) {
-                updateAnalyticsDashboard();
-                updateWeeklyChart(generateWeeklyTrends(calculateAverageWaitDays()));
-                updateScheduleInsights();
-            }
             
             // Update ALL priority management components simultaneously
             if (updateComponents.priorityManagement) {
@@ -2402,9 +2158,6 @@
                 'populateRescheduleDropdown',
                 'populatePriorityDropdown',
                 'populateAvailabilityDropdown',
-                'updateAnalyticsDashboard',
-                'updateWeeklyChart',
-                'updateScheduleInsights',
                 'updatePriorityCases',
                 'updatePerformanceMetrics',
                 'updateAchievementStatus'
@@ -4150,22 +3903,6 @@ Notes: ${appointment.notes || 'None'}
             }
         }
 
-        // Update recent feedback display
-        function updateRecentFeedback() {
-            const container = document.getElementById('recentFeedback');
-            container.innerHTML = '';
-
-            feedback.slice(-5).forEach(item => {
-                const feedbackElement = document.createElement('div');
-                feedbackElement.className = 'feedback-item';
-                feedbackElement.innerHTML = `
-                    <strong>${item.type.replace('-', ' ').toUpperCase()}</strong> - ${item.rating}/5 stars<br>
-                    <em>${item.comment}</em><br>
-                    <small>${item.timestamp.toLocaleDateString()}</small>
-                `;
-                container.appendChild(feedbackElement);
-            });
-        }
 
         // Handle appointment form submission
         document.getElementById('appointmentForm').addEventListener('submit', function(e) {
@@ -4256,27 +3993,6 @@ Notes: ${appointment.notes || 'None'}
             alert(`Appointment scheduled successfully for ${patientName}!`);
         });
 
-        // Handle feedback form submission
-        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const feedbackData = {
-                type: document.getElementById('feedbackType').value,
-                rating: parseInt(document.getElementById('feedbackRating').value),
-                comment: document.getElementById('feedbackComment').value,
-                timestamp: new Date()
-            };
-
-            feedback.push(feedbackData);
-            updateRecentFeedback();
-            updateDashboard();
-            
-            // Clear form
-            this.reset();
-            
-            // Show success message
-            alert('Feedback submitted successfully! Thank you for your input.');
-        });
 
 
 
