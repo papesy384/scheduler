@@ -16,11 +16,11 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #000000 0%, #8B0000 25%, #DC143C 50%, #8B0000 75%, #000000 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 25%, #ffffff 50%, #f8f9fa 75%, #ffffff 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
-            color: #ffffff;
+            color: #212529;
         }
 
         @keyframes gradientShift {
@@ -36,13 +36,13 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #000000, #8B0000);
+            background: linear-gradient(135deg, #000000, #1a1a1a);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
-            border: 3px solid #DC143C;
-            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.4);
+            border: 3px solid #ffffff;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .header h1 {
@@ -51,7 +51,7 @@
             margin-bottom: 8px;
             font-size: 1.8rem;
             font-weight: 600;
-            text-shadow: 0 0 10px rgba(220, 20, 60, 0.8), 0 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .header p {
@@ -64,13 +64,13 @@
 
         /* Navigation Menu Styles */
         .navigation-menu {
-            background: linear-gradient(135deg, #000000, #8B0000);
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             padding: 15px;
-            border: 2px solid #DC143C;
+            border: 2px solid #000000;
         }
 
         .nav-container {
@@ -81,35 +81,35 @@
         }
 
         .nav-btn {
-            background: linear-gradient(135deg, #DC143C, #8B0000);
+            background: linear-gradient(135deg, #000000, #1a1a1a);
             color: white;
-            border: 2px solid #DC143C;
+            border: 2px solid #000000;
             padding: 8px 16px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 0.8rem;
             font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(220, 20, 60, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .nav-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(220, 20, 60, 0.6);
-            background: linear-gradient(135deg, #FF1744, #DC143C);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #333333, #1a1a1a);
         }
 
         .nav-btn.active {
             background: linear-gradient(135deg, #FFFFFF, #F8F9FA);
-            color: #DC143C;
-            border: 2px solid #FFFFFF;
-            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.5);
-            text-shadow: 0 0 5px rgba(220, 20, 60, 0.3);
+            color: #000000;
+            border: 2px solid #000000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-shadow: none;
         }
 
         .nav-btn.active:hover {
             background: linear-gradient(135deg, #FFFFFF, #F0F0F0);
-            box-shadow: 0 6px 20px rgba(220, 20, 60, 0.7);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
 
         /* Section Visibility */
@@ -478,13 +478,13 @@
         }
 
         .card {
-            background: linear-gradient(135deg, #000000, #1a1a1a);
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
             backdrop-filter: blur(15px);
             border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid #DC143C;
+            border: 2px solid #000000;
             position: relative;
             overflow: hidden;
         }
@@ -502,7 +502,7 @@
 
         .card:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(220, 20, 60, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
         .card:hover::before {
@@ -510,13 +510,13 @@
         }
 
         .card h2 {
-            color: #ffffff;
+            color: #000000;
             margin-bottom: 15px;
             font-size: 1.2rem;
             font-weight: 600;
-            border-bottom: 2px solid #DC143C;
+            border-bottom: 2px solid #000000;
             padding-bottom: 8px;
-            text-shadow: 0 0 8px rgba(220, 20, 60, 0.6);
+            text-shadow: none;
         }
 
         .metrics {
@@ -527,13 +527,13 @@
         }
 
         .metric {
-            background: linear-gradient(135deg, #8B0000, #DC143C);
+            background: linear-gradient(135deg, #000000, #1a1a1a);
             color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
-            border: 2px solid #FF1744;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid #000000;
         }
 
         .metric-value {
@@ -570,39 +570,39 @@
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 2px solid #DC143C;
+            border: 2px solid #000000;
             border-radius: 8px;
             font-size: 1rem;
             transition: border-color 0.3s ease;
-            background: #000000;
-            color: #ffffff;
+            background: #ffffff;
+            color: #000000;
         }
 
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #FF1744;
-            box-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
+            border-color: #333333;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
         .btn {
-            background: linear-gradient(135deg, #DC143C, #8B0000);
+            background: linear-gradient(135deg, #000000, #1a1a1a);
             color: white;
-            border: 2px solid #DC143C;
+            border: 2px solid #000000;
             padding: 12px 25px;
             border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
             margin: 5px;
-            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(220, 20, 60, 0.6);
-            background: linear-gradient(135deg, #FF1744, #DC143C);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #333333, #1a1a1a);
         }
 
         .btn-success {
@@ -2152,16 +2152,16 @@
                 
                 if (avgWaitDays <= targetWaitDays) {
                     // Good performance
-                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #000000, #8B0000)';
-                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #8B0000, #DC143C)';
+                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
+                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #f8f9fa, #ffffff)';
                 } else if (avgWaitDays <= targetWaitDays * 1.5) {
                     // Warning performance
-                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #8B0000, #DC143C)';
-                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #DC143C, #FF1744)';
+                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #f8f9fa, #e9ecef)';
+                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #e9ecef, #f8f9fa)';
                 } else {
                     // Critical underperformance
-                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #DC143C, #FF1744)';
-                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #FF1744, #FF5722)';
+                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #f8f9fa, #dee2e6)';
+                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #dee2e6, #f8f9fa)';
                 }
                 
                 // Update Quick Data Check
@@ -3477,13 +3477,11 @@
             
             // Create realistic clinic scenario with proper business logic
             
-            // 1. TODAY'S APPOINTMENTS (5 patients) - Good Performance Scenario
+            // 1. TODAY'S APPOINTMENTS (3 patients) - Excellent Performance Scenario
             const todayAppointments = [
                 { name: 'John Smith', priority: 'urgent', duration: 60, time: '9:00 AM', status: 'completed' },
                 { name: 'Sarah Johnson', priority: 'high', duration: 30, time: '10:30 AM', status: 'completed' },
-                { name: 'Mike Davis', priority: 'medium', duration: 45, time: '2:00 PM', status: 'in-progress' },
-                { name: 'Lisa Brown', priority: 'urgent', duration: 90, time: '3:30 PM', status: 'scheduled' },
-                { name: 'Tom Wilson', priority: 'low', duration: 30, time: '4:00 PM', status: 'scheduled' }
+                { name: 'Mike Davis', priority: 'medium', duration: 45, time: '2:00 PM', status: 'in-progress' }
             ];
             
             todayAppointments.forEach((apt, index) => {
@@ -3498,7 +3496,7 @@
                 scheduledTime.setHours(hours, parseInt(time[1]), 0, 0);
                 
                 // Create specific wait times to achieve excellent performance (3-day average)
-                const waitDays = [2, 3, 4, 3, 2]; // Total: 14 days for 5 patients = 2.8 avg
+                const waitDays = [2, 3, 4]; // Total: 9 days for 3 patients = 3.0 avg
                 const requestDate = new Date(scheduledTime.getTime() - waitDays[index] * 24 * 60 * 60 * 1000);
                 
                 appointments.push({
@@ -3515,16 +3513,16 @@
                 });
             });
             
-            // 2. UPCOMING APPOINTMENTS (15 patients over next 2 weeks) - 3-day average target for excellent performance
-            const upcomingWaitDays = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]; // All 3 days = 45 total
-            for (let i = 6; i <= 20; i++) {
+            // 2. UPCOMING APPOINTMENTS (5 patients over next 2 weeks) - 3-day average target for excellent performance
+            const upcomingWaitDays = [3, 3, 3, 3, 3]; // All 3 days = 15 total
+            for (let i = 4; i <= 8; i++) {
                 const daysFromNow = Math.floor(Math.random() * 14) + 1;
-                const requestDaysAgo = upcomingWaitDays[i - 6]; // Use specific wait days
+                const requestDaysAgo = upcomingWaitDays[i - 4]; // Use specific wait days
                 
                 let priority = 'medium';
-                if (i <= 8) priority = 'urgent';
-                else if (i <= 12) priority = 'high';
-                else if (i <= 16) priority = 'low';
+                if (i <= 5) priority = 'urgent';
+                else if (i <= 6) priority = 'high';
+                else priority = 'low';
                 
                 const durationOptions = [15, 30, 45, 60, 90];
                 const estimatedDuration = durationOptions[Math.floor(Math.random() * durationOptions.length)];
@@ -3581,7 +3579,7 @@
                 });
             });
             
-            console.log(`✅ GOOD PERFORMANCE SCENARIO LOADED: ${appointments.length} appointments:`);
+            console.log(`✅ EXCELLENT PERFORMANCE SCENARIO LOADED: ${appointments.length} appointments:`);
             console.log(`   - Today: ${appointments.filter(apt => {
                 const aptDate = new Date(apt.scheduledDate);
                 return aptDate.toDateString() === today.toDateString();
@@ -3987,15 +3985,15 @@ Notes: ${appointment.notes || 'None'}
             
             if (avgWaitDays <= targetWaitDays) {
                 // GOOD PERFORMANCE (≤7 days)
-                performanceCard.style.background = 'linear-gradient(135deg, #000000, #8B0000)';
-                progressBar.style.background = 'linear-gradient(90deg, #DC143C, #FF1744)';
+                performanceCard.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
+                progressBar.style.background = 'linear-gradient(90deg, #000000, #333333)';
                 progressBar.style.width = `${progressPercent}%`;
                 
-                // Status cards - red
-                statusCard1.style.borderLeftColor = '#DC143C';
-                statusCard2.style.borderLeftColor = '#DC143C';
-                statusText1.style.color = '#DC143C';
-                statusText2.style.color = '#DC143C';
+                // Status cards - black
+                statusCard1.style.borderLeftColor = '#000000';
+                statusCard2.style.borderLeftColor = '#000000';
+                statusText1.style.color = '#000000';
+                statusText2.style.color = '#000000';
                 
                 // Status texts
                 statusText1.textContent = '✅ Target Achieved';
@@ -4004,23 +4002,23 @@ Notes: ${appointment.notes || 'None'}
                 statusSubtext2.textContent = `${avgWaitDays.toFixed(1)} days average`;
                 
                 // Dr. Sarah's status - OPTIMIZED
-                doctorStatusCard.style.background = 'linear-gradient(135deg, #000000, #8B0000)';
+                doctorStatusCard.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
                 doctorStatusIndicator.className = 'status-indicator success';
                 doctorStatusText.textContent = 'OPTIMIZED';
                 doctorStatusMessage.textContent = `Excellent performance - ${avgWaitDays.toFixed(1)} days average wait`;
-                doctorStatusProgress.style.background = 'linear-gradient(90deg, #DC143C, #FF1744)';
+                doctorStatusProgress.style.background = 'linear-gradient(90deg, #000000, #333333)';
                 doctorStatusProgress.style.width = `${progressPercent}%`;
                 
                 // Performance Status - SUCCESS
-                performanceStatusCard.style.background = 'linear-gradient(135deg, #000000, #8B0000)';
-                performanceStatusCard.style.borderLeft = '5px solid #DC143C';
-                performanceStatusTitle.style.color = '#DC143C';
+                performanceStatusCard.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
+                performanceStatusCard.style.borderLeft = '5px solid #000000';
+                performanceStatusTitle.style.color = '#000000';
                 performanceStatusTitle.textContent = '✅ Performance Success';
-                performanceStatusSubtitle1.style.color = '#DC143C';
+                performanceStatusSubtitle1.style.color = '#000000';
                 performanceStatusSubtitle1.textContent = '🎉 Excellent Achievements';
-                performanceStatusSubtitle2.style.color = '#DC143C';
+                performanceStatusSubtitle2.style.color = '#000000';
                 performanceStatusSubtitle2.textContent = '🎯 Continue Excellence';
-                performanceStatusList1.style.color = '#DC143C';
+                performanceStatusList1.style.color = '#000000';
                 performanceStatusList1.innerHTML = `
                     <li>Wait time ${((targetWaitDays - avgWaitDays) / targetWaitDays * 100).toFixed(0)}% below target (${avgWaitDays.toFixed(1)} days)</li>
                     <li>Dr. Sarah operating efficiently</li>
@@ -4037,15 +4035,15 @@ Notes: ${appointment.notes || 'None'}
                 
             } else {
                 // UNDERPERFORMANCE (>7 days)
-                performanceCard.style.background = 'linear-gradient(135deg, #8B0000, #DC143C)';
-                progressBar.style.background = 'linear-gradient(90deg, #FF1744, #FF5722)';
+                performanceCard.style.background = 'linear-gradient(135deg, #f8f9fa, #e9ecef)';
+                progressBar.style.background = 'linear-gradient(90deg, #6c757d, #495057)';
                 progressBar.style.width = '100%';
                 
-                // Status cards - bright red
-                statusCard1.style.borderLeftColor = '#FF1744';
-                statusCard2.style.borderLeftColor = '#FF1744';
-                statusText1.style.color = '#FF1744';
-                statusText2.style.color = '#FF1744';
+                // Status cards - gray
+                statusCard1.style.borderLeftColor = '#6c757d';
+                statusCard2.style.borderLeftColor = '#6c757d';
+                statusText1.style.color = '#6c757d';
+                statusText2.style.color = '#6c757d';
                 
                 // Status texts
                 statusText1.textContent = '❌ Target Missed';
