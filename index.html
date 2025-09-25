@@ -558,9 +558,9 @@
             margin-bottom: 20px;
             font-size: 1.3rem;
             font-weight: 600;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
             padding-bottom: 10px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
         .metrics {
@@ -585,6 +585,8 @@
             font-size: 2rem;
             font-weight: bold;
             margin-bottom: 5px;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .metric-label {
@@ -1270,7 +1272,7 @@
             <div class="dashboard">
                 <div class="card">
                     <h2>📊 Clinic Performance Metrics</h2>
-                <div id="performanceMetricsCard" style="background: rgba(34, 139, 34, 0.8); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden; border: 2px solid rgba(0, 255, 0, 0.3);">
+                <div id="performanceMetricsCard" style="background: linear-gradient(135deg, rgba(34, 139, 34, 0.9), rgba(0, 100, 0, 0.9)); color: #ffffff; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden; border: 2px solid rgba(0, 255, 0, 0.5); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);">
                     <div class="counter" id="avgWaitDays">0</div>
                     <div style="font-size: 0.9rem; margin-bottom: 8px;">Average Wait Days</div>
                     <div style="font-size: 0.75rem; opacity: 0.8; margin-bottom: 10px;">Target: ≤7 days</div>
@@ -1293,7 +1295,7 @@
 
             <div class="card">
                 <h2>👩‍⚕️ Dr. Sarah's Professional Status</h2>
-                <div id="doctorStatusCard" style="background: rgba(34, 139, 34, 0.8); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden; border: 2px solid rgba(0, 255, 0, 0.3);">
+                <div id="doctorStatusCard" style="background: linear-gradient(135deg, rgba(34, 139, 34, 0.9), rgba(0, 100, 0, 0.9)); color: #ffffff; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden; border: 2px solid rgba(0, 255, 0, 0.5); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);">
                     <div style="font-size: 1.4rem; margin-bottom: 8px;">
                         <span id="doctorStatusIndicator" class="status-indicator"></span><span id="doctorStatusText">LOADING...</span>
                     </div>
@@ -3544,8 +3546,8 @@
                 
                 scheduledTime.setHours(hours, parseInt(time[1]), 0, 0);
                 
-                // Create specific wait times to achieve excellent performance (3-day average)
-                const waitDays = [2, 3, 4]; // Total: 9 days for 3 patients = 3.0 avg
+                // Create specific wait times to achieve good performance (4-day average)
+                const waitDays = [3, 4, 5]; // Total: 12 days for 3 patients = 4.0 avg
                 const requestDate = new Date(scheduledTime.getTime() - waitDays[index] * 24 * 60 * 60 * 1000);
                 
                 appointments.push({
@@ -3562,8 +3564,8 @@
                 });
             });
             
-            // 2. UPCOMING APPOINTMENTS (5 patients over next 2 weeks) - 3-day average target for excellent performance
-            const upcomingWaitDays = [3, 3, 3, 3, 3]; // All 3 days = 15 total
+            // 2. UPCOMING APPOINTMENTS (5 patients over next 2 weeks) - 4-day average target for good performance
+            const upcomingWaitDays = [4, 4, 4, 4, 4]; // All 4 days = 20 total
             for (let i = 4; i <= 8; i++) {
                 const daysFromNow = Math.floor(Math.random() * 14) + 1;
                 const requestDaysAgo = upcomingWaitDays[i - 4]; // Use specific wait days
@@ -3604,10 +3606,10 @@
                 });
             }
             
-            // 3. WAITING LIST (2 patients - 3-day average target) - Excellent performance wait times
+            // 3. WAITING LIST (2 patients - 4-day average target) - Good performance wait times
             const waitingPatients = [
-                { name: 'Follow-up Patient', priority: 'high', daysWaiting: 3 },
-                { name: 'New Patient', priority: 'medium', daysWaiting: 3 }
+                { name: 'Follow-up Patient', priority: 'high', daysWaiting: 4 },
+                { name: 'New Patient', priority: 'medium', daysWaiting: 4 }
             ];
             
             waitingPatients.forEach((patient, index) => {
