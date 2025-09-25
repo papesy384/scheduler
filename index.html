@@ -1270,7 +1270,7 @@
             <div class="dashboard">
                 <div class="card">
                     <h2>📊 Clinic Performance Metrics</h2>
-                <div id="performanceMetricsCard" style="color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden;">
+                <div id="performanceMetricsCard" style="background: rgba(34, 139, 34, 0.8); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden; border: 2px solid rgba(0, 255, 0, 0.3);">
                     <div class="counter" id="avgWaitDays">0</div>
                     <div style="font-size: 0.9rem; margin-bottom: 8px;">Average Wait Days</div>
                     <div style="font-size: 0.75rem; opacity: 0.8; margin-bottom: 10px;">Target: ≤7 days</div>
@@ -1293,7 +1293,7 @@
 
             <div class="card">
                 <h2>👩‍⚕️ Dr. Sarah's Professional Status</h2>
-                <div id="doctorStatusCard" style="color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden;">
+                <div id="doctorStatusCard" style="background: rgba(34, 139, 34, 0.8); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden; border: 2px solid rgba(0, 255, 0, 0.3);">
                     <div style="font-size: 1.4rem; margin-bottom: 8px;">
                         <span id="doctorStatusIndicator" class="status-indicator"></span><span id="doctorStatusText">LOADING...</span>
                     </div>
@@ -2597,7 +2597,7 @@
             // Verify all functions exist before updating
             if (verifyUpdateFunctions()) {
                 updateAllComponents(); // Use global update system
-                startRealTimeUpdates();
+                // startRealTimeUpdates(); // Disabled - user will update data manually
                 console.log('🚀 System initialized with simultaneous updates');
                 
                 // VERIFICATION: Test that data is actually working
