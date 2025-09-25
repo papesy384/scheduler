@@ -1490,7 +1490,69 @@
                                 🔄 Reschedule Selected
                             </button>
                         </div>
-                        <div id="rescheduleInfo" style="margin-top: 10px; font-size: 0.8rem; color: #666; display: none;">
+                        <div id="rescheduleInfo" style="margin-top: 10px; font-size: 0.8rem; color: #ffffff; display: none;">
+                            <!-- Patient info will be shown here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Priority and Availability Management -->
+                    <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 2px solid rgba(255, 255, 255, 0.2);">
+                        <h4 style="margin: 0 0 15px 0; color: #ffffff; font-size: 0.9rem;">⚡ Priority & Availability Management</h4>
+                        
+                        <!-- Priority Change Section -->
+                        <div style="margin-bottom: 15px;">
+                            <h5 style="margin: 0 0 10px 0; color: #ffffff; font-size: 0.8rem;">🎯 Change Patient Priority</h5>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end;">
+                                <div>
+                                    <label style="display: block; font-size: 0.75rem; color: #ffffff; margin-bottom: 5px;">Select Patient:</label>
+                                    <select id="priorityPatientSelect" style="width: 100%; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.4); border-radius: 4px; font-size: 0.8rem; background: rgba(0, 0, 0, 0.5); color: #ffffff;">
+                                        <option value="">Choose a patient...</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="display: block; font-size: 0.75rem; color: #ffffff; margin-bottom: 5px;">New Priority:</label>
+                                    <select id="priorityLevelSelect" style="width: 100%; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.4); border-radius: 4px; font-size: 0.8rem; background: rgba(0, 0, 0, 0.5); color: #ffffff;">
+                                        <option value="">Select priority...</option>
+                                        <option value="urgent">🚨 Urgent</option>
+                                        <option value="high">⚠️ High</option>
+                                        <option value="medium">📋 Medium</option>
+                                        <option value="low">📄 Low</option>
+                                    </select>
+                                </div>
+                                <button onclick="changePatientPriority()" style="background: rgba(220, 20, 60, 0.8); color: white; border: 2px solid rgba(220, 20, 60, 0.6); padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; white-space: nowrap;">
+                                    ⚡ Change Priority
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Availability Change Section -->
+                        <div>
+                            <h5 style="margin: 0 0 10px 0; color: #ffffff; font-size: 0.8rem;">📅 Change Patient Availability</h5>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end;">
+                                <div>
+                                    <label style="display: block; font-size: 0.75rem; color: #ffffff; margin-bottom: 5px;">Select Patient:</label>
+                                    <select id="availabilityPatientSelect" style="width: 100%; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.4); border-radius: 4px; font-size: 0.8rem; background: rgba(0, 0, 0, 0.5); color: #ffffff;">
+                                        <option value="">Choose a patient...</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="display: block; font-size: 0.75rem; color: #ffffff; margin-bottom: 5px;">New Status:</label>
+                                    <select id="availabilityStatusSelect" style="width: 100%; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.4); border-radius: 4px; font-size: 0.8rem; background: rgba(0, 0, 0, 0.5); color: #ffffff;">
+                                        <option value="">Select status...</option>
+                                        <option value="waiting">⏳ Waiting</option>
+                                        <option value="scheduled">📅 Scheduled</option>
+                                        <option value="in-progress">🔄 In Progress</option>
+                                        <option value="completed">✅ Completed</option>
+                                        <option value="cancelled">❌ Cancelled</option>
+                                    </select>
+                                </div>
+                                <button onclick="changePatientAvailability()" style="background: rgba(52, 152, 219, 0.8); color: white; border: 2px solid rgba(52, 152, 219, 0.6); padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; white-space: nowrap;">
+                                    📅 Change Status
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="priorityAvailabilityInfo" style="margin-top: 10px; font-size: 0.8rem; color: #ffffff; display: none;">
                             <!-- Patient info will be shown here -->
                         </div>
                     </div>
@@ -2274,6 +2336,8 @@
             if (updateComponents.priorityManagement) {
                 updateUrgentCases();
                 populateRescheduleDropdown();
+                populatePriorityDropdown();
+                populateAvailabilityDropdown();
             }
             
             // Update ALL date suggestions simultaneously
@@ -2336,6 +2400,8 @@
                 'updatePatientQueue',
                 'updateUrgentCases',
                 'populateRescheduleDropdown',
+                'populatePriorityDropdown',
+                'populateAvailabilityDropdown',
                 'updateAnalyticsDashboard',
                 'updateWeeklyChart',
                 'updateScheduleInsights',
@@ -2771,6 +2837,64 @@
             });
         }
 
+        // Populate priority change dropdown
+        function populatePriorityDropdown() {
+            const select = document.getElementById('priorityPatientSelect');
+            if (!select) return;
+            
+            // Clear existing options
+            select.innerHTML = '<option value="">Choose a patient...</option>';
+            
+            // Add ALL patients
+            appointments.forEach(apt => {
+                const option = document.createElement('option');
+                option.value = apt.id;
+                
+                // Add priority indicator
+                const priorityIcon = apt.priority === 'urgent' ? '🚨' : 
+                                   apt.priority === 'high' ? '⚠️' : 
+                                   apt.priority === 'medium' ? '📋' : '📄';
+                
+                const statusText = apt.status.toUpperCase();
+                const statusIcon = apt.status === 'waiting' ? '⏳' : 
+                                 apt.status === 'scheduled' ? '📅' :
+                                 apt.status === 'in-progress' ? '🔄' :
+                                 apt.status === 'completed' ? '✅' : '❌';
+                
+                option.textContent = `${priorityIcon} ${apt.patientName} - ${statusIcon} ${statusText} (${apt.priority.toUpperCase()})`;
+                select.appendChild(option);
+            });
+        }
+
+        // Populate availability change dropdown
+        function populateAvailabilityDropdown() {
+            const select = document.getElementById('availabilityPatientSelect');
+            if (!select) return;
+            
+            // Clear existing options
+            select.innerHTML = '<option value="">Choose a patient...</option>';
+            
+            // Add ALL patients
+            appointments.forEach(apt => {
+                const option = document.createElement('option');
+                option.value = apt.id;
+                
+                // Add priority indicator
+                const priorityIcon = apt.priority === 'urgent' ? '🚨' : 
+                                   apt.priority === 'high' ? '⚠️' : 
+                                   apt.priority === 'medium' ? '📋' : '📄';
+                
+                const statusText = apt.status.toUpperCase();
+                const statusIcon = apt.status === 'waiting' ? '⏳' : 
+                                 apt.status === 'scheduled' ? '📅' :
+                                 apt.status === 'in-progress' ? '🔄' :
+                                 apt.status === 'completed' ? '✅' : '❌';
+                
+                option.textContent = `${priorityIcon} ${apt.patientName} - ${statusIcon} ${statusText} (${apt.priority.toUpperCase()})`;
+                select.appendChild(option);
+            });
+        }
+
         // Show patient info when selected for rescheduling
         function showPatientRescheduleInfo(patientId) {
             const infoDiv = document.getElementById('rescheduleInfo');
@@ -2878,6 +3002,143 @@
                 
                 const successAction = patient.status === 'waiting' ? 'scheduled' : 'rescheduled';
                 alert(`✅ ${patient.patientName} has been ${successAction} to ${newDate}`);
+            }
+        }
+
+        // Change patient priority
+        function changePatientPriority() {
+            const patientSelect = document.getElementById('priorityPatientSelect');
+            const prioritySelect = document.getElementById('priorityLevelSelect');
+            
+            if (!patientSelect || !patientSelect.value) {
+                alert('Please select a patient to change priority.');
+                return;
+            }
+            
+            if (!prioritySelect || !prioritySelect.value) {
+                alert('Please select a new priority level.');
+                return;
+            }
+            
+            const patientId = parseInt(patientSelect.value);
+            const patient = appointments.find(apt => apt.id === patientId);
+            
+            if (!patient) {
+                alert('Patient not found.');
+                return;
+            }
+            
+            const oldPriority = patient.priority;
+            const newPriority = prioritySelect.value;
+            
+            // Get priority icons
+            const priorityIcons = {
+                'urgent': '🚨',
+                'high': '⚠️',
+                'medium': '📋',
+                'low': '📄'
+            };
+            
+            const oldIcon = priorityIcons[oldPriority] || '📄';
+            const newIcon = priorityIcons[newPriority] || '📄';
+            
+            if (confirm(`${oldIcon} Change ${patient.patientName}'s priority from ${oldPriority.toUpperCase()} to ${newPriority.toUpperCase()}?`)) {
+                // Update priority
+                patient.priority = newPriority;
+                
+                // Trigger data change notification and global update
+                onDataChange('Priority Changed', {
+                    patient: patient.patientName,
+                    oldPriority: oldPriority,
+                    newPriority: newPriority
+                });
+                
+                // Clear selection
+                patientSelect.value = '';
+                prioritySelect.value = '';
+                document.getElementById('priorityAvailabilityInfo').style.display = 'none';
+                
+                alert(`✅ ${patient.patientName}'s priority has been changed to ${newIcon} ${newPriority.toUpperCase()}`);
+            }
+        }
+
+        // Change patient availability/status
+        function changePatientAvailability() {
+            const patientSelect = document.getElementById('availabilityPatientSelect');
+            const statusSelect = document.getElementById('availabilityStatusSelect');
+            
+            if (!patientSelect || !patientSelect.value) {
+                alert('Please select a patient to change status.');
+                return;
+            }
+            
+            if (!statusSelect || !statusSelect.value) {
+                alert('Please select a new status.');
+                return;
+            }
+            
+            const patientId = parseInt(patientSelect.value);
+            const patient = appointments.find(apt => apt.id === patientId);
+            
+            if (!patient) {
+                alert('Patient not found.');
+                return;
+            }
+            
+            const oldStatus = patient.status;
+            const newStatus = statusSelect.value;
+            
+            // Get status icons
+            const statusIcons = {
+                'waiting': '⏳',
+                'scheduled': '📅',
+                'in-progress': '🔄',
+                'completed': '✅',
+                'cancelled': '❌'
+            };
+            
+            const oldIcon = statusIcons[oldStatus] || '📄';
+            const newIcon = statusIcons[newStatus] || '📄';
+            
+            // Special handling for certain status changes
+            if (newStatus === 'scheduled' && !patient.scheduledDate) {
+                alert('❌ Cannot set status to "Scheduled" without a scheduled date. Please reschedule the patient first.');
+                return;
+            }
+            
+            if (newStatus === 'completed' && oldStatus === 'waiting') {
+                alert('❌ Cannot mark a waiting patient as completed. Please schedule them first.');
+                return;
+            }
+            
+            if (confirm(`${oldIcon} Change ${patient.patientName}'s status from ${oldStatus.toUpperCase()} to ${newStatus.toUpperCase()}?`)) {
+                // Update status
+                patient.status = newStatus;
+                
+                // Special handling for completed appointments
+                if (newStatus === 'completed') {
+                    patient.completionDate = new Date().toISOString();
+                }
+                
+                // Special handling for cancelled appointments
+                if (newStatus === 'cancelled') {
+                    patient.cancellationDate = new Date().toISOString();
+                    patient.scheduledDate = null; // Clear scheduled date if cancelled
+                }
+                
+                // Trigger data change notification and global update
+                onDataChange('Status Changed', {
+                    patient: patient.patientName,
+                    oldStatus: oldStatus,
+                    newStatus: newStatus
+                });
+                
+                // Clear selection
+                patientSelect.value = '';
+                statusSelect.value = '';
+                document.getElementById('priorityAvailabilityInfo').style.display = 'none';
+                
+                alert(`✅ ${patient.patientName}'s status has been changed to ${newIcon} ${newStatus.toUpperCase()}`);
             }
         }
 
