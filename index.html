@@ -1474,15 +1474,19 @@
                     
                     <!-- Patient Selection for Rescheduling -->
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #dee2e6;">
-                        <h4 style="margin: 0 0 10px 0; color: #495057; font-size: 0.9rem;">🔄 Manual Patient Rescheduling</h4>
-                        <div style="display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: end;">
+                        <h4 style="margin: 0 0 10px 0; color: #ffffff; font-size: 0.9rem;">🔄 Manual Patient Rescheduling</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end;">
                             <div>
-                                <label style="display: block; font-size: 0.8rem; color: #666; margin-bottom: 5px;">Select Patient to Reschedule:</label>
-                                <select id="patientRescheduleSelect" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.85rem;">
+                                <label style="display: block; font-size: 0.8rem; color: #ffffff; margin-bottom: 5px;">Select Patient:</label>
+                                <select id="patientRescheduleSelect" style="width: 100%; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.4); border-radius: 4px; font-size: 0.85rem; background: rgba(0, 0, 0, 0.5); color: #ffffff;">
                                     <option value="">Choose a patient...</option>
                                 </select>
                             </div>
-                            <button onclick="rescheduleSelectedPatient()" style="background: #f39c12; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; white-space: nowrap;">
+                            <div>
+                                <label style="display: block; font-size: 0.8rem; color: #ffffff; margin-bottom: 5px;">Choose New Date:</label>
+                                <input type="date" id="rescheduleDatePicker" style="width: 100%; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.4); border-radius: 4px; font-size: 0.85rem; background: rgba(0, 0, 0, 0.5); color: #ffffff;">
+                            </div>
+                            <button onclick="rescheduleSelectedPatient()" style="background: rgba(255, 193, 7, 0.8); color: white; border: 2px solid rgba(255, 193, 7, 0.6); padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; white-space: nowrap;">
                                 🔄 Reschedule Selected
                             </button>
                         </div>
@@ -2815,8 +2819,15 @@
         // Reschedule selected patient
         function rescheduleSelectedPatient() {
             const select = document.getElementById('patientRescheduleSelect');
+            const datePicker = document.getElementById('rescheduleDatePicker');
+            
             if (!select || !select.value) {
                 alert('Please select a patient to reschedule.');
+                return;
+            }
+            
+            if (!datePicker || !datePicker.value) {
+                alert('Please choose a new date for the appointment.');
                 return;
             }
             
@@ -2828,16 +2839,20 @@
                 return;
             }
             
-            // Find next available slot
-            const nextAvailableSlot = findNextAvailableSlot();
-            if (!nextAvailableSlot) {
-                alert('🚨 No available slots found in the next 90 days - Clinic is severely overbooked due to underperformance!');
+            // Use manually selected date
+            const selectedDate = new Date(datePicker.value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            // Check if selected date is in the past
+            if (selectedDate < today) {
+                alert('❌ Cannot schedule appointments in the past. Please choose a future date.');
                 return;
             }
             
             // Confirm rescheduling
             const currentDate = patient.status === 'scheduled' ? new Date(patient.scheduledDate).toLocaleDateString() : 'WAITING';
-            const newDate = nextAvailableSlot.toLocaleDateString();
+            const newDate = selectedDate.toLocaleDateString();
             const priorityIcon = patient.priority === 'urgent' ? '🚨' : 
                                patient.priority === 'high' ? '⚠️' : 
                                patient.priority === 'medium' ? '📋' : '📄';
@@ -2846,7 +2861,7 @@
             
             if (confirm(`${priorityIcon} ${actionText} ${patient.patientName} (${patient.priority.toUpperCase()}) from ${currentDate} to ${newDate}?`)) {
                 // Update appointment
-                patient.scheduledDate = nextAvailableSlot.toISOString();
+                patient.scheduledDate = selectedDate.toISOString();
                 
                 // Trigger data change notification and global update
                 onDataChange('Patient Rescheduled', {
@@ -2858,6 +2873,7 @@
                 
                 // Clear selection
                 select.value = '';
+                datePicker.value = '';
                 document.getElementById('rescheduleInfo').style.display = 'none';
                 
                 const successAction = patient.status === 'waiting' ? 'scheduled' : 'rescheduled';
