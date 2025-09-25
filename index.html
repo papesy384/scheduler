@@ -16,11 +16,11 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
+            background: linear-gradient(135deg, #000000 0%, #8B0000 25%, #DC143C 50%, #8B0000 75%, #000000 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
-            color: #212529;
+            color: #ffffff;
         }
 
         @keyframes gradientShift {
@@ -36,13 +36,13 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #000000, #1a1a1a);
+            background: linear-gradient(135deg, #000000, #8B0000);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
-            border: 2px solid #000000;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            border: 3px solid #DC143C;
+            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.4);
         }
 
         .header h1 {
@@ -51,7 +51,7 @@
             margin-bottom: 8px;
             font-size: 1.8rem;
             font-weight: 600;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 0 10px rgba(220, 20, 60, 0.8), 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .header p {
@@ -64,13 +64,13 @@
 
         /* Navigation Menu Styles */
         .navigation-menu {
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            background: linear-gradient(135deg, #000000, #8B0000);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3);
             padding: 15px;
-            border: 2px solid #000000;
+            border: 2px solid #DC143C;
         }
 
         .nav-container {
@@ -81,35 +81,35 @@
         }
 
         .nav-btn {
-            background: linear-gradient(135deg, #000000, #1a1a1a);
+            background: linear-gradient(135deg, #DC143C, #8B0000);
             color: white;
-            border: 2px solid #000000;
+            border: 2px solid #DC143C;
             padding: 8px 16px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 0.8rem;
             font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 8px rgba(220, 20, 60, 0.3);
         }
 
         .nav-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(135deg, #333333, #1a1a1a);
+            box-shadow: 0 6px 20px rgba(220, 20, 60, 0.6);
+            background: linear-gradient(135deg, #FF1744, #DC143C);
         }
 
         .nav-btn.active {
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
-            color: #000000;
-            border: 2px solid #000000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            text-shadow: none;
+            background: linear-gradient(135deg, #FFFFFF, #F8F9FA);
+            color: #DC143C;
+            border: 2px solid #FFFFFF;
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.5);
+            text-shadow: 0 0 5px rgba(220, 20, 60, 0.3);
         }
 
         .nav-btn.active:hover {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #FFFFFF, #F0F0F0);
+            box-shadow: 0 6px 20px rgba(220, 20, 60, 0.7);
         }
 
         /* Section Visibility */
@@ -478,13 +478,13 @@
         }
 
         .card {
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            background: linear-gradient(135deg, #000000, #1a1a1a);
             backdrop-filter: blur(15px);
             border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid #000000;
+            border: 2px solid #DC143C;
             position: relative;
             overflow: hidden;
         }
@@ -502,7 +502,7 @@
 
         .card:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 40px rgba(220, 20, 60, 0.4);
         }
 
         .card:hover::before {
@@ -510,13 +510,13 @@
         }
 
         .card h2 {
-            color: #000000;
+            color: #ffffff;
             margin-bottom: 15px;
             font-size: 1.2rem;
             font-weight: 600;
-            border-bottom: 2px solid #000000;
+            border-bottom: 2px solid #DC143C;
             padding-bottom: 8px;
-            text-shadow: none;
+            text-shadow: 0 0 8px rgba(220, 20, 60, 0.6);
         }
 
         .metrics {
@@ -527,13 +527,13 @@
         }
 
         .metric {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            color: #000000;
+            background: linear-gradient(135deg, #8B0000, #DC143C);
+            color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border: 2px solid #000000;
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
+            border: 2px solid #FF1744;
         }
 
         .metric-value {
@@ -562,7 +562,7 @@
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
-            color: #000000;
+            color: #ffffff;
         }
 
         .form-group input,
@@ -570,37 +570,39 @@
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 2px solid #000000;
+            border: 2px solid #DC143C;
             border-radius: 8px;
             font-size: 1rem;
             transition: border-color 0.3s ease;
-            background: #ffffff;
-            color: #000000;
+            background: #000000;
+            color: #ffffff;
         }
 
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #333333;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-color: #FF1744;
+            box-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
         }
 
         .btn {
-            background: linear-gradient(135deg, #000000, #1a1a1a);
+            background: linear-gradient(135deg, #DC143C, #8B0000);
             color: white;
-            border: 2px solid #000000;
+            border: 2px solid #DC143C;
             padding: 12px 25px;
             border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
             margin: 5px;
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(220, 20, 60, 0.6);
+            background: linear-gradient(135deg, #FF1744, #DC143C);
         }
 
         .btn-success {
@@ -2145,16 +2147,16 @@
                 
                 if (avgWaitDays <= targetWaitDays) {
                     // Good performance
-                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
-                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #f8f9fa, #ffffff)';
+                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #000000, #8B0000)';
+                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #8B0000, #DC143C)';
                 } else if (avgWaitDays <= targetWaitDays * 1.5) {
                     // Warning performance
-                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #f8f9fa, #e9ecef)';
-                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #e9ecef, #f8f9fa)';
+                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #8B0000, #DC143C)';
+                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #DC143C, #FF1744)';
                 } else {
                     // Critical underperformance
-                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #f8f9fa, #dee2e6)';
-                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #dee2e6, #f8f9fa)';
+                    if (performanceContainer) performanceContainer.style.background = 'linear-gradient(135deg, #DC143C, #FF1744)';
+                    if (impactContainer) impactContainer.style.background = 'linear-gradient(135deg, #FF1744, #FF5722)';
                 }
                 
                 // Update Quick Data Check
@@ -3975,15 +3977,15 @@ Notes: ${appointment.notes || 'None'}
             
             if (avgWaitDays <= targetWaitDays) {
                 // GOOD PERFORMANCE (≤7 days)
-                performanceCard.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
-                progressBar.style.background = 'linear-gradient(90deg, #000000, #333333)';
+                performanceCard.style.background = 'linear-gradient(135deg, #000000, #8B0000)';
+                progressBar.style.background = 'linear-gradient(90deg, #DC143C, #FF1744)';
                 progressBar.style.width = `${progressPercent}%`;
                 
-                // Status cards - black
-                statusCard1.style.borderLeftColor = '#000000';
-                statusCard2.style.borderLeftColor = '#000000';
-                statusText1.style.color = '#000000';
-                statusText2.style.color = '#000000';
+                // Status cards - red
+                statusCard1.style.borderLeftColor = '#DC143C';
+                statusCard2.style.borderLeftColor = '#DC143C';
+                statusText1.style.color = '#DC143C';
+                statusText2.style.color = '#DC143C';
                 
                 // Status texts
                 statusText1.textContent = '✅ Target Achieved';
@@ -3992,23 +3994,23 @@ Notes: ${appointment.notes || 'None'}
                 statusSubtext2.textContent = `${avgWaitDays.toFixed(1)} days average`;
                 
                 // Dr. Sarah's status - OPTIMIZED
-                doctorStatusCard.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
+                doctorStatusCard.style.background = 'linear-gradient(135deg, #000000, #8B0000)';
                 doctorStatusIndicator.className = 'status-indicator success';
                 doctorStatusText.textContent = 'OPTIMIZED';
                 doctorStatusMessage.textContent = `Excellent performance - ${avgWaitDays.toFixed(1)} days average wait`;
-                doctorStatusProgress.style.background = 'linear-gradient(90deg, #000000, #333333)';
+                doctorStatusProgress.style.background = 'linear-gradient(90deg, #DC143C, #FF1744)';
                 doctorStatusProgress.style.width = `${progressPercent}%`;
                 
                 // Performance Status - SUCCESS
-                performanceStatusCard.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
-                performanceStatusCard.style.borderLeft = '5px solid #000000';
-                performanceStatusTitle.style.color = '#000000';
+                performanceStatusCard.style.background = 'linear-gradient(135deg, #000000, #8B0000)';
+                performanceStatusCard.style.borderLeft = '5px solid #DC143C';
+                performanceStatusTitle.style.color = '#DC143C';
                 performanceStatusTitle.textContent = '✅ Performance Success';
-                performanceStatusSubtitle1.style.color = '#000000';
+                performanceStatusSubtitle1.style.color = '#DC143C';
                 performanceStatusSubtitle1.textContent = '🎉 Excellent Achievements';
-                performanceStatusSubtitle2.style.color = '#000000';
+                performanceStatusSubtitle2.style.color = '#DC143C';
                 performanceStatusSubtitle2.textContent = '🎯 Continue Excellence';
-                performanceStatusList1.style.color = '#000000';
+                performanceStatusList1.style.color = '#DC143C';
                 performanceStatusList1.innerHTML = `
                     <li>Wait time ${((targetWaitDays - avgWaitDays) / targetWaitDays * 100).toFixed(0)}% below target (${avgWaitDays.toFixed(1)} days)</li>
                     <li>Dr. Sarah operating efficiently</li>
@@ -4025,15 +4027,15 @@ Notes: ${appointment.notes || 'None'}
                 
             } else {
                 // UNDERPERFORMANCE (>7 days)
-                performanceCard.style.background = 'linear-gradient(135deg, #f8f9fa, #e9ecef)';
-                progressBar.style.background = 'linear-gradient(90deg, #6c757d, #495057)';
+                performanceCard.style.background = 'linear-gradient(135deg, #8B0000, #DC143C)';
+                progressBar.style.background = 'linear-gradient(90deg, #FF1744, #FF5722)';
                 progressBar.style.width = '100%';
                 
-                // Status cards - gray
-                statusCard1.style.borderLeftColor = '#6c757d';
-                statusCard2.style.borderLeftColor = '#6c757d';
-                statusText1.style.color = '#6c757d';
-                statusText2.style.color = '#6c757d';
+                // Status cards - bright red
+                statusCard1.style.borderLeftColor = '#FF1744';
+                statusCard2.style.borderLeftColor = '#FF1744';
+                statusText1.style.color = '#FF1744';
+                statusText2.style.color = '#FF1744';
                 
                 // Status texts
                 statusText1.textContent = '❌ Target Missed';
