@@ -75,13 +75,23 @@
         }
 
         .header {
-            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(20px);
             border-radius: 20px;
             padding: 25px;
             margin-bottom: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Performance-based header colors */
+        .header.good-performance {
+            background: rgba(34, 139, 34, 0.8);
+            border: 2px solid rgba(0, 255, 0, 0.4);
+        }
+
+        .header.under-performance {
+            background: rgba(220, 20, 60, 0.8);
+            border: 2px solid rgba(255, 100, 100, 0.4);
         }
 
         .header h1 {
@@ -103,13 +113,23 @@
 
         /* Navigation Menu Styles */
         .navigation-menu {
-            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(20px);
             border-radius: 20px;
             margin-bottom: 25px;
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             padding: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        /* Performance-based navigation colors */
+        .navigation-menu.good-performance {
+            background: rgba(34, 139, 34, 0.7);
+            border: 2px solid rgba(0, 255, 0, 0.4);
+        }
+
+        .navigation-menu.under-performance {
+            background: rgba(220, 20, 60, 0.7);
+            border: 2px solid rgba(255, 100, 100, 0.4);
         }
 
         .nav-container {
@@ -120,9 +140,7 @@
         }
 
         .nav-btn {
-            background: rgba(0, 0, 0, 0.5);
             color: white;
-            border: 2px solid rgba(255, 255, 255, 0.4);
             padding: 10px 20px;
             border-radius: 25px;
             cursor: pointer;
@@ -133,25 +151,60 @@
             backdrop-filter: blur(10px);
         }
 
+        /* Performance-based nav button colors */
+        .nav-btn.good-performance {
+            background: rgba(34, 139, 34, 0.6);
+            border: 2px solid rgba(0, 255, 0, 0.5);
+        }
+
+        .nav-btn.under-performance {
+            background: rgba(220, 20, 60, 0.6);
+            border: 2px solid rgba(255, 100, 100, 0.5);
+        }
+
         .nav-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            background: rgba(0, 0, 0, 0.7);
-            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .nav-btn.good-performance:hover {
+            background: rgba(34, 139, 34, 0.8);
+            border-color: rgba(0, 255, 0, 0.7);
+        }
+
+        .nav-btn.under-performance:hover {
+            background: rgba(220, 20, 60, 0.8);
+            border-color: rgba(255, 100, 100, 0.7);
         }
 
         .nav-btn.active {
-            background: rgba(0, 0, 0, 0.8);
             color: #ffffff;
-            border: 2px solid rgba(255, 255, 255, 0.7);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
+        .nav-btn.active.good-performance {
+            background: rgba(34, 139, 34, 0.9);
+            border: 2px solid rgba(0, 255, 0, 0.8);
+        }
+
+        .nav-btn.active.under-performance {
+            background: rgba(220, 20, 60, 0.9);
+            border: 2px solid rgba(255, 100, 100, 0.8);
+        }
+
         .nav-btn.active:hover {
-            background: rgba(0, 0, 0, 0.9);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            border-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-btn.active.good-performance:hover {
+            background: rgba(34, 139, 34, 1.0);
+            border-color: rgba(0, 255, 0, 1.0);
+        }
+
+        .nav-btn.active.under-performance:hover {
+            background: rgba(220, 20, 60, 1.0);
+            border-color: rgba(255, 100, 100, 1.0);
         }
 
         /* Section Visibility */
@@ -520,15 +573,24 @@
         }
 
         .card {
-            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(20px);
             border-radius: 20px;
             padding: 25px;
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid rgba(255, 255, 255, 0.3);
             position: relative;
             overflow: hidden;
+        }
+
+        /* Performance-based card colors */
+        .card.good-performance {
+            background: rgba(34, 139, 34, 0.7);
+            border: 2px solid rgba(0, 255, 0, 0.4);
+        }
+
+        .card.under-performance {
+            background: rgba(220, 20, 60, 0.7);
+            border: 2px solid rgba(255, 100, 100, 0.4);
         }
 
         .card::before {
@@ -545,8 +607,16 @@
         .card:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .card.good-performance:hover {
+            border-color: rgba(0, 255, 0, 0.6);
+            background: rgba(34, 139, 34, 0.8);
+        }
+
+        .card.under-performance:hover {
+            border-color: rgba(255, 100, 100, 0.6);
+            background: rgba(220, 20, 60, 0.8);
         }
 
         .card:hover::before {
@@ -571,14 +641,34 @@
         }
 
         .metric {
-            background: rgba(0, 0, 0, 0.7);
             color: #ffffff;
             padding: 25px;
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        /* Performance-based metric colors */
+        .metric.excellent {
+            background: rgba(34, 139, 34, 0.8);
+            border: 2px solid rgba(0, 255, 0, 0.5);
+        }
+
+        .metric.good {
+            background: rgba(30, 60, 120, 0.8);
+            border: 2px solid rgba(100, 150, 255, 0.5);
+        }
+
+        .metric.warning {
+            background: rgba(255, 165, 0, 0.8);
+            border: 2px solid rgba(255, 200, 0, 0.5);
+        }
+
+        .metric.critical {
+            background: rgba(220, 20, 60, 0.8);
+            border: 2px solid rgba(255, 100, 100, 0.5);
         }
 
         .metric-value {
@@ -617,28 +707,53 @@
         .form-group textarea {
             width: 100%;
             padding: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.4);
             border-radius: 12px;
             font-size: 1rem;
             transition: all 0.3s ease;
-            background: rgba(0, 0, 0, 0.5);
             color: #ffffff;
             backdrop-filter: blur(10px);
+        }
+
+        /* Performance-based form colors */
+        .form-group input.good-performance,
+        .form-group select.good-performance,
+        .form-group textarea.good-performance {
+            border: 2px solid rgba(0, 255, 0, 0.5);
+            background: rgba(34, 139, 34, 0.6);
+        }
+
+        .form-group input.under-performance,
+        .form-group select.under-performance,
+        .form-group textarea.under-performance {
+            border: 2px solid rgba(255, 100, 100, 0.5);
+            background: rgba(220, 20, 60, 0.6);
         }
 
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: rgba(255, 255, 255, 0.7);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.7);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group input.good-performance:focus,
+        .form-group select.good-performance:focus,
+        .form-group textarea.good-performance:focus {
+            border-color: rgba(0, 255, 0, 0.8);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            background: rgba(34, 139, 34, 0.8);
+        }
+
+        .form-group input.under-performance:focus,
+        .form-group select.under-performance:focus,
+        .form-group textarea.under-performance:focus {
+            border-color: rgba(255, 100, 100, 0.8);
+            box-shadow: 0 0 20px rgba(255, 100, 100, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            background: rgba(220, 20, 60, 0.8);
         }
 
         .btn {
-            background: rgba(0, 0, 0, 0.6);
             color: white;
-            border: 2px solid rgba(255, 255, 255, 0.4);
             padding: 15px 30px;
             border-radius: 12px;
             font-size: 1rem;
@@ -649,11 +764,30 @@
             backdrop-filter: blur(10px);
         }
 
+        /* Performance-based button colors */
+        .btn.good-performance {
+            background: rgba(34, 139, 34, 0.7);
+            border: 2px solid rgba(0, 255, 0, 0.5);
+        }
+
+        .btn.under-performance {
+            background: rgba(220, 20, 60, 0.7);
+            border: 2px solid rgba(255, 100, 100, 0.5);
+        }
+
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            background: rgba(0, 0, 0, 0.8);
-            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .btn.good-performance:hover {
+            background: rgba(34, 139, 34, 0.9);
+            border-color: rgba(0, 255, 0, 0.7);
+        }
+
+        .btn.under-performance:hover {
+            background: rgba(220, 20, 60, 0.9);
+            border-color: rgba(255, 100, 100, 0.7);
         }
 
         .btn-success {
@@ -2296,6 +2430,158 @@
             if (waitingTodayElement) {
                 waitingTodayElement.textContent = metrics.waitingAppointments;
             }
+            
+            // Update metric colors based on performance
+            updateMetricColors(metrics);
+        }
+        
+        // Update metric colors based on performance levels
+        function updateMetricColors(metrics) {
+            const avgWaitDays = metrics.avgWaitDays;
+            const urgentAppointments = metrics.urgentAppointments;
+            const waitingAppointments = metrics.waitingAppointments;
+            
+            // Get all metric elements
+            const metricsElements = document.querySelectorAll('.metric');
+            
+            metricsElements.forEach(metric => {
+                // Remove existing performance classes
+                metric.classList.remove('excellent', 'good', 'warning', 'critical');
+                
+                // Determine performance level based on average wait days
+                let performanceLevel = 'good'; // default
+                
+                if (avgWaitDays <= 3) {
+                    performanceLevel = 'excellent';
+                } else if (avgWaitDays <= 7) {
+                    performanceLevel = 'good';
+                } else if (avgWaitDays <= 14) {
+                    performanceLevel = 'warning';
+                } else {
+                    performanceLevel = 'critical';
+                }
+                
+                // Apply the appropriate class
+                metric.classList.add(performanceLevel);
+                
+                // Add performance indicator text
+                const metricValue = metric.querySelector('.metric-value');
+                if (metricValue) {
+                    const currentText = metricValue.textContent;
+                    // Remove any existing performance indicators
+                    metricValue.textContent = currentText.replace(/⭐|⚠️|🚨|✅/g, '');
+                    
+                    // Add performance indicator
+                    let indicator = '';
+                    switch(performanceLevel) {
+                        case 'excellent':
+                            indicator = '⭐ ';
+                            break;
+                        case 'good':
+                            indicator = '✅ ';
+                            break;
+                        case 'warning':
+                            indicator = '⚠️ ';
+                            break;
+                        case 'critical':
+                            indicator = '🚨 ';
+                            break;
+                    }
+                    metricValue.textContent = indicator + currentText;
+                }
+            });
+            
+            // Update specific metric cards with detailed performance info
+            updateSpecificMetricCards(metrics);
+            
+            // Update overall theme based on performance
+            updateOverallTheme(performanceLevel);
+        }
+        
+        // Update specific metric cards with detailed performance information
+        function updateSpecificMetricCards(metrics) {
+            const avgWaitDays = metrics.avgWaitDays;
+            
+            // Update average wait days metric
+            const avgWaitDaysMetric = document.querySelector('.metric:has(.metric-value)');
+            if (avgWaitDaysMetric) {
+                avgWaitDaysMetric.classList.remove('excellent', 'good', 'warning', 'critical');
+                
+                if (avgWaitDays <= 3) {
+                    avgWaitDaysMetric.classList.add('excellent');
+                } else if (avgWaitDays <= 7) {
+                    avgWaitDaysMetric.classList.add('good');
+                } else if (avgWaitDays <= 14) {
+                    avgWaitDaysMetric.classList.add('warning');
+                } else {
+                    avgWaitDaysMetric.classList.add('critical');
+                }
+            }
+            
+            // Update urgent cases metric
+            const urgentMetric = document.querySelector('.metric');
+            if (urgentMetric && metrics.urgentAppointments > 0) {
+                if (metrics.urgentAppointments <= 2) {
+                    urgentMetric.classList.add('excellent');
+                } else if (metrics.urgentAppointments <= 5) {
+                    urgentMetric.classList.add('good');
+                } else if (metrics.urgentAppointments <= 10) {
+                    urgentMetric.classList.add('warning');
+                } else {
+                    urgentMetric.classList.add('critical');
+                }
+            }
+        }
+        
+        // Update overall theme based on performance level
+        function updateOverallTheme(performanceLevel) {
+            // Determine if we're in good performance or underperformance
+            const isGoodPerformance = performanceLevel === 'excellent' || performanceLevel === 'good';
+            const themeClass = isGoodPerformance ? 'good-performance' : 'under-performance';
+            
+            // Update header
+            const header = document.querySelector('.header');
+            if (header) {
+                header.classList.remove('good-performance', 'under-performance');
+                header.classList.add(themeClass);
+            }
+            
+            // Update navigation menu
+            const navMenu = document.querySelector('.navigation-menu');
+            if (navMenu) {
+                navMenu.classList.remove('good-performance', 'under-performance');
+                navMenu.classList.add(themeClass);
+            }
+            
+            // Update navigation buttons
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('good-performance', 'under-performance');
+                btn.classList.add(themeClass);
+            });
+            
+            // Update cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.classList.remove('good-performance', 'under-performance');
+                card.classList.add(themeClass);
+            });
+            
+            // Update form elements
+            const formElements = document.querySelectorAll('.form-group input, .form-group select, .form-group textarea');
+            formElements.forEach(element => {
+                element.classList.remove('good-performance', 'under-performance');
+                element.classList.add(themeClass);
+            });
+            
+            // Update buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('good-performance', 'under-performance');
+                btn.classList.add(themeClass);
+            });
+            
+            console.log(`🎨 Theme updated to: ${themeClass} (Performance: ${performanceLevel})`);
         }
         
         // Update priority cases (both urgent and non-urgent)
