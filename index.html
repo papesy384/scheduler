@@ -584,13 +584,13 @@
 
         /* Performance-based card colors */
         .card.good-performance {
-            background: rgba(34, 139, 34, 0.7);
-            border: 2px solid rgba(0, 255, 0, 0.4);
+            background: rgba(34, 139, 34, 0.9);
+            border: 2px solid rgba(0, 255, 0, 0.6);
         }
 
         .card.under-performance {
-            background: rgba(220, 20, 60, 0.7);
-            border: 2px solid rgba(255, 100, 100, 0.4);
+            background: rgba(220, 20, 60, 0.9);
+            border: 2px solid rgba(255, 100, 100, 0.6);
         }
 
         .card::before {
@@ -610,13 +610,13 @@
         }
 
         .card.good-performance:hover {
-            border-color: rgba(0, 255, 0, 0.6);
-            background: rgba(34, 139, 34, 0.8);
+            border-color: rgba(0, 255, 0, 0.8);
+            background: rgba(34, 139, 34, 1.0);
         }
 
         .card.under-performance:hover {
-            border-color: rgba(255, 100, 100, 0.6);
-            background: rgba(220, 20, 60, 0.8);
+            border-color: rgba(255, 100, 100, 0.8);
+            background: rgba(220, 20, 60, 1.0);
         }
 
         .card:hover::before {
@@ -2565,6 +2565,7 @@
             cards.forEach(card => {
                 card.classList.remove('good-performance', 'under-performance');
                 card.classList.add(themeClass);
+                console.log(`🎨 Card updated to: ${themeClass}`);
             });
             
             // Update form elements
