@@ -249,7 +249,6 @@
         }
 
         .queue-item {
-            background: white;
             border-bottom: 1px solid #e0e0e0;
             padding: 12px 15px;
             display: flex;
@@ -258,8 +257,25 @@
             transition: all 0.2s ease;
         }
 
+        /* Performance-based queue item colors */
+        .queue-item.good-performance {
+            background: rgba(34, 139, 34, 0.9) !important;
+        }
+
+        .queue-item.under-performance {
+            background: rgba(220, 20, 60, 0.9) !important;
+        }
+
         .queue-item:hover {
             background: #f8f9fa;
+        }
+
+        .queue-item.good-performance:hover {
+            background: rgba(34, 139, 34, 1.0) !important;
+        }
+
+        .queue-item.under-performance:hover {
+            background: rgba(220, 20, 60, 1.0) !important;
         }
 
         .queue-item:last-child {
@@ -525,7 +541,6 @@
         }
 
         .suggested-date {
-            background: white;
             border: 2px solid #28a745;
             border-radius: 6px;
             padding: 8px;
@@ -533,6 +548,15 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 0.8rem;
+        }
+
+        /* Performance-based suggested date colors */
+        .suggested-date.good-performance {
+            background: rgba(34, 139, 34, 0.9) !important;
+        }
+
+        .suggested-date.under-performance {
+            background: rgba(220, 20, 60, 0.9) !important;
         }
 
         .suggested-date:hover {
@@ -1198,12 +1222,29 @@
         }
 
         .insight-item {
-            background: white;
             padding: 8px 12px;
             margin: 5px 0;
             border-radius: 6px;
             font-size: 0.85rem;
             border-left: 3px solid #28a745;
+        }
+
+        /* Performance-based insight item colors */
+        .insight-item.good-performance {
+            background: rgba(34, 139, 34, 0.9) !important;
+        }
+
+        .insight-item.under-performance {
+            background: rgba(220, 20, 60, 0.9) !important;
+        }
+
+        /* Performance-based chart colors */
+        .performance-chart.good-performance {
+            background: rgba(34, 139, 34, 0.9) !important;
+        }
+
+        .performance-chart.under-performance {
+            background: rgba(220, 20, 60, 0.9) !important;
         }
 
         .wait-time-chart {
@@ -1293,6 +1334,9 @@
             <p>Professional scheduling • Operational efficiency • Staff management</p>
         <button onclick="refreshAllData()" style="background: #3498db; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; margin-top: 10px;">
             🔄 Refresh All Data
+        </button>
+        <button onclick="testThemeUpdate()" style="background: #e74c3c; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; margin-top: 10px; margin-left: 10px;">
+            🎨 Test Theme Update
         </button>
         
         <!-- Auto-Update Status Indicator -->
@@ -1785,7 +1829,7 @@
                 <h2>📊 Professional Performance Analytics</h2>
                 
                 <!-- Weekly Progress Chart -->
-                <div id="weeklyTrendsChart" style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <div id="weeklyTrendsChart" class="performance-chart" style="padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                     <h4 style="margin: 0 0 15px 0; color: #2c3e50;">📈 Weekly Wait Time Trends</h4>
                     <div id="weeklyChartContainer" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; height: 120px; align-items: end;">
                         <!-- Chart will be dynamically generated -->
@@ -2250,6 +2294,12 @@
             // Show refresh notification
             showUpdateNotification('🔄 Manual refresh completed!', '#DC143C');
         }
+
+        function testThemeUpdate() {
+            console.log('🎨 Testing theme update...');
+            updateOverallTheme('good');
+            console.log('🎨 Theme update test completed');
+        }
         
         // Show update notification
         function showUpdateNotification(message, color = '#DC143C') {
@@ -2582,7 +2632,37 @@
                 btn.classList.add(themeClass);
             });
             
+            // Update queue items
+            const queueItems = document.querySelectorAll('.queue-item');
+            queueItems.forEach(item => {
+                item.classList.remove('good-performance', 'under-performance');
+                item.classList.add(themeClass);
+                console.log(`🎨 Queue item updated to: ${themeClass}`);
+            });
+            
+            // Update suggested dates
+            const suggestedDates = document.querySelectorAll('.suggested-date');
+            suggestedDates.forEach(date => {
+                date.classList.remove('good-performance', 'under-performance');
+                date.classList.add(themeClass);
+            });
+            
+            // Update insight items
+            const insightItems = document.querySelectorAll('.insight-item');
+            insightItems.forEach(item => {
+                item.classList.remove('good-performance', 'under-performance');
+                item.classList.add(themeClass);
+            });
+            
+            // Update performance charts
+            const performanceCharts = document.querySelectorAll('.performance-chart');
+            performanceCharts.forEach(chart => {
+                chart.classList.remove('good-performance', 'under-performance');
+                chart.classList.add(themeClass);
+            });
+            
             console.log(`🎨 Theme updated to: ${themeClass} (Performance: ${performanceLevel})`);
+            console.log(`🎨 Updated elements: ${queueItems.length} queue items, ${suggestedDates.length} suggested dates, ${insightItems.length} insight items, ${performanceCharts.length} performance charts`);
         }
         
         // Update priority cases (both urgent and non-urgent)
@@ -4333,7 +4413,7 @@ Notes: ${appointment.notes || 'None'}
                 statusSubtext2.textContent = `${avgWaitDays.toFixed(1)} days average`;
                 
                 // Dr. Sarah's status - OPTIMIZED
-                doctorStatusCard.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
+                doctorStatusCard.style.background = 'linear-gradient(135deg, rgba(34, 139, 34, 0.9), rgba(0, 100, 0, 0.9))';
                 doctorStatusIndicator.className = 'status-indicator success';
                 doctorStatusText.textContent = 'OPTIMIZED';
                 doctorStatusMessage.textContent = `Excellent performance - ${avgWaitDays.toFixed(1)} days average wait`;
@@ -4341,7 +4421,7 @@ Notes: ${appointment.notes || 'None'}
                 doctorStatusProgress.style.width = `${progressPercent}%`;
                 
                 // Performance Status - SUCCESS
-                performanceStatusCard.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
+                performanceStatusCard.style.background = 'linear-gradient(135deg, rgba(34, 139, 34, 0.9), rgba(0, 100, 0, 0.9))';
                 performanceStatusCard.style.borderLeft = '5px solid #000000';
                 performanceStatusTitle.style.color = '#000000';
                 performanceStatusTitle.textContent = '✅ Performance Success';
@@ -4383,7 +4463,7 @@ Notes: ${appointment.notes || 'None'}
                 statusSubtext2.textContent = `${avgWaitDays.toFixed(1)} days average`;
                 
                 // Dr. Sarah's status - OVERWHELMED
-                doctorStatusCard.style.background = 'linear-gradient(135deg, #f8f9fa, #e9ecef)';
+                doctorStatusCard.style.background = 'linear-gradient(135deg, rgba(220, 20, 60, 0.9), rgba(139, 0, 0, 0.9))';
                 doctorStatusIndicator.className = 'status-indicator danger';
                 doctorStatusText.textContent = 'OVERWHELMED';
                 doctorStatusMessage.textContent = `Behind schedule - ${avgWaitDays.toFixed(1)} days average wait`;
@@ -4391,7 +4471,7 @@ Notes: ${appointment.notes || 'None'}
                 doctorStatusProgress.style.width = '100%';
                 
                 // Performance Status - ALERT
-                performanceStatusCard.style.background = 'linear-gradient(135deg, #f8f9fa, #e9ecef)';
+                performanceStatusCard.style.background = 'linear-gradient(135deg, rgba(220, 20, 60, 0.9), rgba(139, 0, 0, 0.9))';
                 performanceStatusCard.style.borderLeft = '5px solid #6c757d';
                 performanceStatusTitle.style.color = '#6c757d';
                 performanceStatusTitle.textContent = '⚠️ Performance Alert';
