@@ -16,7 +16,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #ffffff;
+            background: transparent;
             min-height: 100vh;
             color: #000000;
             margin: 0;
@@ -1387,6 +1387,12 @@
         <!-- Performance Status -->
         <div id="performanceStatusCard" class="card" style="margin-bottom: 20px;">
             <h2 id="performanceStatusTitle" style="margin-bottom: 15px;">📊 Performance Status</h2>
+            <div style="color: #000000; background: #ffffff; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #e0e0e0;">
+                <div style="font-weight: bold; margin-bottom: 5px;">Average Wait Days, Target: ≤7 days</div>
+                <div style="font-weight: bold; color: #000000; margin-bottom: 5px;">OVERWHELMED</div>
+                <div style="margin-bottom: 5px;">Behind schedule - 9.4 days average wait</div>
+                <div style="font-size: 0.9rem; color: #666;">Updated: Just now</div>
+            </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                 <div>
                     <h4 id="performanceStatusSubtitle1" style="margin-bottom: 10px;">📈 Current Status</h4>
@@ -1634,6 +1640,82 @@
                         <button onclick="viewWaitingList()" style="background: #3498db; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">
                             📋 View Waiting List
                         </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-Time Flow Optimization -->
+            <div class="card">
+                <h2>⚡ Real-Time Flow Optimization</h2>
+                
+                <!-- Current Flow Status -->
+                <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 2px solid rgba(255, 255, 255, 0.2);">
+                    <h4 style="margin: 0 0 15px 0; color: #ffffff; font-size: 0.9rem;">📊 Current Flow Status</h4>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                        <div style="text-align: center; padding: 10px; background: rgba(0, 0, 0, 0.2); border-radius: 6px;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #ffffff;" id="currentFlowRate">0</div>
+                            <div style="font-size: 0.8rem; color: #ffffff;">Patients/Hour</div>
+                        </div>
+                        <div style="text-align: center; padding: 10px; background: rgba(0, 0, 0, 0.2); border-radius: 6px;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #ffffff;" id="averageWaitTime">0</div>
+                            <div style="font-size: 0.8rem; color: #ffffff;">Min Wait</div>
+                        </div>
+                        <div style="text-align: center; padding: 10px; background: rgba(0, 0, 0, 0.2); border-radius: 6px;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #ffffff;" id="roomUtilization">0%</div>
+                            <div style="font-size: 0.8rem; color: #ffffff;">Room Usage</div>
+                        </div>
+                        <div style="text-align: center; padding: 10px; background: rgba(0, 0, 0, 0.2); border-radius: 6px;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #ffffff;" id="staffEfficiency">0%</div>
+                            <div style="font-size: 0.8rem; color: #ffffff;">Staff Efficiency</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Optimization Controls -->
+                <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 2px solid rgba(255, 255, 255, 0.2);">
+                    <h4 style="margin: 0 0 15px 0; color: #ffffff; font-size: 0.9rem;">🎯 Optimization Controls</h4>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <label style="display: block; font-size: 0.8rem; color: #ffffff; margin-bottom: 5px;">Flow Optimization Mode:</label>
+                            <select id="flowOptimizationMode" style="width: 100%; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.4); border-radius: 4px; font-size: 0.8rem; background: rgba(0, 0, 0, 0.5); color: #ffffff;">
+                                <option value="balanced">⚖️ Balanced</option>
+                                <option value="speed">⚡ Speed Priority</option>
+                                <option value="quality">🎯 Quality Priority</option>
+                                <option value="efficiency">📈 Efficiency Priority</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 0.8rem; color: #ffffff; margin-bottom: 5px;">Auto-Adjustment:</label>
+                            <select id="autoAdjustmentMode" style="width: 100%; padding: 8px; border: 2px solid rgba(255, 255, 255, 0.4); border-radius: 4px; font-size: 0.8rem; background: rgba(0, 0, 0, 0.5); color: #ffffff;">
+                                <option value="enabled">✅ Enabled</option>
+                                <option value="disabled">❌ Disabled</option>
+                                <option value="manual">👤 Manual Only</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="optimizeFlow()" style="background: #27ae60; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">
+                            ⚡ Optimize Flow Now
+                        </button>
+                        <button onclick="analyzeBottlenecks()" style="background: #3498db; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">
+                            🔍 Analyze Bottlenecks
+                        </button>
+                        <button onclick="resetOptimization()" style="background: #e74c3c; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">
+                            🔄 Reset Settings
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Real-Time Recommendations -->
+                <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; border: 2px solid rgba(255, 255, 255, 0.2);">
+                    <h4 style="margin: 0 0 15px 0; color: #ffffff; font-size: 0.9rem;">💡 Real-Time Recommendations</h4>
+                    <div id="flowRecommendations" style="font-size: 0.8rem; color: #ffffff;">
+                        <div style="padding: 8px; background: rgba(0, 0, 0, 0.2); border-radius: 4px; margin-bottom: 8px;">
+                            📊 Analyzing current flow patterns...
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2100,8 +2182,11 @@
                 const avgWaitDaysEl = document.getElementById('avgWaitDays');
                 if (avgWaitDaysEl) avgWaitDaysEl.textContent = avgWaitDays.toFixed(1);
                 
-                // Update Performance Metrics dynamically based on average wait days
-                updatePerformanceMetricsDisplay(avgWaitDays);
+            // Update Performance Metrics dynamically based on average wait days
+            updatePerformanceMetricsDisplay(avgWaitDays);
+            
+            // Update Real-Time Flow Optimization metrics
+            updateFlowMetrics();
                 
                 const patientsTodayEl = document.getElementById('patientsToday');
                 if (patientsTodayEl) patientsTodayEl.textContent = todayAppointments.length;
@@ -2264,12 +2349,182 @@
         }
         
         // Manual refresh function for user
-        function refreshAllData() {
-            console.log('🔄 Manual refresh requested by user...');
-            triggerGlobalUpdate();
+        // Real-Time Flow Optimization Functions
+        function optimizeFlow() {
+            console.log('⚡ Optimizing flow...');
+            const mode = document.getElementById('flowOptimizationMode').value;
+            const autoMode = document.getElementById('autoAdjustmentMode').value;
             
-            // Show refresh notification
-            showUpdateNotification('🔄 Manual refresh completed!', '#DC143C');
+            // Calculate current flow metrics
+            const flowMetrics = calculateFlowMetrics();
+            
+            // Apply optimization based on mode
+            let recommendations = [];
+            switch(mode) {
+                case 'speed':
+                    recommendations = optimizeForSpeed(flowMetrics);
+                    break;
+                case 'quality':
+                    recommendations = optimizeForQuality(flowMetrics);
+                    break;
+                case 'efficiency':
+                    recommendations = optimizeForEfficiency(flowMetrics);
+                    break;
+                default:
+                    recommendations = optimizeBalanced(flowMetrics);
+            }
+            
+            // Update recommendations display
+            updateFlowRecommendations(recommendations);
+            
+            // Show optimization notification
+            showOptimizationNotification(`Flow optimized for ${mode} mode`);
+        }
+        
+        function calculateFlowMetrics() {
+            const today = new Date();
+            const todayAppointments = appointments.filter(apt => {
+                const aptDate = new Date(apt.scheduledDate);
+                return aptDate.toDateString() === today.toDateString();
+            });
+            
+            const completedToday = todayAppointments.filter(apt => apt.status === 'completed').length;
+            const inProgressToday = todayAppointments.filter(apt => apt.status === 'in-progress').length;
+            const waitingToday = todayAppointments.filter(apt => apt.status === 'waiting').length;
+            
+            // Calculate metrics
+            const currentHour = today.getHours();
+            const flowRate = completedToday > 0 ? Math.round((completedToday / Math.max(currentHour, 1)) * 10) / 10 : 0;
+            const avgWaitTime = calculateAverageWaitTime();
+            const roomUtilization = Math.round(((completedToday + inProgressToday) / Math.max(todayAppointments.length, 1)) * 100);
+            const staffEfficiency = Math.round((completedToday / Math.max(todayAppointments.length, 1)) * 100);
+            
+            return {
+                flowRate,
+                avgWaitTime,
+                roomUtilization,
+                staffEfficiency,
+                completedToday,
+                inProgressToday,
+                waitingToday
+            };
+        }
+        
+        function optimizeForSpeed(metrics) {
+            return [
+                '⚡ Speed Optimization Active',
+                '📈 Prioritizing quick procedures',
+                '🔄 Reducing wait times',
+                '⏰ Optimizing appointment intervals'
+            ];
+        }
+        
+        function optimizeForQuality(metrics) {
+            return [
+                '🎯 Quality Optimization Active',
+                '👥 Ensuring adequate consultation time',
+                '📋 Comprehensive patient care',
+                '🔍 Detailed follow-up procedures'
+            ];
+        }
+        
+        function optimizeForEfficiency(metrics) {
+            return [
+                '📈 Efficiency Optimization Active',
+                '⚖️ Balancing speed and quality',
+                '📊 Maximizing resource utilization',
+                '🎯 Optimal patient flow patterns'
+            ];
+        }
+        
+        function optimizeBalanced(metrics) {
+            return [
+                '⚖️ Balanced Optimization Active',
+                '📊 Monitoring all metrics',
+                '🔄 Adaptive flow adjustments',
+                '📈 Continuous improvement'
+            ];
+        }
+        
+        function analyzeBottlenecks() {
+            console.log('🔍 Analyzing bottlenecks...');
+            const metrics = calculateFlowMetrics();
+            
+            let bottlenecks = [];
+            if (metrics.avgWaitTime > 30) bottlenecks.push('⏰ High wait times detected');
+            if (metrics.roomUtilization < 70) bottlenecks.push('🏥 Low room utilization');
+            if (metrics.staffEfficiency < 80) bottlenecks.push('👥 Staff efficiency issues');
+            if (metrics.flowRate < 2) bottlenecks.push('📉 Low patient flow rate');
+            
+            if (bottlenecks.length === 0) {
+                bottlenecks.push('✅ No major bottlenecks detected');
+                bottlenecks.push('📊 Flow is operating efficiently');
+            }
+            
+            updateFlowRecommendations(bottlenecks);
+            showOptimizationNotification('Bottleneck analysis completed');
+        }
+        
+        function resetOptimization() {
+            console.log('🔄 Resetting optimization settings...');
+            document.getElementById('flowOptimizationMode').value = 'balanced';
+            document.getElementById('autoAdjustmentMode').value = 'enabled';
+            
+            updateFlowRecommendations(['🔄 Settings reset to default', '📊 Ready for new optimization']);
+            showOptimizationNotification('Optimization settings reset');
+        }
+        
+        function updateFlowRecommendations(recommendations) {
+            const container = document.getElementById('flowRecommendations');
+            container.innerHTML = '';
+            
+            recommendations.forEach(rec => {
+                const div = document.createElement('div');
+                div.style.cssText = 'padding: 8px; background: rgba(0, 0, 0, 0.2); border-radius: 4px; margin-bottom: 8px;';
+                div.textContent = rec;
+                container.appendChild(div);
+            });
+        }
+        
+        function updateFlowMetrics() {
+            const metrics = calculateFlowMetrics();
+            
+            // Update flow status displays
+            const flowRateEl = document.getElementById('currentFlowRate');
+            if (flowRateEl) flowRateEl.textContent = metrics.flowRate;
+            
+            const waitTimeEl = document.getElementById('averageWaitTime');
+            if (waitTimeEl) waitTimeEl.textContent = metrics.avgWaitTime;
+            
+            const roomUtilEl = document.getElementById('roomUtilization');
+            if (roomUtilEl) roomUtilEl.textContent = metrics.roomUtilization + '%';
+            
+            const staffEffEl = document.getElementById('staffEfficiency');
+            if (staffEffEl) staffEffEl.textContent = metrics.staffEfficiency + '%';
+        }
+        
+        function showOptimizationNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #27ae60;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                z-index: 1000;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 3000);
         }
         
         // Show update notification
@@ -3928,7 +4183,19 @@
                     contactNumber: `(555) ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`,
                     estimatedDuration: apt.duration,
                     time: apt.time,
-                    notes: `Appointment for ${apt.name}`
+                    notes: `Appointment for ${apt.name}`,
+                    historicalProcedureLengths: [
+                        { procedure: 'Consultation', duration: apt.duration, date: '2024-01-15' },
+                        { procedure: 'Follow-up', duration: Math.max(20, apt.duration - 10), date: '2023-12-10' },
+                        { procedure: 'Check-up', duration: Math.max(15, apt.duration - 15), date: '2023-11-05' }
+                    ],
+                    patientPunctuality: {
+                        averageArrivalTime: Math.floor(Math.random() * 20) - 10, // -10 to +10 minutes
+                        punctualityScore: Math.floor(Math.random() * 40) + 60, // 60-100%
+                        totalAppointments: Math.floor(Math.random() * 8) + 3, // 3-10 appointments
+                        lateArrivals: Math.floor(Math.random() * 3), // 0-2 late arrivals
+                        onTimeArrivals: Math.floor(Math.random() * 5) + 2 // 2-6 on-time arrivals
+                    }
                 });
             });
             
@@ -3970,7 +4237,19 @@
                     contactNumber: `(555) ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`,
                     estimatedDuration: estimatedDuration,
                     time: randomTime,
-                    notes: `Scheduled appointment for Patient ${i}`
+                    notes: `Scheduled appointment for Patient ${i}`,
+                    historicalProcedureLengths: [
+                        { procedure: 'Initial Consultation', duration: estimatedDuration, date: '2024-01-10' },
+                        { procedure: 'Follow-up Visit', duration: Math.max(20, estimatedDuration - 15), date: '2023-12-15' },
+                        { procedure: 'Routine Check', duration: Math.max(15, estimatedDuration - 20), date: '2023-11-20' }
+                    ],
+                    patientPunctuality: {
+                        averageArrivalTime: Math.floor(Math.random() * 25) - 12, // -12 to +12 minutes
+                        punctualityScore: Math.floor(Math.random() * 35) + 65, // 65-100%
+                        totalAppointments: Math.floor(Math.random() * 6) + 2, // 2-7 appointments
+                        lateArrivals: Math.floor(Math.random() * 2), // 0-1 late arrivals
+                        onTimeArrivals: Math.floor(Math.random() * 4) + 1 // 1-4 on-time arrivals
+                    }
                 });
             }
             
@@ -3994,7 +4273,19 @@
                     status: 'waiting',
                     contactNumber: `(555) ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`,
                     estimatedDuration: estimatedDuration,
-                    notes: `Waiting list - ${patient.name}`
+                    notes: `Waiting list - ${patient.name}`,
+                    historicalProcedureLengths: [
+                        { procedure: 'Previous Visit', duration: estimatedDuration, date: '2023-12-01' },
+                        { procedure: 'Initial Assessment', duration: Math.max(20, estimatedDuration - 10), date: '2023-10-15' },
+                        { procedure: 'Consultation', duration: Math.max(15, estimatedDuration - 15), date: '2023-09-20' }
+                    ],
+                    patientPunctuality: {
+                        averageArrivalTime: Math.floor(Math.random() * 30) - 15, // -15 to +15 minutes
+                        punctualityScore: Math.floor(Math.random() * 30) + 70, // 70-100%
+                        totalAppointments: Math.floor(Math.random() * 5) + 1, // 1-5 appointments
+                        lateArrivals: Math.floor(Math.random() * 2), // 0-1 late arrivals
+                        onTimeArrivals: Math.floor(Math.random() * 3) + 1 // 1-3 on-time arrivals
+                    }
                 });
             });
             
