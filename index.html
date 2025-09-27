@@ -16,33 +16,11 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%),
-                linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
-            background-size: 400% 400%, 400% 400%, 400% 400%, 400% 400%;
-            /* animation: gradientShift 30s ease infinite, backgroundFloat 25s ease-in-out infinite; */
+            background: #ffffff;
             min-height: 100vh;
-            color: #ffffff;
-            position: relative;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 25%),
-                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 0%, transparent 25%),
-                radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.1) 0%, transparent 25%);
-            background-size: 300px 300px, 400px 400px, 500px 500px;
-            /* animation: backgroundFloat 35s ease-in-out infinite reverse; */
-            pointer-events: none;
-            z-index: -1;
+            color: #000000;
+            margin: 0;
+            padding: 0;
         }
 
         @keyframes gradientShift {
@@ -75,12 +53,13 @@
         }
 
         .header {
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
+            background: #ffffff;
+            border-radius: 12px;
             padding: 25px;
             margin-bottom: 25px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
         }
 
         /* Performance-based header colors */
@@ -95,28 +74,27 @@
         }
 
         .header h1 {
-            color: #ffffff;
+            color: #000000;
             text-align: center;
             margin-bottom: 8px;
             font-size: 1.8rem;
             font-weight: 600;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .header p {
             text-align: center;
-            color: #ffffff;
+            color: #000000;
             font-size: 0.9rem;
             margin-bottom: 0;
-            opacity: 0.9;
+            opacity: 0.8;
         }
 
         /* Navigation Menu Styles */
         .navigation-menu {
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
+            background: #000000;
+            border-radius: 12px;
             margin-bottom: 25px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             transition: all 0.3s ease;
         }
@@ -140,15 +118,16 @@
         }
 
         .nav-btn {
-            color: white;
+            color: #ffffff;
+            background: #333333;
             padding: 10px 20px;
-            border-radius: 25px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 0.9rem;
             font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid #555555;
         }
 
         /* Performance-based nav button colors */
@@ -597,13 +576,12 @@
         }
 
         .card {
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
+            background: #000000;
+            border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #333333;
         }
 
         /* Performance-based card colors */
@@ -652,9 +630,8 @@
             margin-bottom: 20px;
             font-size: 1.3rem;
             font-weight: 600;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+            border-bottom: 2px solid #333333;
             padding-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
         .metrics {
@@ -666,11 +643,12 @@
 
         .metric {
             color: #ffffff;
-            padding: 25px;
-            border-radius: 15px;
+            padding: 20px;
+            border-radius: 8px;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: #333333;
+            border: 1px solid #555555;
             transition: all 0.3s ease;
         }
 
@@ -730,12 +708,13 @@
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 12px;
+            border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s ease;
             color: #ffffff;
-            backdrop-filter: blur(10px);
+            background: #333333;
+            border: 1px solid #555555;
         }
 
         /* Performance-based form colors */
@@ -777,15 +756,16 @@
         }
 
         .btn {
-            color: white;
-            padding: 15px 30px;
-            border-radius: 12px;
+            color: #ffffff;
+            background: #333333;
+            padding: 12px 24px;
+            border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
             margin: 5px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid #555555;
         }
 
         /* Performance-based button colors */
@@ -1335,9 +1315,6 @@
         <button onclick="refreshAllData()" style="background: #3498db; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; margin-top: 10px;">
             🔄 Refresh All Data
         </button>
-        <button onclick="testThemeUpdate()" style="background: #e74c3c; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; margin-top: 10px; margin-left: 10px;">
-            🎨 Test Theme Update
-        </button>
         
         <!-- Auto-Update Status Indicator -->
         <div id="updateStatusIndicator" style="position: fixed; bottom: 20px; right: 20px; background: #000000; color: #DC143C; padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; border: 2px solid #DC143C; z-index: 1000; display: none;">
@@ -1384,7 +1361,7 @@
 
             <div class="card">
                 <h2>👩‍⚕️ Dr. Sarah's Professional Status</h2>
-                <div id="doctorStatusCard" style="background: linear-gradient(135deg, rgba(34, 139, 34, 0.9), rgba(0, 100, 0, 0.9)); color: #ffffff; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden; border: 2px solid rgba(0, 255, 0, 0.5); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);">
+                <div id="doctorStatusCard" style="color: #ffffff; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);">
                     <div style="font-size: 1.4rem; margin-bottom: 8px;">
                         <span id="doctorStatusIndicator" class="status-indicator"></span><span id="doctorStatusText">LOADING...</span>
                     </div>
@@ -2293,12 +2270,6 @@
             
             // Show refresh notification
             showUpdateNotification('🔄 Manual refresh completed!', '#DC143C');
-        }
-
-        function testThemeUpdate() {
-            console.log('🎨 Testing theme update...');
-            updateOverallTheme('good');
-            console.log('🎨 Theme update test completed');
         }
         
         // Show update notification
@@ -4413,7 +4384,7 @@ Notes: ${appointment.notes || 'None'}
                 statusSubtext2.textContent = `${avgWaitDays.toFixed(1)} days average`;
                 
                 // Dr. Sarah's status - OPTIMIZED
-                doctorStatusCard.style.background = 'linear-gradient(135deg, rgba(34, 139, 34, 0.9), rgba(0, 100, 0, 0.9))';
+                doctorStatusCard.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
                 doctorStatusIndicator.className = 'status-indicator success';
                 doctorStatusText.textContent = 'OPTIMIZED';
                 doctorStatusMessage.textContent = `Excellent performance - ${avgWaitDays.toFixed(1)} days average wait`;
@@ -4421,7 +4392,7 @@ Notes: ${appointment.notes || 'None'}
                 doctorStatusProgress.style.width = `${progressPercent}%`;
                 
                 // Performance Status - SUCCESS
-                performanceStatusCard.style.background = 'linear-gradient(135deg, rgba(34, 139, 34, 0.9), rgba(0, 100, 0, 0.9))';
+                performanceStatusCard.style.background = 'linear-gradient(135deg, #ffffff, #f8f9fa)';
                 performanceStatusCard.style.borderLeft = '5px solid #000000';
                 performanceStatusTitle.style.color = '#000000';
                 performanceStatusTitle.textContent = '✅ Performance Success';
@@ -4463,7 +4434,7 @@ Notes: ${appointment.notes || 'None'}
                 statusSubtext2.textContent = `${avgWaitDays.toFixed(1)} days average`;
                 
                 // Dr. Sarah's status - OVERWHELMED
-                doctorStatusCard.style.background = 'linear-gradient(135deg, rgba(220, 20, 60, 0.9), rgba(139, 0, 0, 0.9))';
+                doctorStatusCard.style.background = 'linear-gradient(135deg, #f8f9fa, #e9ecef)';
                 doctorStatusIndicator.className = 'status-indicator danger';
                 doctorStatusText.textContent = 'OVERWHELMED';
                 doctorStatusMessage.textContent = `Behind schedule - ${avgWaitDays.toFixed(1)} days average wait`;
@@ -4471,7 +4442,7 @@ Notes: ${appointment.notes || 'None'}
                 doctorStatusProgress.style.width = '100%';
                 
                 // Performance Status - ALERT
-                performanceStatusCard.style.background = 'linear-gradient(135deg, rgba(220, 20, 60, 0.9), rgba(139, 0, 0, 0.9))';
+                performanceStatusCard.style.background = 'linear-gradient(135deg, #f8f9fa, #e9ecef)';
                 performanceStatusCard.style.borderLeft = '5px solid #6c757d';
                 performanceStatusTitle.style.color = '#6c757d';
                 performanceStatusTitle.textContent = '⚠️ Performance Alert';
