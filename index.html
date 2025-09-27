@@ -1341,7 +1341,7 @@
                 <div id="performanceMetricsCard" class="metric good-performance" style="color: #ffffff; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; position: relative; overflow: hidden; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);">
                     <div class="counter" id="avgWaitDays">0</div>
                     <div style="font-size: 0.9rem; margin-bottom: 8px;">Average Wait Days</div>
-                    <div style="font-size: 0.75rem; opacity: 0.8; margin-bottom: 10px;">Target: ≤10 days</div>
+                    <div style="font-size: 0.75rem; opacity: 0.8; margin-bottom: 10px;">Target: ≤8 days</div>
                     <div class="progress-bar">
                         <div class="progress-fill" id="waitDaysProgress" style="width: 0%;"></div>
                     </div>
@@ -1388,7 +1388,7 @@
         <div id="performanceStatusCard" class="card" style="margin-bottom: 20px;">
             <h2 id="performanceStatusTitle" style="margin-bottom: 15px;">📊 Performance Status</h2>
             <div style="color: #000000; background: #ffffff; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #e0e0e0;">
-                <div style="font-weight: bold; margin-bottom: 5px;">Average Wait Days, Target: ≤10 days</div>
+                <div style="font-weight: bold; margin-bottom: 5px;">Average Wait Days, Target: ≤8 days</div>
                 <div style="font-weight: bold; color: #000000; margin-bottom: 5px;">OVERWHELMED</div>
                 <div style="margin-bottom: 5px;">Behind schedule - 9.4 days average wait</div>
                 <div style="font-size: 0.9rem; color: #666;">Updated: Just now</div>
@@ -1830,7 +1830,7 @@
                             <div style="font-size: 0.9rem; opacity: 0.9;">Current Avg (Days)</div>
                         </div>
                         <div>
-                            <div id="targetWaitDays" style="font-size: 2.5rem; font-weight: bold;">10.0</div>
+                            <div id="targetWaitDays" style="font-size: 2.5rem; font-weight: bold;">8.0</div>
                             <div style="font-size: 0.9rem; opacity: 0.9;">Target Avg (Days)</div>
                         </div>
                     </div>
@@ -2168,7 +2168,7 @@
                 const todayWaiting = waitingAppointments; // All waiting patients
                 
                 // Calculate performance metrics - EXCELLENT PERFORMANCE Scenario
-                const targetWaitDays = 10.0;
+                const targetWaitDays = 8.0;
                 const baselineWaitDays = 12.0; // Baseline was 12 days (before optimization)
                 const currentWaitDays = avgWaitDays; // Current value showing excellent performance (3 days)
                 
@@ -2240,14 +2240,14 @@
                 const waitTimeReductionAchievementEl = document.getElementById('waitTimeReductionAchievement');
                 if (waitTimeReductionAchievementEl) waitTimeReductionAchievementEl.textContent = `${waitTimeChange.toFixed(0)}% reduction in average wait time`;
                 
-                // Calculate appointments within target (≤10 days)
+                // Calculate appointments within target (≤8 days)
                 const appointmentsWithinTarget = appointments.filter(apt => {
                     const waitDays = calculateWaitDays(apt);
-                    return waitDays <= 10;
+                    return waitDays <= 8;
                 }).length;
                 const appointmentsWithinTargetPercent = appointments.length > 0 ? (appointmentsWithinTarget / appointments.length) * 100 : 0;
                 const appointmentsWithinTargetEl = document.getElementById('appointmentsWithinTarget');
-                if (appointmentsWithinTargetEl) appointmentsWithinTargetEl.textContent = `${appointmentsWithinTargetPercent.toFixed(0)}% of appointments scheduled within 10 days`;
+                if (appointmentsWithinTargetEl) appointmentsWithinTargetEl.textContent = `${appointmentsWithinTargetPercent.toFixed(0)}% of appointments scheduled within 8 days`;
                 
                 // Calculate urgent coverage (urgent patients not waiting)
                 const urgentCoveragePercent = urgentAppointments > 0 ? ((urgentAppointments - urgentWaitingAppointments) / urgentAppointments) * 100 : 100;
@@ -4629,7 +4629,7 @@ Notes: ${appointment.notes || 'None'}
         // Update Performance Metrics Display based on average wait days
         function updatePerformanceMetricsDisplay(avgWaitDays) {
             console.log('🎯 Updating Performance Metrics Display with avgWaitDays:', avgWaitDays);
-            const targetWaitDays = 10.0;
+            const targetWaitDays = 8.0;
             const performanceCard = document.getElementById('performanceMetricsCard');
             const progressBar = document.getElementById('waitDaysProgress');
             const statusCard1 = document.getElementById('statusCard1');
